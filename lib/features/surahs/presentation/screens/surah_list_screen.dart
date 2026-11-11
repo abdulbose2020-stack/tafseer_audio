@@ -8,6 +8,7 @@ import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/widgets/brand_mark.dart';
 import '../../../../core/widgets/islamic_pattern.dart';
+import '../../../player/presentation/widgets/sample_audio_card.dart';
 import '../../domain/surah.dart';
 import '../../domain/surah_filter.dart';
 import '../providers/surah_providers.dart';
@@ -109,6 +110,8 @@ class SurahListScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SampleAudioCard(),
+                    const SizedBox(height: AppSpacing.xl),
                     const _SectionHeading(),
                     const SizedBox(height: AppSpacing.md),
                     const _SearchAndFilterCard(),

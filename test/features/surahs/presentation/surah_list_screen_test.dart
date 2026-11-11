@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tafseer_audio/core/theme/app_theme.dart';
+import 'package:tafseer_audio/features/player/presentation/providers/playback_providers.dart';
 import 'package:tafseer_audio/features/surahs/domain/revelation_place.dart';
 import 'package:tafseer_audio/features/surahs/domain/surah.dart';
 import 'package:tafseer_audio/features/surahs/presentation/providers/surah_providers.dart';
 import 'package:tafseer_audio/features/surahs/presentation/screens/surah_list_screen.dart';
+
+import '../../player/support/fake_audio_engine.dart';
 
 const _surahs = [
   Surah(
@@ -50,19 +53,28 @@ const _surahs = [
   ),
 ];
 
-Future<void> _pumpCatalogue(WidgetTester tester) async {
+Future<FakeAudioEngine> _pumpCatalogue(
+  WidgetTester tester, {
+  FakeAudioEngine? engine,
+}) async {
   tester.view.physicalSize = const Size(800, 1800);
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
   addTearDown(tester.view.resetDevicePixelRatio);
 
+  final audioEngine = engine ?? FakeAudioEngine();
+  addTearDown(audioEngine.dispose);
   await tester.pumpWidget(
     ProviderScope(
-      overrides: [surahsProvider.overrideWithValue(AsyncValue.data(_surahs))],
+      overrides: [
+        surahsProvider.overrideWithValue(AsyncValue.data(_surahs)),
+        audioEngineProvider.overrideWithValue(audioEngine),
+      ],
       child: MaterialApp(theme: AppTheme.light, home: const SurahListScreen()),
     ),
   );
   await tester.pumpAndSettle();
+  return audioEngine;
 }
 
 void main() {
@@ -181,5 +193,34 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('SELECTED SURAH'), findsNothing);
+  });
+
+  testWidgets('labels the temporary sample and never assigns it to a Surah', (
+    tester,
+  ) async {
+    final engine = FakeAudioEngine();
+    await _pumpCatalogue(tester, engine: engine);
+
+    expect(find.text('TEMPORARY AUDIO ENGINE TEST'), findsOneWidget);
+    expect(find.text('Wedding sermon sample'), findsOneWidget);
+    expect(find.text('NOT A SURAH'), findsOneWidget);
+    expect(find.textContaining('not a Surah tafsir'), findsOneWidget);
+    expect(find.text('Play sample'), findsOneWidget);
+    expect(find.text('Surah catalog'), findsOneWidget);
+
+    await tester.tap(find.text('Play sample'));
+    await tester.pumpAndSettle();
+
+    expect(engine.calls, containsAllInOrder(['setQueue', 'play']));
+    expect(engine.lastQueue, hasLength(1));
+    expect(engine.lastQueue!.single.isTemporarySample, isTrue);
+    expect(engine.lastQueue!.single.surahNumber, isNull);
+    expect(find.text('Pause'), findsOneWidget);
+
+    await tester.tap(find.text('Pause'));
+    await tester.pumpAndSettle();
+
+    expect(engine.calls, contains('pause'));
+    expect(find.text('Resume'), findsOneWidget);
   });
 }

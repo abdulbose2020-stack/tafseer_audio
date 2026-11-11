@@ -2,38 +2,38 @@
 
 ## Phase status
 
-Phases 0, 1, and 2 are complete. **Phase 3 — audio playback — has not
-started.** The codebase currently contains the foundation, design shell, and
-Surah catalogue only. Everything described below as planned or future is design
-intent, not implemented code.
+Phases 0–3 are complete. **Phase 4 — player UI — has not started.** The
+codebase contains the foundation, design shell, Surah catalogue, and the Phase 3
+audio engine. The existing `PlayerScreen` is still a static Phase 1 design
+preview.
 
 | Phase | Status | Scope |
 | --- | --- | --- |
 | 0 — Foundation | Complete | Project setup, Android identity, audio-service configuration, dependencies, fonts, brand assets, and Git baseline. |
 | 1 — Design shell | Complete | Theme, typography, Islamic pattern, app shell, native splash, and launcher icon. |
 | 2 — Surah catalogue | Complete; verified on the Android emulator | 114-Surah metadata, offline JSON catalogue, search, Makki/Madani filters, selection highlighting, and automated tests. |
-| 3 — Audio playback | Not started | Audio engine, sample audio, playback queue, background playback, and notification/lock-screen controls. |
+| 3 — Audio playback | Complete; automated tests pass and basic playback smoke-tested on the Android emulator | Audio engine, temporary sample audio, playback queue, background playback, notification/lock-screen controls, and Riverpod integration. |
 | 4 — Player UI | Planned | Mini player and a player screen connected to the catalogue and playback state. |
 | 5 — Hardening | Planned | Full test pass, device verification, and documentation for adding the Sheikh's recordings. |
 
-The app launches into `SurahListScreen`. The existing `PlayerScreen` is a static
-Phase 1 design preview: it is not reachable from the catalogue and contains no
-playback logic. The Android audio-service components are configured, but no
-audio handler, player instance, or queue connects to them yet.
+The app launches into `SurahListScreen`. A small card above the catalogue
+provides a temporary control for the Phase 3 engine. It is explicitly labelled
+as an engine test and is not connected to any Surah. The full player experience
+remains Phase 4.
 
 ## Approach
 
 Tafseer Audio uses a pragmatic, feature-first clean architecture. The goal is
 clear boundaries without adding ceremony that the app does not need.
 
-- **Domain** — immutable models, search and filter logic, and repository
-  interfaces. Pure Dart.
-- **Data** — bundled JSON loading and repository implementations. Phase 3 will
-  add the audio handler and playback queue here.
+- **Domain** — immutable models, search and filter logic, repository interfaces,
+  and the `AudioEngine` contract. Pure Dart.
+- **Data** — bundled JSON loading, the `audio_service` handler, and adapters over
+  `just_audio` and `audio_session`.
 - **Presentation** — Riverpod providers, screens, and reusable widgets.
 - **Core** — theme, typography, spacing, constants, and shared widgets.
 
-## Current catalogue data flow
+## Catalogue data flow
 
 ```text
 assets/data/surahs.json
@@ -62,30 +62,63 @@ The catalogue is read once from a bundled JSON asset. Search and filtering are
 pure domain functions. Selection is UI state only; it does not create an audio
 player or start playback.
 
-## Catalogue data and attribution
+## Audio data flow
 
-The catalogue is bundled at `assets/data/surahs.json` and loaded without
-network access.
+```text
+main()
+  │ initializes exactly once
+  ▼
+AudioService.init ──► TafseerAudioHandler (BaseAudioHandler + AudioEngine)
+                         ├─ JustAudioPlayerPort ──► one just_audio player
+                         ├─ SpeechAudioSessionPort ──► audio_session
+                         └─ audio_service notification / lock screen
+                                    │
+                                    │ stateStream
+                                    ▼
+                         playbackControllerProvider
+                                    │ PlaybackState + commands
+                                    ▼
+                         SampleAudioCard (Phase 3)
+                         Future mini player / PlayerScreen (Phase 4)
+```
 
-The metadata is derived from [Tanzil Quran
-Metadata](https://tanzil.net/res/text/metadata/quran-data.xml), copyright
-(C) 2008-2009 Tanzil.info, licensed under
-[CC BY](https://creativecommons.org/licenses/by/3.0/). The [Quran.com Chapters
-API](https://api.quran.com/api/v4/chapters) was used as an independent
-cross-check. The `source` object at the top of the JSON file records this
-provenance.
+`PlaybackController` mirrors the handler's `PlaybackState` and forwards play,
+pause, stop, and seek commands. Screens do not import `just_audio` or
+`audio_service`. The handler is the single source of truth for queue position,
+playback phase, position, duration, errors, and the media notification.
 
-The catalogue contains 114 Surahs and 6,236 Ayahs in total: 86 Makki and 28
-Madani Surahs. Field definitions, attribution details, and validation coverage
-are documented in [`assets/data/README.md`](../assets/data/README.md).
+## Audio design
+
+- One `just_audio` player per process, wrapped by `JustAudioPlayerPort`.
+- One `audio_service` handler, `TafseerAudioHandler`, initialized before
+  `runApp`; tests override `audioEngineProvider` instead.
+- A queue of `AudioTrack` models with next/previous, seek-to-item, completion
+  auto-advance, and boundary handling.
+- `audio_session` configured for speech playback, with audio-focus interruption
+  handling (pause/resume and ducking) and headphone-disconnect pausing.
+- `audio_service` publishes playback state, controls, current media item, and
+  queue metadata for the media notification and lock screen.
+- Loading, ready, buffering, completed, error, and idle phases are mapped to
+  app-owned `PlaybackPhase` values.
+- Playback is from bundled assets only. There are no remote URLs or network
+  streams.
+- The handler is disposable: it cancels subscriptions, releases the player and
+  session, and closes all broadcast streams.
+
+### Temporary sample
+
+Phase 3 uses one temporary recording at
+`assets/audio/sample/sample_tafseer.mp3` to verify the engine. It is a wedding
+sermon, not a Surah tafsir. The `AudioTrack` has `surahNumber == null` and
+`isTemporarySample == true`; it is never assigned to a Surah, never shown as
+catalogue content, and no tafsir audio is synthesized or fabricated. The sample
+must be replaced with the Sheikh's recordings before release.
 
 ## Current lib layout
 
-This tree reflects the files that exist today.
-
 ```text
 lib/
-├─ main.dart
+├─ main.dart                 # initializes the handler and app lifecycle
 ├─ app.dart
 ├─ core/
 │  ├─ constants/
@@ -116,130 +149,66 @@ lib/
    │     ├─ screens/surah_list_screen.dart
    │     └─ widgets/surah_tile.dart
    └─ player/
+      ├─ domain/
+      │  ├─ audio_engine.dart
+      │  ├─ audio_track.dart
+      │  └─ playback_state.dart
+      ├─ data/
+      │  ├─ audio_player_port.dart
+      │  ├─ audio_service_bootstrap.dart
+      │  ├─ audio_session_port.dart
+      │  ├─ sample_audio_track.dart
+      │  └─ tafseer_audio_handler.dart
       └─ presentation/
-         └─ screens/player_screen.dart
-```
-
-## Planned Phase 3 layout
-
-Phase 3 will add the audio layer under the existing `player` feature. The names
-below are proposals; none of the proposed new files or folders exist yet.
-`player_screen.dart` already exists as the static Phase 1 preview.
-
-```text
-lib/features/player/
-├─ domain/
-│  ├─ playback_track.dart
-│  ├─ playback_state.dart
-│  └─ playback_service.dart
-├─ data/
-│  ├─ tafseer_audio_handler.dart
-│  ├─ audio_service_bootstrap.dart
-│  ├─ playback_queue.dart
-│  └─ surah_track_mapper.dart
-└─ presentation/
-   ├─ providers/
-   ├─ screens/          # player_screen.dart exists; connection is Phase 4
-   └─ widgets/          # planned for Phase 4
+         ├─ providers/playback_providers.dart
+         ├─ screens/player_screen.dart   # static Phase 1 preview
+         └─ widgets/sample_audio_card.dart
 ```
 
 ## State management
 
-Current:
-
 - `flutter_riverpod` with manually written providers. No code generation.
-- Surah metadata is loaded once at startup from `surahsProvider`.
+- Surah metadata is loaded once from `surahsProvider`.
 - `surahCatalogControllerProvider` owns the search query and revelation filter.
-- `filteredSurahsProvider` derives the visible list from the catalogue and the
-  current query/filter.
-- `selectedSurahNumberProvider` and `selectedSurahProvider` track selection for
-  highlighting and the selected-Surah summary only.
-
-Planned for Phase 3:
-
-- Player commands will go through a `PlayerController`; the UI will never talk
-  to `just_audio` directly.
-- The audio handler will own playback state and publish app-owned state models,
-  so the UI does not depend on `audio_service` types.
-- Playback position will be exposed separately from the main player state to
-  avoid rebuilding the whole player UI on every position tick.
-- Riverpod will mirror handler state for the UI.
-
-## Planned Phase 3 data flow
-
-```text
-player command (from the Phase 4 UI)
-        │
-        ▼
-PlayerController
-        │ commands
-        ▼
-TafseerAudioHandler
-├─ just_audio
-├─ PlaybackQueue
-├─ audio_session
-└─ audio_service notification
-        │ state + position streams
-        ▼
-Riverpod player providers
-        │
-        └──► PlayerScreen / MiniPlayer (Phase 4)
-```
-
-The audio handler will be the single source of truth for playback. Riverpod
-will mirror its state for the UI and send commands through the thin controller.
-
-## Audio design (planned, not implemented)
-
-- One `just_audio` player instance.
-- One recording per Surah in v1.
-- A pure `PlaybackQueue` will handle current index, next, previous, and boundary
-  rules so it can be unit tested without platform plugins.
-- `audio_session` will be configured for speech playback, audio focus loss, and
-  headphone disconnection.
-- `audio_service` will provide notification, lock-screen, headset, and
-  background controls.
-- Sample audio will be mapped to all 114 Surahs until the Sheikh's recordings
-  are available. No sample recording is bundled yet; the project will not
-  synthesize or fabricate recordings.
+- `filteredSurahsProvider` derives the visible list.
+- `selectedSurahNumberProvider` and `selectedSurahProvider` track catalogue
+  selection only.
+- `audioEngineProvider` is overridden in `main` with the initialized
+  `TafseerAudioHandler`.
+- `playbackControllerProvider` mirrors the handler's authoritative
+  `PlaybackState` and exposes the sample commands used by the temporary card.
+- Position updates currently flow through the same playback state; a separate
+  position provider can be introduced in Phase 4 if the full player UI needs
+  finer-grained rebuilds.
 
 ## Offline guarantees
 
-Current:
-
-- No Firebase, authentication, analytics, or HTTP client.
+- No Firebase, authentication, analytics, HTTP client, or remote audio URL.
 - No `INTERNET` permission in the release manifest. Debug and profile builds
   retain the Flutter tooling's development `INTERNET` permission.
-- Fonts, artwork, and Surah metadata are local assets.
-
-Planned for Phase 3:
-
-- Playback will not require network access. Audio packaging (base bundle, Play
-  Asset Delivery, or a sideload build) is not yet decided.
-- Notification artwork will use bundled or locally cached assets, not network
-  downloads.
+- Fonts, artwork, Surah metadata, and the temporary sample are local assets.
+- The audio notification uses local app resources only.
 
 ## Testing strategy
-
-Current:
 
 - Metadata tests validate all 114 entries, sequential numbering, unique
   numbers, the 6,236 total Ayah count, revelation-place counts, known values,
   and the recorded source.
 - Unit tests cover search normalization, filtering, repository behavior, JSON
   parsing, and Riverpod state.
-- Widget tests cover catalogue rendering, search, filters, empty state, and
-  selection highlighting using ProviderScope overrides.
-- The catalogue was also manually verified on the Android emulator.
-
-Planned:
-
-- Phase 3 unit tests will cover playback queue behavior and audio-handler
-  state mapping.
-- Phase 4 widget tests will cover the mini player and player controls.
-- Phase 5 will include a full manual pass for background playback,
-  notifications, lock screen, headset controls, interruptions, seeking, and
-  catalogue regression.
+- Widget tests cover catalogue rendering, search, filters, empty state,
+  selection highlighting, and the temporary sample card. All widget tests
+  override `audioEngineProvider` with a fake engine.
+- Phase 3 handler tests use fake `AudioPlayerPort` and `AudioSessionPort`
+  implementations to verify asset loading, the unassigned sample, media
+  notification state, play/pause/seek/stop, errors, interruptions, ducking,
+  headphone disconnect, completion auto-advance, queue clearing, and disposal.
+- `PlaybackController` tests verify sample loading, pause/resume without
+  reloading, external state mirroring, seek, and stop.
+- Basic playback, pause/resume, background playback, and the media notification
+  were manually smoke-tested on the Android emulator. Notification actions,
+  lock-screen controls, headset buttons, headphone disconnection, and audio
+  interruptions still require a full manual pass in Phase 5.
 
 ## Distribution constraint
 
@@ -252,6 +221,6 @@ note](../README.md#distribution-note) for the current options.
 ## Related documentation
 
 - [`README.md`](../README.md) — project status, setup, catalogue attribution,
-  roadmap, and distribution note.
+  audio engine, roadmap, and distribution note.
 - [`assets/data/README.md`](../assets/data/README.md) — catalogue provenance,
   fields, and validation.

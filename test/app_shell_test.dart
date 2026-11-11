@@ -3,12 +3,26 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tafseer_audio/app.dart';
 import 'package:tafseer_audio/core/theme/app_colors.dart';
+import 'package:tafseer_audio/features/player/presentation/providers/playback_providers.dart';
+
+import 'features/player/support/fake_audio_engine.dart';
+
+Future<void> _pumpApp(WidgetTester tester) async {
+  final engine = FakeAudioEngine();
+  addTearDown(engine.dispose);
+  await tester.pumpWidget(
+    ProviderScope(
+      overrides: [audioEngineProvider.overrideWithValue(engine)],
+      child: const TafseerAudioApp(),
+    ),
+  );
+}
 
 void main() {
   testWidgets('renders the app shell with the offline Surah catalogue', (
     tester,
   ) async {
-    await tester.pumpWidget(const ProviderScope(child: TafseerAudioApp()));
+    await _pumpApp(tester);
     await tester.pumpAndSettle();
 
     expect(find.text('Tafseer Audio'), findsOneWidget);
@@ -21,7 +35,7 @@ void main() {
   });
 
   testWidgets('uses the Tafseer Audio visual theme', (tester) async {
-    await tester.pumpWidget(const ProviderScope(child: TafseerAudioApp()));
+    await _pumpApp(tester);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 

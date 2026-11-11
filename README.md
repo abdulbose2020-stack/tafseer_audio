@@ -6,7 +6,7 @@ account, Firebase, or online backend.
 
 ## Status
 
-**Phases 0, 1, and 2 are complete. Phase 3 — audio playback — has not started.**
+**Phases 0–3 are complete. Phase 4 — player UI — has not started.**
 
 - **Phase 0 — Foundation (complete):** project setup, Android application ID,
   audio-service configuration, dependencies, fonts, brand assets, and Git
@@ -18,12 +18,20 @@ account, Firebase, or online backend.
   tests. The catalogue was visually verified on the Android emulator: all 114
   Surahs render correctly, and search, filters, scrolling, and selection
   highlighting work.
+- **Phase 3 — Audio playback (complete):** one process-wide
+  `audio_service`/`just_audio` handler, offline asset playback, a playback queue
+  and authoritative state model, background media notification,
+  lock-screen/headset controls, audio-focus and headphone-disconnect handling,
+  Riverpod integration, automated engine tests, and a temporary sample control
+  in the catalogue screen. Basic playback, pause/resume, background playback,
+  and the media notification were smoke-tested on the Android emulator.
 
-Phase 3 has not begun: there is no audio player instance, audio handler,
-playback queue, or bundled recording. The Android audio-service components are
-configured, but nothing connects them to playback. The existing `PlayerScreen`
-is a static Phase 1 design preview; it is not reachable from the catalogue and
-contains no playback logic.
+The Android audio-service components are now connected to a real handler. The
+existing `PlayerScreen` remains the static Phase 1 design preview; the full
+player UI is Phase 4. Playback currently uses one temporary wedding-sermon
+recording at `assets/audio/sample/sample_tafseer.mp3`. It is clearly labelled in
+the app as an engine test, has no Surah number, is not assigned to any Surah, and
+is not catalogue content. No tafsir audio has been synthesized or fabricated.
 
 ## Product principles
 
@@ -41,9 +49,10 @@ contains no playback logic.
 
 - Flutter 3.44.1 / Dart 3.12.1
 - Riverpod 3 for state management and dependency injection
-- `just_audio`, `audio_service`, `audio_session`, and `path_provider` installed;
-  Android is configured for the Phase 3 audio service, but no playback code
-  exists yet
+- `just_audio`, `audio_service`, and `audio_session` for the Phase 3 playback
+  engine; Android is configured for the background audio service
+- `path_provider` installed for future asset-packaging work; it is not used by
+  the current playback path
 - Locally bundled Amiri and Inter fonts
 
 ## Surah catalogue
@@ -78,6 +87,31 @@ The `source` object at the top of `surahs.json` records this provenance. Field
 definitions and validation are documented in
 [`assets/data/README.md`](assets/data/README.md).
 
+## Audio engine
+
+Phase 3 provides one process-wide audio engine:
+
+- `TafseerAudioHandler` extends `audio_service`'s `BaseAudioHandler` and owns one
+  `just_audio` player, the queue, and the authoritative playback state.
+- The handler publishes notification/lock-screen state and handles play, pause,
+  resume, stop, seek, next/previous, completion, audio interruptions, and
+  headphone disconnection.
+- `main` initializes the handler once before `runApp` and overrides
+  `audioEngineProvider`; `PlaybackController` mirrors the handler state for the
+  UI. Screens never talk to the audio plugins directly.
+- Playback uses bundled assets only. There is no streaming, remote URL, backend,
+  or internet permission in the release manifest.
+- Tests use fake player, session, and engine implementations; they do not
+  initialize Android audio services.
+
+### Temporary sample caveat
+
+The card above the catalogue is a temporary engine check, not a Surah player. It
+controls `assets/audio/sample/sample_tafseer.mp3`, a wedding sermon used only to
+verify real playback. The track has `surahNumber == null` and
+`isTemporarySample == true`, and it is never mapped to a Surah. Replace it with
+the Sheikh's recordings before release; do not treat it as tafsir content.
+
 ## Project layout
 
 ```text
@@ -85,7 +119,7 @@ tafseer_audio/
 ├─ lib/                 Flutter application source
 ├─ test/                Unit, metadata, repository, and widget tests
 ├─ assets/
-│  ├─ audio/            Reserved for Phase 3; no recordings bundled
+│  ├─ audio/            Temporary engine-test sample only
 │  ├─ data/             surahs.json and provenance notes
 │  ├─ fonts/            Amiri and Inter, with OFL licenses
 │  └─ images/           App icon, splash, and brand artwork
@@ -164,13 +198,10 @@ generators.
 
 ## Roadmap
 
-Phases 0–2 are complete. Remaining work:
+Phases 0–3 are complete. Remaining work:
 
-- **Phase 3 (next) — Audio playback:** audio engine, sample audio, playback
-  queue, background playback, and notification/lock-screen controls. Not
-  started.
-- **Phase 4 — Player UI:** mini player and a player screen connected to the
-  catalogue and playback state.
+- **Phase 4 (next) — Player UI:** mini player and a player screen connected to
+  the catalogue and the existing playback state.
 - **Phase 5 — Hardening:** full test pass, device verification, and
   documentation for adding the Sheikh's recordings.
 
@@ -179,5 +210,6 @@ Phases 0–2 are complete. Remaining work:
 114 full tafseer recordings may total several gigabytes. Before real recordings
 are added, the project must choose a packaging approach: Play Asset Delivery, a
 fully bundled sideload build, or a subset-per-release approach. The Phase 3
-audio layer will keep this decision isolated from the UI. No audio is bundled
-or declared in `pubspec.yaml` today.
+audio layer keeps this decision isolated from the UI. No real tafsir recordings
+are bundled today; only the temporary engine-test sample is declared in
+`pubspec.yaml`.

@@ -57,6 +57,7 @@ flutter:
   assets:
     - assets/images/
     - assets/data/
+    - assets/audio/sample/
 
   fonts:
     - family: Amiri
