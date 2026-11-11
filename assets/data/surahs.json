@@ -1,0 +1,923 @@
+{
+  "source": {
+    "name": "Tanzil Quran Metadata",
+    "url": "https://tanzil.net/res/text/metadata/quran-data.xml",
+    "license": "CC BY",
+    "copyright": "(C) 2008-2009 Tanzil.info",
+    "cross_checked_with": "Quran.com Chapters API (https://api.quran.com/api/v4/chapters)"
+  },
+  "surahs": [
+    {
+      "number": 1,
+      "arabic_name": "الفاتحة",
+      "transliteration": "Al-Faatiha",
+      "english_meaning": "The Opening",
+      "ayah_count": 7,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 2,
+      "arabic_name": "البقرة",
+      "transliteration": "Al-Baqara",
+      "english_meaning": "The Cow",
+      "ayah_count": 286,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 3,
+      "arabic_name": "آل عمران",
+      "transliteration": "Aal-i-Imraan",
+      "english_meaning": "The Family of Imraan",
+      "ayah_count": 200,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 4,
+      "arabic_name": "النساء",
+      "transliteration": "An-Nisaa",
+      "english_meaning": "The Women",
+      "ayah_count": 176,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 5,
+      "arabic_name": "المائدة",
+      "transliteration": "Al-Maaida",
+      "english_meaning": "The Table",
+      "ayah_count": 120,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 6,
+      "arabic_name": "الأنعام",
+      "transliteration": "Al-An'aam",
+      "english_meaning": "The Cattle",
+      "ayah_count": 165,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 7,
+      "arabic_name": "الأعراف",
+      "transliteration": "Al-A'raaf",
+      "english_meaning": "The Heights",
+      "ayah_count": 206,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 8,
+      "arabic_name": "الأنفال",
+      "transliteration": "Al-Anfaal",
+      "english_meaning": "The Spoils of War",
+      "ayah_count": 75,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 9,
+      "arabic_name": "التوبة",
+      "transliteration": "At-Tawba",
+      "english_meaning": "The Repentance",
+      "ayah_count": 129,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 10,
+      "arabic_name": "يونس",
+      "transliteration": "Yunus",
+      "english_meaning": "Jonas",
+      "ayah_count": 109,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 11,
+      "arabic_name": "هود",
+      "transliteration": "Hud",
+      "english_meaning": "Hud",
+      "ayah_count": 123,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 12,
+      "arabic_name": "يوسف",
+      "transliteration": "Yusuf",
+      "english_meaning": "Joseph",
+      "ayah_count": 111,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 13,
+      "arabic_name": "الرعد",
+      "transliteration": "Ar-Ra'd",
+      "english_meaning": "The Thunder",
+      "ayah_count": 43,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 14,
+      "arabic_name": "ابراهيم",
+      "transliteration": "Ibrahim",
+      "english_meaning": "Abraham",
+      "ayah_count": 52,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 15,
+      "arabic_name": "الحجر",
+      "transliteration": "Al-Hijr",
+      "english_meaning": "The Rock",
+      "ayah_count": 99,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 16,
+      "arabic_name": "النحل",
+      "transliteration": "An-Nahl",
+      "english_meaning": "The Bee",
+      "ayah_count": 128,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 17,
+      "arabic_name": "الإسراء",
+      "transliteration": "Al-Israa",
+      "english_meaning": "The Night Journey",
+      "ayah_count": 111,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 18,
+      "arabic_name": "الكهف",
+      "transliteration": "Al-Kahf",
+      "english_meaning": "The Cave",
+      "ayah_count": 110,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 19,
+      "arabic_name": "مريم",
+      "transliteration": "Maryam",
+      "english_meaning": "Mary",
+      "ayah_count": 98,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 20,
+      "arabic_name": "طه",
+      "transliteration": "Taa-Haa",
+      "english_meaning": "Taa-Haa",
+      "ayah_count": 135,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 21,
+      "arabic_name": "الأنبياء",
+      "transliteration": "Al-Anbiyaa",
+      "english_meaning": "The Prophets",
+      "ayah_count": 112,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 22,
+      "arabic_name": "الحج",
+      "transliteration": "Al-Hajj",
+      "english_meaning": "The Pilgrimage",
+      "ayah_count": 78,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 23,
+      "arabic_name": "المؤمنون",
+      "transliteration": "Al-Muminoon",
+      "english_meaning": "The Believers",
+      "ayah_count": 118,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 24,
+      "arabic_name": "النور",
+      "transliteration": "An-Noor",
+      "english_meaning": "The Light",
+      "ayah_count": 64,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 25,
+      "arabic_name": "الفرقان",
+      "transliteration": "Al-Furqaan",
+      "english_meaning": "The Criterion",
+      "ayah_count": 77,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 26,
+      "arabic_name": "الشعراء",
+      "transliteration": "Ash-Shu'araa",
+      "english_meaning": "The Poets",
+      "ayah_count": 227,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 27,
+      "arabic_name": "النمل",
+      "transliteration": "An-Naml",
+      "english_meaning": "The Ant",
+      "ayah_count": 93,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 28,
+      "arabic_name": "القصص",
+      "transliteration": "Al-Qasas",
+      "english_meaning": "The Stories",
+      "ayah_count": 88,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 29,
+      "arabic_name": "العنكبوت",
+      "transliteration": "Al-Ankaboot",
+      "english_meaning": "The Spider",
+      "ayah_count": 69,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 30,
+      "arabic_name": "الروم",
+      "transliteration": "Ar-Room",
+      "english_meaning": "The Romans",
+      "ayah_count": 60,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 31,
+      "arabic_name": "لقمان",
+      "transliteration": "Luqman",
+      "english_meaning": "Luqman",
+      "ayah_count": 34,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 32,
+      "arabic_name": "السجدة",
+      "transliteration": "As-Sajda",
+      "english_meaning": "The Prostration",
+      "ayah_count": 30,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 33,
+      "arabic_name": "الأحزاب",
+      "transliteration": "Al-Ahzaab",
+      "english_meaning": "The Clans",
+      "ayah_count": 73,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 34,
+      "arabic_name": "سبإ",
+      "transliteration": "Saba",
+      "english_meaning": "Sheba",
+      "ayah_count": 54,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 35,
+      "arabic_name": "فاطر",
+      "transliteration": "Faatir",
+      "english_meaning": "The Originator",
+      "ayah_count": 45,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 36,
+      "arabic_name": "يس",
+      "transliteration": "Yaseen",
+      "english_meaning": "Yaseen",
+      "ayah_count": 83,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 37,
+      "arabic_name": "الصافات",
+      "transliteration": "As-Saaffaat",
+      "english_meaning": "Those drawn up in Ranks",
+      "ayah_count": 182,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 38,
+      "arabic_name": "ص",
+      "transliteration": "Saad",
+      "english_meaning": "The letter Saad",
+      "ayah_count": 88,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 39,
+      "arabic_name": "الزمر",
+      "transliteration": "Az-Zumar",
+      "english_meaning": "The Groups",
+      "ayah_count": 75,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 40,
+      "arabic_name": "غافر",
+      "transliteration": "Al-Ghaafir",
+      "english_meaning": "The Forgiver",
+      "ayah_count": 85,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 41,
+      "arabic_name": "فصلت",
+      "transliteration": "Fussilat",
+      "english_meaning": "Explained in detail",
+      "ayah_count": 54,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 42,
+      "arabic_name": "الشورى",
+      "transliteration": "Ash-Shura",
+      "english_meaning": "Consultation",
+      "ayah_count": 53,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 43,
+      "arabic_name": "الزخرف",
+      "transliteration": "Az-Zukhruf",
+      "english_meaning": "Ornaments of gold",
+      "ayah_count": 89,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 44,
+      "arabic_name": "الدخان",
+      "transliteration": "Ad-Dukhaan",
+      "english_meaning": "The Smoke",
+      "ayah_count": 59,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 45,
+      "arabic_name": "الجاثية",
+      "transliteration": "Al-Jaathiya",
+      "english_meaning": "Crouching",
+      "ayah_count": 37,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 46,
+      "arabic_name": "الأحقاف",
+      "transliteration": "Al-Ahqaf",
+      "english_meaning": "The Dunes",
+      "ayah_count": 35,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 47,
+      "arabic_name": "محمد",
+      "transliteration": "Muhammad",
+      "english_meaning": "Muhammad",
+      "ayah_count": 38,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 48,
+      "arabic_name": "الفتح",
+      "transliteration": "Al-Fath",
+      "english_meaning": "The Victory",
+      "ayah_count": 29,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 49,
+      "arabic_name": "الحجرات",
+      "transliteration": "Al-Hujuraat",
+      "english_meaning": "The Inner Apartments",
+      "ayah_count": 18,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 50,
+      "arabic_name": "ق",
+      "transliteration": "Qaaf",
+      "english_meaning": "The letter Qaaf",
+      "ayah_count": 45,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 51,
+      "arabic_name": "الذاريات",
+      "transliteration": "Adh-Dhaariyat",
+      "english_meaning": "The Winnowing Winds",
+      "ayah_count": 60,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 52,
+      "arabic_name": "الطور",
+      "transliteration": "At-Tur",
+      "english_meaning": "The Mount",
+      "ayah_count": 49,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 53,
+      "arabic_name": "النجم",
+      "transliteration": "An-Najm",
+      "english_meaning": "The Star",
+      "ayah_count": 62,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 54,
+      "arabic_name": "القمر",
+      "transliteration": "Al-Qamar",
+      "english_meaning": "The Moon",
+      "ayah_count": 55,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 55,
+      "arabic_name": "الرحمن",
+      "transliteration": "Ar-Rahmaan",
+      "english_meaning": "The Beneficent",
+      "ayah_count": 78,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 56,
+      "arabic_name": "الواقعة",
+      "transliteration": "Al-Waaqia",
+      "english_meaning": "The Inevitable",
+      "ayah_count": 96,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 57,
+      "arabic_name": "الحديد",
+      "transliteration": "Al-Hadid",
+      "english_meaning": "The Iron",
+      "ayah_count": 29,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 58,
+      "arabic_name": "المجادلة",
+      "transliteration": "Al-Mujaadila",
+      "english_meaning": "The Pleading Woman",
+      "ayah_count": 22,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 59,
+      "arabic_name": "الحشر",
+      "transliteration": "Al-Hashr",
+      "english_meaning": "The Exile",
+      "ayah_count": 24,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 60,
+      "arabic_name": "الممتحنة",
+      "transliteration": "Al-Mumtahana",
+      "english_meaning": "She that is to be examined",
+      "ayah_count": 13,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 61,
+      "arabic_name": "الصف",
+      "transliteration": "As-Saff",
+      "english_meaning": "The Ranks",
+      "ayah_count": 14,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 62,
+      "arabic_name": "الجمعة",
+      "transliteration": "Al-Jumu'a",
+      "english_meaning": "Friday",
+      "ayah_count": 11,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 63,
+      "arabic_name": "المنافقون",
+      "transliteration": "Al-Munaafiqoon",
+      "english_meaning": "The Hypocrites",
+      "ayah_count": 11,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 64,
+      "arabic_name": "التغابن",
+      "transliteration": "At-Taghaabun",
+      "english_meaning": "Mutual Disillusion",
+      "ayah_count": 18,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 65,
+      "arabic_name": "الطلاق",
+      "transliteration": "At-Talaaq",
+      "english_meaning": "Divorce",
+      "ayah_count": 12,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 66,
+      "arabic_name": "التحريم",
+      "transliteration": "At-Tahrim",
+      "english_meaning": "The Prohibition",
+      "ayah_count": 12,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 67,
+      "arabic_name": "الملك",
+      "transliteration": "Al-Mulk",
+      "english_meaning": "The Sovereignty",
+      "ayah_count": 30,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 68,
+      "arabic_name": "القلم",
+      "transliteration": "Al-Qalam",
+      "english_meaning": "The Pen",
+      "ayah_count": 52,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 69,
+      "arabic_name": "الحاقة",
+      "transliteration": "Al-Haaqqa",
+      "english_meaning": "The Reality",
+      "ayah_count": 52,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 70,
+      "arabic_name": "المعارج",
+      "transliteration": "Al-Ma'aarij",
+      "english_meaning": "The Ascending Stairways",
+      "ayah_count": 44,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 71,
+      "arabic_name": "نوح",
+      "transliteration": "Nooh",
+      "english_meaning": "Noah",
+      "ayah_count": 28,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 72,
+      "arabic_name": "الجن",
+      "transliteration": "Al-Jinn",
+      "english_meaning": "The Jinn",
+      "ayah_count": 28,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 73,
+      "arabic_name": "المزمل",
+      "transliteration": "Al-Muzzammil",
+      "english_meaning": "The Enshrouded One",
+      "ayah_count": 20,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 74,
+      "arabic_name": "المدثر",
+      "transliteration": "Al-Muddaththir",
+      "english_meaning": "The Cloaked One",
+      "ayah_count": 56,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 75,
+      "arabic_name": "القيامة",
+      "transliteration": "Al-Qiyaama",
+      "english_meaning": "The Resurrection",
+      "ayah_count": 40,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 76,
+      "arabic_name": "الانسان",
+      "transliteration": "Al-Insaan",
+      "english_meaning": "Man",
+      "ayah_count": 31,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 77,
+      "arabic_name": "المرسلات",
+      "transliteration": "Al-Mursalaat",
+      "english_meaning": "The Emissaries",
+      "ayah_count": 50,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 78,
+      "arabic_name": "النبإ",
+      "transliteration": "An-Naba",
+      "english_meaning": "The Announcement",
+      "ayah_count": 40,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 79,
+      "arabic_name": "النازعات",
+      "transliteration": "An-Naazi'aat",
+      "english_meaning": "Those who drag forth",
+      "ayah_count": 46,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 80,
+      "arabic_name": "عبس",
+      "transliteration": "Abasa",
+      "english_meaning": "He frowned",
+      "ayah_count": 42,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 81,
+      "arabic_name": "التكوير",
+      "transliteration": "At-Takwir",
+      "english_meaning": "The Overthrowing",
+      "ayah_count": 29,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 82,
+      "arabic_name": "الإنفطار",
+      "transliteration": "Al-Infitaar",
+      "english_meaning": "The Cleaving",
+      "ayah_count": 19,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 83,
+      "arabic_name": "المطففين",
+      "transliteration": "Al-Mutaffifin",
+      "english_meaning": "Defrauding",
+      "ayah_count": 36,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 84,
+      "arabic_name": "الإنشقاق",
+      "transliteration": "Al-Inshiqaaq",
+      "english_meaning": "The Splitting Open",
+      "ayah_count": 25,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 85,
+      "arabic_name": "البروج",
+      "transliteration": "Al-Burooj",
+      "english_meaning": "The Constellations",
+      "ayah_count": 22,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 86,
+      "arabic_name": "الطارق",
+      "transliteration": "At-Taariq",
+      "english_meaning": "The Morning Star",
+      "ayah_count": 17,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 87,
+      "arabic_name": "الأعلى",
+      "transliteration": "Al-A'laa",
+      "english_meaning": "The Most High",
+      "ayah_count": 19,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 88,
+      "arabic_name": "الغاشية",
+      "transliteration": "Al-Ghaashiya",
+      "english_meaning": "The Overwhelming",
+      "ayah_count": 26,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 89,
+      "arabic_name": "الفجر",
+      "transliteration": "Al-Fajr",
+      "english_meaning": "The Dawn",
+      "ayah_count": 30,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 90,
+      "arabic_name": "البلد",
+      "transliteration": "Al-Balad",
+      "english_meaning": "The City",
+      "ayah_count": 20,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 91,
+      "arabic_name": "الشمس",
+      "transliteration": "Ash-Shams",
+      "english_meaning": "The Sun",
+      "ayah_count": 15,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 92,
+      "arabic_name": "الليل",
+      "transliteration": "Al-Lail",
+      "english_meaning": "The Night",
+      "ayah_count": 21,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 93,
+      "arabic_name": "الضحى",
+      "transliteration": "Ad-Dhuhaa",
+      "english_meaning": "The Morning Hours",
+      "ayah_count": 11,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 94,
+      "arabic_name": "الشرح",
+      "transliteration": "Ash-Sharh",
+      "english_meaning": "The Consolation",
+      "ayah_count": 8,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 95,
+      "arabic_name": "التين",
+      "transliteration": "At-Tin",
+      "english_meaning": "The Fig",
+      "ayah_count": 8,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 96,
+      "arabic_name": "العلق",
+      "transliteration": "Al-Alaq",
+      "english_meaning": "The Clot",
+      "ayah_count": 19,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 97,
+      "arabic_name": "القدر",
+      "transliteration": "Al-Qadr",
+      "english_meaning": "The Power, Fate",
+      "ayah_count": 5,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 98,
+      "arabic_name": "البينة",
+      "transliteration": "Al-Bayyina",
+      "english_meaning": "The Evidence",
+      "ayah_count": 8,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 99,
+      "arabic_name": "الزلزلة",
+      "transliteration": "Az-Zalzala",
+      "english_meaning": "The Earthquake",
+      "ayah_count": 8,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 100,
+      "arabic_name": "العاديات",
+      "transliteration": "Al-Aadiyaat",
+      "english_meaning": "The Chargers",
+      "ayah_count": 11,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 101,
+      "arabic_name": "القارعة",
+      "transliteration": "Al-Qaari'a",
+      "english_meaning": "The Calamity",
+      "ayah_count": 11,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 102,
+      "arabic_name": "التكاثر",
+      "transliteration": "At-Takaathur",
+      "english_meaning": "Competition",
+      "ayah_count": 8,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 103,
+      "arabic_name": "العصر",
+      "transliteration": "Al-Asr",
+      "english_meaning": "The Declining Day, Epoch",
+      "ayah_count": 3,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 104,
+      "arabic_name": "الهمزة",
+      "transliteration": "Al-Humaza",
+      "english_meaning": "The Traducer",
+      "ayah_count": 9,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 105,
+      "arabic_name": "الفيل",
+      "transliteration": "Al-Fil",
+      "english_meaning": "The Elephant",
+      "ayah_count": 5,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 106,
+      "arabic_name": "قريش",
+      "transliteration": "Quraish",
+      "english_meaning": "Quraysh",
+      "ayah_count": 4,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 107,
+      "arabic_name": "الماعون",
+      "transliteration": "Al-Maa'un",
+      "english_meaning": "Almsgiving",
+      "ayah_count": 7,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 108,
+      "arabic_name": "الكوثر",
+      "transliteration": "Al-Kawthar",
+      "english_meaning": "Abundance",
+      "ayah_count": 3,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 109,
+      "arabic_name": "الكافرون",
+      "transliteration": "Al-Kaafiroon",
+      "english_meaning": "The Disbelievers",
+      "ayah_count": 6,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 110,
+      "arabic_name": "النصر",
+      "transliteration": "An-Nasr",
+      "english_meaning": "Divine Support",
+      "ayah_count": 3,
+      "revelation_place": "madani"
+    },
+    {
+      "number": 111,
+      "arabic_name": "المسد",
+      "transliteration": "Al-Masad",
+      "english_meaning": "The Palm Fibre",
+      "ayah_count": 5,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 112,
+      "arabic_name": "الإخلاص",
+      "transliteration": "Al-Ikhlaas",
+      "english_meaning": "Sincerity",
+      "ayah_count": 4,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 113,
+      "arabic_name": "الفلق",
+      "transliteration": "Al-Falaq",
+      "english_meaning": "The Dawn",
+      "ayah_count": 5,
+      "revelation_place": "makki"
+    },
+    {
+      "number": 114,
+      "arabic_name": "الناس",
+      "transliteration": "An-Naas",
+      "english_meaning": "Mankind",
+      "ayah_count": 6,
+      "revelation_place": "makki"
+    }
+  ]
+}
