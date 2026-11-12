@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,11 +10,21 @@ import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/widgets/brand_mark.dart';
 import '../../../../core/widgets/islamic_pattern.dart';
+import '../../../player/presentation/providers/playback_providers.dart';
+import '../../../player/presentation/providers/surah_recording_providers.dart';
+import '../../../player/presentation/screens/player_screen.dart';
+import '../../../player/presentation/widgets/mini_player.dart';
 import '../../../player/presentation/widgets/sample_audio_card.dart';
 import '../../domain/surah.dart';
 import '../../domain/surah_filter.dart';
 import '../providers/surah_providers.dart';
 import '../widgets/surah_tile.dart';
+
+void _openPlayer(BuildContext context, WidgetRef ref, Surah surah) {
+  ref.read(selectedSurahNumberProvider.notifier).select(surah.number);
+  unawaited(ref.read(playbackControllerProvider.notifier).stopSampleIfLoaded());
+  Navigator.of(context).push(PlayerScreen.route(surah: surah));
+}
 
 class SurahListScreen extends ConsumerWidget {
   const SurahListScreen({super.key});
@@ -57,9 +69,7 @@ class SurahListScreen extends ConsumerWidget {
                     surah: surah,
                     isSelected: selectedSurah?.number == surah.number,
                     onTap: () {
-                      ref
-                          .read(selectedSurahNumberProvider.notifier)
-                          .toggle(surah.number);
+                      _openPlayer(context, ref, surah);
                     },
                   ),
                 );
@@ -95,6 +105,7 @@ class SurahListScreen extends ConsumerWidget {
         statusBarColor: Colors.transparent,
       ),
       child: Scaffold(
+        bottomNavigationBar: const MiniPlayer(),
         body: CustomScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           slivers: [
@@ -509,6 +520,8 @@ class _SelectedSurahCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
+    final hasRecording =
+        ref.watch(surahRecordingProvider(surah.number)) != null;
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
@@ -563,21 +576,54 @@ class _SelectedSurahCard extends ConsumerWidget {
                     color: AppColors.white.withValues(alpha: 0.72),
                   ),
                 ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Icon(
+                      hasRecording
+                          ? Icons.offline_pin_rounded
+                          : Icons.schedule_rounded,
+                      size: 14,
+                      color: AppColors.gold,
+                    ),
+                    const SizedBox(width: 4),
+                    Expanded(
+                      child: Text(
+                        hasRecording
+                            ? 'Local recording available'
+                            : 'Recording not yet available',
+                        style: textTheme.labelSmall?.copyWith(
+                          color: AppColors.white.withValues(alpha: 0.72),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
-          const SizedBox(width: AppSpacing.sm),
-          TextButton(
+          const SizedBox(width: AppSpacing.xs),
+          IconButton(
+            onPressed: () {
+              _openPlayer(context, ref, surah);
+            },
+            tooltip: 'Open player',
+            color: AppColors.white,
+            visualDensity: VisualDensity.compact,
+            constraints: const BoxConstraints.tightFor(width: 36, height: 36),
+            padding: EdgeInsets.zero,
+            icon: const Icon(Icons.arrow_forward_rounded, size: 20),
+          ),
+          IconButton(
             onPressed: () {
               ref.read(selectedSurahNumberProvider.notifier).clear();
             },
-            style: TextButton.styleFrom(
-              foregroundColor: AppColors.white.withValues(alpha: 0.82),
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
-              minimumSize: const Size(0, 36),
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
-            child: const Text('Clear'),
+            tooltip: 'Clear selection',
+            color: AppColors.white.withValues(alpha: 0.82),
+            visualDensity: VisualDensity.compact,
+            constraints: const BoxConstraints.tightFor(width: 36, height: 36),
+            padding: EdgeInsets.zero,
+            icon: const Icon(Icons.close_rounded, size: 20),
           ),
         ],
       ),

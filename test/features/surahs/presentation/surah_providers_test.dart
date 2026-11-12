@@ -119,4 +119,16 @@ void main() {
     controller.clear();
     expect(container.read(selectedSurahProvider), isNull);
   });
+
+  test('selects a Surah and looks it up by number', () {
+    final container = _createContainer();
+    final controller = container.read(selectedSurahNumberProvider.notifier);
+
+    controller.select(55);
+
+    expect(container.read(selectedSurahNumberProvider), 55);
+    expect(container.read(selectedSurahProvider), _surahs[3]);
+    expect(container.read(surahByNumberProvider(55)), _surahs[3]);
+    expect(container.read(surahByNumberProvider(99)), isNull);
+  });
 }

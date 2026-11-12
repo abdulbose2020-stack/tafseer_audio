@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
-import '../../domain/playback_state.dart';
 import '../providers/playback_providers.dart';
+import '../utils/playback_time.dart';
 
 /// A small, explicitly temporary control for verifying the Phase 3 engine.
 ///
@@ -22,19 +22,28 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(playbackControllerProvider);
+    final playback = ref.watch(playbackControllerProvider);
     final controller = ref.read(playbackControllerProvider.notifier);
+    final sampleState = playback.track?.isTemporarySample == true
+        ? playback
+        : null;
     final textTheme = Theme.of(context).textTheme;
-    final duration = state.duration;
+    final isBusy = sampleState?.isBusy ?? false;
+    final isPlaying = sampleState?.isPlaying ?? false;
+    final isCompleted = sampleState?.isCompleted ?? false;
+    final hasSample = sampleState?.hasTrack ?? false;
+    final hasError = sampleState?.hasError ?? false;
+    final duration = sampleState?.duration;
+    final position = sampleState?.position ?? Duration.zero;
     final maxMilliseconds = duration != null && duration > Duration.zero
         ? duration.inMilliseconds.toDouble()
         : 1.0;
     final currentMilliseconds =
-        (_dragValue ?? state.position.inMilliseconds.toDouble())
+        (_dragValue ?? position.inMilliseconds.toDouble())
             .clamp(0.0, maxMilliseconds)
             .toDouble();
     final displayPosition = Duration(milliseconds: currentMilliseconds.round());
-    final canSeek = state.canSeek && !state.isBusy;
+    final canSeek = sampleState != null && sampleState.canSeek && !isBusy;
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
@@ -101,15 +110,15 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
-            'This recording only verifies Phase 3 playback. It is not a Surah '
-            'tafsir and is not linked to any Surah.',
+            'This recording only verifies audio-engine playback. It is not a '
+            'Surah tafsir and is not linked to any Surah.',
             style: textTheme.bodySmall?.copyWith(color: AppColors.muted),
           ),
           const SizedBox(height: AppSpacing.md),
           Row(
             children: [
               FilledButton.icon(
-                onPressed: state.isBusy ? null : controller.togglePlayback,
+                onPressed: isBusy ? null : controller.toggleSample,
                 style: FilledButton.styleFrom(
                   backgroundColor: AppColors.emerald,
                   foregroundColor: AppColors.white,
@@ -118,7 +127,7 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
                     vertical: 10,
                   ),
                 ),
-                icon: state.isBusy
+                icon: isBusy
                     ? const SizedBox(
                         width: 16,
                         height: 16,
@@ -128,26 +137,31 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
                         ),
                       )
                     : Icon(
-                        state.isPlaying
+                        isPlaying
                             ? Icons.pause_rounded
                             : Icons.play_arrow_rounded,
                         size: 20,
                       ),
-                label: Text(_buttonLabel(state)),
+                label: Text(
+                  _buttonLabel(
+                    isBusy: isBusy,
+                    isPlaying: isPlaying,
+                    isCompleted: isCompleted,
+                    hasSample: hasSample,
+                  ),
+                ),
               ),
               const SizedBox(width: AppSpacing.sm),
               IconButton(
-                onPressed: state.hasTrack && !state.isBusy
-                    ? controller.stop
-                    : null,
+                onPressed: hasSample && !isBusy ? controller.stop : null,
                 tooltip: 'Stop sample',
                 icon: const Icon(Icons.stop_rounded),
               ),
               const SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: Text(
-                  '${_formatDuration(displayPosition)} / '
-                  '${_formatDuration(duration)}',
+                  '${formatPlaybackDuration(displayPosition)} / '
+                  '${formatPlaybackDuration(duration)}',
                   textAlign: TextAlign.end,
                   overflow: TextOverflow.ellipsis,
                   style: textTheme.labelMedium?.copyWith(
@@ -186,7 +200,7 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
                   : null,
             ),
           ),
-          if (state.hasError)
+          if (hasError)
             Padding(
               padding: const EdgeInsets.only(top: AppSpacing.xs),
               child: Row(
@@ -200,7 +214,7 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
                   const SizedBox(width: AppSpacing.xs),
                   Expanded(
                     child: Text(
-                      state.errorMessage ?? 'Unable to play the sample.',
+                      sampleState?.errorMessage ?? 'Unable to play the sample.',
                       style: textTheme.bodySmall?.copyWith(
                         color: AppColors.error,
                       ),
@@ -214,35 +228,24 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
     );
   }
 
-  String _buttonLabel(PlaybackState state) {
-    if (state.isBusy) {
+  String _buttonLabel({
+    required bool isBusy,
+    required bool isPlaying,
+    required bool isCompleted,
+    required bool hasSample,
+  }) {
+    if (isBusy) {
       return 'Preparing...';
     }
-    if (state.isPlaying) {
+    if (isPlaying) {
       return 'Pause';
     }
-    if (state.isCompleted) {
+    if (isCompleted) {
       return 'Replay';
     }
-    if (state.hasTrack) {
+    if (hasSample) {
       return 'Resume';
     }
     return 'Play sample';
-  }
-
-  String _formatDuration(Duration? duration) {
-    if (duration == null) {
-      return '--:--';
-    }
-    final totalSeconds = duration.inSeconds;
-    final minutes = totalSeconds ~/ 60;
-    final seconds = totalSeconds % 60;
-    final hours = minutes ~/ 60;
-    final remainingMinutes = minutes % 60;
-    if (hours > 0) {
-      return '$hours:${remainingMinutes.toString().padLeft(2, '0')}:'
-          '${seconds.toString().padLeft(2, '0')}';
-    }
-    return '$minutes:${seconds.toString().padLeft(2, '0')}';
   }
 }

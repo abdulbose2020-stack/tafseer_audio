@@ -93,6 +93,11 @@ class SelectedSurahController extends Notifier<int?> {
   @override
   int? build() => null;
 
+  /// Selects [number] without toggling an existing selection off.
+  void select(int number) {
+    state = number;
+  }
+
   void toggle(int number) {
     state = state == number ? null : number;
   }
@@ -108,22 +113,26 @@ final selectedSurahNumberProvider =
       SelectedSurahController.new,
     );
 
-/// The full metadata for the selected Surah, if available.
-final selectedSurahProvider = Provider<Surah?>((ref) {
-  final selectedNumber = ref.watch(selectedSurahNumberProvider);
-  if (selectedNumber == null) {
-    return null;
-  }
-
+/// Looks up a Surah by its Mushaf number.
+final surahByNumberProvider = Provider.family<Surah?, int>((ref, number) {
   final surahs = ref.watch(surahsProvider).value;
   if (surahs == null) {
     return null;
   }
 
   for (final surah in surahs) {
-    if (surah.number == selectedNumber) {
+    if (surah.number == number) {
       return surah;
     }
   }
   return null;
+});
+
+/// The full metadata for the selected Surah, if available.
+final selectedSurahProvider = Provider<Surah?>((ref) {
+  final selectedNumber = ref.watch(selectedSurahNumberProvider);
+  if (selectedNumber == null) {
+    return null;
+  }
+  return ref.watch(surahByNumberProvider(selectedNumber));
 });

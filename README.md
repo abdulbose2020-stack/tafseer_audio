@@ -6,7 +6,7 @@ account, Firebase, or online backend.
 
 ## Status
 
-**Phases 0–3 are complete. Phase 4 — player UI — has not started.**
+**Phases 0–4 are complete. Phase 5 — hardening — is next.**
 
 - **Phase 0 — Foundation (complete):** project setup, Android application ID,
   audio-service configuration, dependencies, fonts, brand assets, and Git
@@ -25,10 +25,18 @@ account, Firebase, or online backend.
   Riverpod integration, automated engine tests, and a temporary sample control
   in the catalogue screen. Basic playback, pause/resume, background playback,
   and the media notification were smoke-tested on the Android emulator.
+- **Phase 4 — Player UI (complete):** a full Surah player with playback status,
+  progress, seeking, and previous/next catalogue navigation, plus a mini player
+  at the bottom of the catalogue for the currently loaded Surah recording. A
+  recording repository resolves a Surah's local file when one is bundled and
+  otherwise shows a clear unavailable state. Automated provider, repository, and
+  widget tests cover the player and mini player.
 
-The Android audio-service components are now connected to a real handler. The
-existing `PlayerScreen` remains the static Phase 1 design preview; the full
-player UI is Phase 4. Playback currently uses one temporary wedding-sermon
+The Android audio-service components are connected to a real handler, and the
+player UI reads playback state through Riverpod. No real tafsir recordings are
+bundled yet, so every Surah currently opens in the clearly labelled "Recording
+not yet available" state; the player never falls back to the temporary sample.
+Playback for engine verification still uses one temporary wedding-sermon
 recording at `assets/audio/sample/sample_tafseer.mp3`. It is clearly labelled in
 the app as an engine test, has no Surah number, is not assigned to any Surah, and
 is not catalogue content. No tafsir audio has been synthesized or fabricated.
@@ -43,14 +51,14 @@ is not catalogue content. No tafsir audio has been synthesized or fabricated.
 - **Quietly Islamic** — emerald, ivory, and restrained gold; Amiri Arabic
   typography; geometric motifs instead of heavy ornamentation.
 - **Maintainable** — feature-first structure, Riverpod state, and an audio layer
-  isolated from the UI in Phase 3.
+  isolated from the UI.
 
 ## Tech stack
 
 - Flutter 3.44.1 / Dart 3.12.1
 - Riverpod 3 for state management and dependency injection
-- `just_audio`, `audio_service`, and `audio_session` for the Phase 3 playback
-  engine; Android is configured for the background audio service
+- `just_audio`, `audio_service`, and `audio_session` for the playback engine;
+  Android is configured for the background audio service
 - `path_provider` installed for future asset-packaging work; it is not used by
   the current playback path
 - Locally bundled Amiri and Inter fonts
@@ -65,8 +73,8 @@ network access.
 - **6,236 Ayahs** in total, across 86 Makki and 28 Madani Surahs.
 - Search by Surah number, Arabic name, transliteration, or English meaning.
 - Filter by All, Makki, or Madani.
-- Selecting a Surah highlights it and shows a selected-Surah summary. Selection
-  does not navigate or start playback.
+- Tapping a Surah opens the player and highlights it in the catalogue. Opening
+  the player does not start playback.
 
 ### Source and attribution
 
@@ -89,7 +97,7 @@ definitions and validation are documented in
 
 ## Audio engine
 
-Phase 3 provides one process-wide audio engine:
+The app uses one process-wide audio engine:
 
 - `TafseerAudioHandler` extends `audio_service`'s `BaseAudioHandler` and owns one
   `just_audio` player, the queue, and the authoritative playback state.
@@ -103,6 +111,31 @@ Phase 3 provides one process-wide audio engine:
   or internet permission in the release manifest.
 - Tests use fake player, session, and engine implementations; they do not
   initialize Android audio services.
+- Audio asset layout and recording instructions are documented in
+  [`assets/audio/README.md`](assets/audio/README.md).
+
+## Player UI
+
+Phase 4 connects the catalogue and the playback state:
+
+- **Player screen** — shows the Surah medallion, Arabic name, transliteration,
+  meaning, Ayah count, and revelation place; playback status, position,
+  duration, and a seek slider; play/pause and previous/next controls. Previous
+  and next move through the catalogue without starting playback, so browsing
+  never unexpectedly plays a recording. If another Surah is playing, the screen
+  says so and offers a shortcut to it.
+- **Mini player** — appears at the bottom of the catalogue only for a real Surah
+  recording. It shows Surah details, elapsed/total time, a thin progress bar,
+  play/pause, and opens the full player. It is deliberately hidden for the
+  temporary sample.
+- **Recording resolution** — `SurahRecordingRepository` maps a Surah number to a
+  bundled local file. The default repository is empty, so every Surah currently
+  shows "Recording not yet available" and playback/seeking are disabled. Bundle
+  the files, declare their asset directory in `pubspec.yaml`, and add entries in
+  `LocalSurahRecordingRepository` to enable playback; the UI needs no changes.
+- **Safety** — the temporary wedding-sermon sample can never be presented as a
+  Surah recording. Opening any Surah stops the sample, the player refuses the
+  sample asset as a Surah file, and the mini player ignores it.
 
 ### Temporary sample caveat
 
@@ -117,9 +150,9 @@ the Sheikh's recordings before release; do not treat it as tafsir content.
 ```text
 tafseer_audio/
 ├─ lib/                 Flutter application source
-├─ test/                Unit, metadata, repository, and widget tests
+├─ test/                Unit, metadata, provider, repository, and widget tests
 ├─ assets/
-│  ├─ audio/            Temporary engine-test sample only
+│  ├─ audio/            Temporary sample and reserved Surah recordings
 │  ├─ data/             surahs.json and provenance notes
 │  ├─ fonts/            Amiri and Inter, with OFL licenses
 │  └─ images/           App icon, splash, and brand artwork
@@ -137,8 +170,8 @@ tafseer_audio/
 └─ README.md
 ```
 
-The detailed `lib/` feature layout, current data flow, and planned Phase 3
-architecture are documented in [`docs/architecture.md`](docs/architecture.md).
+The detailed `lib/` feature layout, current data flow, and current architecture
+are documented in [`docs/architecture.md`](docs/architecture.md).
 
 ## Getting started
 
@@ -161,7 +194,7 @@ flutter build apk --debug
 - Application ID: `com.tafseeraudio.app`
 - Display name: `Tafseer Audio`
 - `MainActivity` extends `AudioServiceActivity` so the Flutter engine can be
-  shared with the Phase 3 playback service.
+  shared with the playback service.
 - Android permissions are limited to wake lock and media playback foreground
   service permissions. The release manifest has no `INTERNET` permission;
   debug and profile builds add it only for Flutter tooling.
@@ -198,18 +231,18 @@ generators.
 
 ## Roadmap
 
-Phases 0–3 are complete. Remaining work:
+Phases 0–4 are complete. Remaining work:
 
-- **Phase 4 (next) — Player UI:** mini player and a player screen connected to
-  the catalogue and the existing playback state.
-- **Phase 5 — Hardening:** full test pass, device verification, and
-  documentation for adding the Sheikh's recordings.
+- **Phase 5 (next) — Hardening:** final full test pass, device verification, and
+  documentation for adding the Sheikh's recordings. This includes replacing the
+  temporary sample, populating `LocalSurahRecordingRepository`, and manually
+  verifying notification, lock-screen, headset, and interruption behavior.
 
 ## Distribution note
 
 114 full tafseer recordings may total several gigabytes. Before real recordings
 are added, the project must choose a packaging approach: Play Asset Delivery, a
-fully bundled sideload build, or a subset-per-release approach. The Phase 3
-audio layer keeps this decision isolated from the UI. No real tafsir recordings
-are bundled today; only the temporary engine-test sample is declared in
-`pubspec.yaml`.
+fully bundled sideload build, or a subset-per-release approach. The Phase 4
+`SurahRecordingRepository` keeps this decision isolated from the UI. No real
+tafsir recordings are bundled today; only the temporary engine-test sample is
+declared in `pubspec.yaml`.
