@@ -413,7 +413,11 @@ class TafseerAudioHandler extends audio_service.BaseAudioHandler
         unawaited(_player.setVolume(0.3));
         return;
       }
-      _resumeAfterInterruption = _state.isPlaying;
+      // Playback may still be loading with a pending autoplay request. Cancel
+      // that request so audio does not start during a call or other focus loss,
+      // and remember the user's intent so a transient interruption can resume.
+      _resumeAfterInterruption = _state.isPlaying || _playWhenReady;
+      _playWhenReady = false;
       if (_state.isPlaying) {
         unawaited(_pause(fromInterruption: true));
       }
@@ -436,6 +440,10 @@ class TafseerAudioHandler extends audio_service.BaseAudioHandler
 
   void _onBecomingNoisy() {
     _resumeAfterInterruption = false;
+    // Also cancel a pending autoplay while a track is loading, otherwise
+    // playback would start through the phone speaker after the headphones are
+    // unplugged.
+    _playWhenReady = false;
     if (_state.isPlaying) {
       unawaited(_pause(fromInterruption: false));
     }

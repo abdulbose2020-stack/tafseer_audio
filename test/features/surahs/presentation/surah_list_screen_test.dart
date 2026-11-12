@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tafseer_audio/core/constants/app_constants.dart';
 import 'package:tafseer_audio/core/theme/app_theme.dart';
 import 'package:tafseer_audio/features/player/data/local_surah_recording_repository.dart';
 import 'package:tafseer_audio/features/player/data/sample_audio_track.dart';
@@ -110,6 +111,19 @@ void main() {
     expect(find.text('الفاتحة'), findsOneWidget);
     expect(find.text('The Opening'), findsOneWidget);
     expect(find.text('7 Ayahs'), findsOneWidget);
+  });
+
+  testWidgets('removes the Listen, Reflect & Understand header tagline', (
+    tester,
+  ) async {
+    await _pumpCatalogue(tester);
+
+    expect(find.text('LISTEN  •  REFLECT  •  UNDERSTAND'), findsNothing);
+    expect(find.text(AppConstants.appName), findsOneWidget);
+    expect(find.text(AppConstants.appNameArabic), findsOneWidget);
+    expect(find.text(AppConstants.tagline), findsOneWidget);
+    expect(find.text('100% offline'), findsOneWidget);
+    expect(find.text('114 Surahs'), findsOneWidget);
   });
 
   testWidgets('filters the catalogue by Makki and Madani', (tester) async {

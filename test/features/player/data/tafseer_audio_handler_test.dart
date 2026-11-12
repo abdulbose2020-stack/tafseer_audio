@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:audio_service/audio_service.dart' as audio_service;
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -101,6 +103,36 @@ void main() {
     },
   );
 
+  test(
+    'publishes next and previous controls for a multi-track queue',
+    () async {
+      final (handler, player, _) = await _createHandler();
+      addTearDown(handler.dispose);
+
+      await handler.setQueue([sampleAudioTrack, _secondTrack]);
+
+      expect(handler.playbackState.value.controls, [
+        audio_service.MediaControl.skipToPrevious,
+        audio_service.MediaControl.play,
+        audio_service.MediaControl.skipToNext,
+        audio_service.MediaControl.stop,
+      ]);
+      expect(handler.playbackState.value.androidCompactActionIndices, [1, 2]);
+
+      await handler.play();
+      await handler.skipToNext();
+
+      expect(handler.currentState.track?.id, _secondTrack.id);
+      expect(handler.currentState.isPlaying, isTrue);
+      expect(player.loadedAssets.last, _secondTrack.assetPath);
+
+      await handler.skipToPrevious();
+
+      expect(handler.currentState.track?.id, sampleAudioTrack.id);
+      expect(handler.currentState.isPlaying, isTrue);
+    },
+  );
+
   test('maps asset errors to an error state and media error', () async {
     final (handler, player, _) = await _createHandler();
     addTearDown(handler.dispose);
@@ -137,6 +169,81 @@ void main() {
     expect(handler.currentState.isPlaying, isTrue);
   });
 
+  test('cancels pending autoplay when interrupted while loading', () async {
+    final (handler, player, session) = await _createHandler();
+    addTearDown(handler.dispose);
+    final gate = Completer<void>();
+    player.assetLoadGate = gate;
+
+    final loading = handler.setQueue([sampleAudioTrack]);
+    await handler.play();
+    expect(handler.currentState.phase, PlaybackPhase.loading);
+
+    session.emitInterruption(
+      AudioInterruptionEvent(true, AudioInterruptionType.pause),
+    );
+    await _flushEvents();
+
+    gate.complete();
+    await loading;
+    await _flushEvents();
+
+    expect(handler.currentState.isPlaying, isFalse);
+    expect(player.calls, isNot(contains('play')));
+
+    session.emitInterruption(
+      AudioInterruptionEvent(false, AudioInterruptionType.pause),
+    );
+    await _flushEvents();
+
+    expect(handler.currentState.isPlaying, isTrue);
+    expect(player.calls, contains('play'));
+  });
+
+  test(
+    'does not resume after an interruption when playback was paused',
+    () async {
+      final (handler, player, session) = await _createHandler();
+      addTearDown(handler.dispose);
+
+      await handler.setQueue([sampleAudioTrack]);
+
+      session.emitInterruption(
+        AudioInterruptionEvent(true, AudioInterruptionType.pause),
+      );
+      await _flushEvents();
+      session.emitInterruption(
+        AudioInterruptionEvent(false, AudioInterruptionType.pause),
+      );
+      await _flushEvents();
+
+      expect(handler.currentState.isPlaying, isFalse);
+      expect(player.calls, isNot(contains('play')));
+    },
+  );
+
+  test('does not resume after a permanent focus loss', () async {
+    final (handler, player, session) = await _createHandler();
+    addTearDown(handler.dispose);
+
+    await handler.setQueue([sampleAudioTrack]);
+    await handler.play();
+
+    session.emitInterruption(
+      AudioInterruptionEvent(true, AudioInterruptionType.unknown),
+    );
+    await _flushEvents();
+    expect(handler.currentState.isPlaying, isFalse);
+    expect(player.calls, contains('pause'));
+
+    session.emitInterruption(
+      AudioInterruptionEvent(false, AudioInterruptionType.unknown),
+    );
+    await _flushEvents();
+
+    expect(handler.currentState.isPlaying, isFalse);
+  });
+
   test('ducks and restores volume for ducking interruptions', () async {
     final (handler, player, session) = await _createHandler();
     addTearDown(handler.dispose);
@@ -171,6 +278,29 @@ void main() {
     expect(player.calls, contains('pause'));
   });
 
+  test(
+    'cancels pending autoplay when headphones disconnect while loading',
+    () async {
+      final (handler, player, session) = await _createHandler();
+      addTearDown(handler.dispose);
+      final gate = Completer<void>();
+      player.assetLoadGate = gate;
+
+      final loading = handler.setQueue([sampleAudioTrack]);
+      await handler.play();
+
+      session.emitBecomingNoisy();
+      await _flushEvents();
+
+      gate.complete();
+      await loading;
+      await _flushEvents();
+
+      expect(handler.currentState.isPlaying, isFalse);
+      expect(player.calls, isNot(contains('play')));
+    },
+  );
+
   test('advances to the next queue item after completion', () async {
     final (handler, player, _) = await _createHandler();
     addTearDown(handler.dispose);
@@ -192,6 +322,69 @@ void main() {
     expect(player.loadedAssets.last, _secondTrack.assetPath);
     expect(handler.currentState.isPlaying, isTrue);
   });
+
+  test('stays completed on the last track instead of wrapping', () async {
+    final (handler, player, _) = await _createHandler();
+    addTearDown(handler.dispose);
+
+    await handler.setQueue([sampleAudioTrack, _secondTrack]);
+    await handler.play();
+    await handler.skipToNext();
+    final loadedCount = player.loadedAssets.length;
+
+    player.emit(
+      const PlayerSnapshot(
+        processingState: PlayerProcessingState.completed,
+        position: Duration(minutes: 2),
+        duration: Duration(minutes: 2),
+      ),
+    );
+    await _flushEvents();
+
+    expect(handler.currentState.track?.id, _secondTrack.id);
+    expect(handler.currentState.phase, PlaybackPhase.completed);
+    expect(handler.currentState.isPlaying, isFalse);
+    expect(
+      handler.playbackState.value.processingState,
+      audio_service.AudioProcessingState.completed,
+    );
+    expect(player.loadedAssets, hasLength(loadedCount));
+  });
+
+  test(
+    'publishes player errors and reloads the track when play is retried',
+    () async {
+      final (handler, player, _) = await _createHandler();
+      addTearDown(handler.dispose);
+
+      await handler.setQueue([sampleAudioTrack]);
+      await handler.play();
+
+      player.emit(
+        const PlayerSnapshot(
+          processingState: PlayerProcessingState.error,
+          playing: false,
+          errorMessage: 'decoder failed',
+        ),
+      );
+      await _flushEvents();
+
+      expect(handler.currentState.phase, PlaybackPhase.error);
+      expect(handler.currentState.errorMessage, 'decoder failed');
+      expect(handler.playbackState.value.errorCode, 1);
+      expect(handler.playbackState.value.errorMessage, 'decoder failed');
+
+      await handler.play();
+
+      expect(handler.currentState.phase, PlaybackPhase.ready);
+      expect(handler.currentState.isPlaying, isTrue);
+      expect(handler.currentState.errorMessage, isNull);
+      expect(player.loadedAssets, [
+        AssetPaths.sampleAudio,
+        AssetPaths.sampleAudio,
+      ]);
+    },
+  );
 
   test('clears the queue and media item when given no tracks', () async {
     final (handler, player, _) = await _createHandler();

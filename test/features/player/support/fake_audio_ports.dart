@@ -18,6 +18,7 @@ class FakeAudioPlayer implements AudioPlayerPort {
 
   Duration? assetDuration = const Duration(minutes: 30);
   Object? setAssetError;
+  Completer<void>? assetLoadGate;
   bool disposed = false;
 
   @override
@@ -38,6 +39,10 @@ class FakeAudioPlayer implements AudioPlayerPort {
   Future<Duration?> setAsset(String assetPath) async {
     calls.add('setAsset');
     loadedAssets.add(assetPath);
+    final gate = assetLoadGate;
+    if (gate != null) {
+      await gate.future;
+    }
     final error = setAssetError;
     if (error != null) {
       throw error;
@@ -46,8 +51,10 @@ class FakeAudioPlayer implements AudioPlayerPort {
     // The handler publishes its own loading/ready state around this future.
     _currentSnapshot = _currentSnapshot.copyWith(
       processingState: PlayerProcessingState.ready,
+      playing: false,
       position: Duration.zero,
       duration: assetDuration,
+      errorMessage: null,
     );
     return assetDuration;
   }

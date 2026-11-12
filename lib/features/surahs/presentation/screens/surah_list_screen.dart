@@ -205,14 +205,6 @@ class _SurahListHeader extends StatelessWidget {
                               color: AppColors.white,
                             ),
                           ),
-                          const SizedBox(height: 2),
-                          Text(
-                            'LISTEN  •  REFLECT  •  UNDERSTAND',
-                            style: textTheme.labelSmall?.copyWith(
-                              color: AppColors.gold,
-                              letterSpacing: 1.4,
-                            ),
-                          ),
                         ],
                       ),
                     ),
