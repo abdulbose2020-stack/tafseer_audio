@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/app_theme_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/widgets/brand_mark.dart';
 import '../../../../core/widgets/islamic_pattern.dart';
@@ -159,24 +159,26 @@ class _SurahListHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
     final topInset = MediaQuery.paddingOf(context).top;
+    final canGoBack = Navigator.canPop(context);
 
     return Container(
       clipBehavior: Clip.antiAlias,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [AppColors.emerald, AppColors.emeraldDark],
+          colors: [colors.headerStart, colors.headerEnd],
         ),
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(32)),
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(32)),
       ),
       child: Stack(
         children: [
-          const Positioned.fill(
+          Positioned.fill(
             child: IslamicPattern(
-              color: AppColors.gold,
+              color: colors.gold,
               opacity: 0.14,
               spacing: 62,
             ),
@@ -193,6 +195,21 @@ class _SurahListHeader extends StatelessWidget {
               children: [
                 Row(
                   children: [
+                    if (canGoBack) ...[
+                      IconButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        tooltip: 'Back to home',
+                        color: colors.onBrand,
+                        visualDensity: VisualDensity.compact,
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints.tightFor(
+                          width: 40,
+                          height: 40,
+                        ),
+                        icon: const Icon(Icons.arrow_back_rounded),
+                      ),
+                      const SizedBox(width: AppSpacing.sm),
+                    ],
                     const BrandMark(size: 48),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
@@ -202,7 +219,7 @@ class _SurahListHeader extends StatelessWidget {
                           Text(
                             AppConstants.appName,
                             style: textTheme.titleLarge?.copyWith(
-                              color: AppColors.white,
+                              color: colors.onBrand,
                             ),
                           ),
                         ],
@@ -217,7 +234,7 @@ class _SurahListHeader extends StatelessWidget {
                   style: AppTypography.arabic(
                     fontSize: 36,
                     weight: 700,
-                    color: AppColors.gold,
+                    color: colors.gold,
                     height: 1.4,
                   ),
                 ),
@@ -225,7 +242,7 @@ class _SurahListHeader extends StatelessWidget {
                 Text(
                   AppConstants.tagline,
                   style: textTheme.bodyLarge?.copyWith(
-                    color: AppColors.white.withValues(alpha: 0.78),
+                    color: colors.onBrand.withValues(alpha: 0.78),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.lg),
@@ -260,26 +277,28 @@ class _HeaderPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.md,
         vertical: AppSpacing.sm,
       ),
       decoration: BoxDecoration(
-        color: AppColors.white.withValues(alpha: 0.1),
+        color: colors.onBrand.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: AppColors.white.withValues(alpha: 0.16)),
+        border: Border.all(color: colors.onBrand.withValues(alpha: 0.16)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 16, color: AppColors.gold),
+          Icon(icon, size: 16, color: colors.gold),
           const SizedBox(width: 6),
           Text(
             label,
             style: Theme.of(
               context,
-            ).textTheme.labelMedium?.copyWith(color: AppColors.white),
+            ).textTheme.labelMedium?.copyWith(color: colors.onBrand),
           ),
         ],
       ),
@@ -292,6 +311,7 @@ class _SectionHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
 
     return Row(
@@ -305,7 +325,9 @@ class _SectionHeading extends StatelessWidget {
               const SizedBox(height: 2),
               Text(
                 'All Surahs in Mushaf order',
-                style: textTheme.bodySmall?.copyWith(color: AppColors.muted),
+                style: textTheme.bodySmall?.copyWith(
+                  color: colors.textSecondary,
+                ),
               ),
             ],
           ),
@@ -316,13 +338,13 @@ class _SectionHeading extends StatelessWidget {
             vertical: 4,
           ),
           decoration: BoxDecoration(
-            color: AppColors.gold.withValues(alpha: 0.16),
+            color: colors.gold.withValues(alpha: 0.16),
             borderRadius: BorderRadius.circular(999),
           ),
           child: Text(
             '${AppConstants.surahCount} SURAHS',
             style: textTheme.labelSmall?.copyWith(
-              color: AppColors.goldDeep,
+              color: colors.goldStrong,
               letterSpacing: 0.8,
             ),
           ),
@@ -337,14 +359,15 @@ class _SearchAndFilterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: colors.surface,
         borderRadius: AppSpacing.cardBorderRadius,
-        border: Border.all(color: AppColors.sand),
+        border: Border.all(color: colors.border),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -354,7 +377,7 @@ class _SearchAndFilterCard extends StatelessWidget {
           Text(
             'FILTER BY REVELATION',
             style: textTheme.labelSmall?.copyWith(
-              color: AppColors.muted,
+              color: colors.textSecondary,
               letterSpacing: 1,
             ),
           ),
@@ -412,6 +435,7 @@ class _SurahSearchFieldState extends ConsumerState<_SurahSearchField> {
       },
     );
 
+    final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
     final hasText = _controller.text.isNotEmpty;
 
@@ -422,12 +446,12 @@ class _SurahSearchFieldState extends ConsumerState<_SurahSearchField> {
         setState(() {});
       },
       textInputAction: TextInputAction.search,
-      cursorColor: AppColors.emerald,
+      cursorColor: colors.accent,
       style: textTheme.bodyLarge,
       decoration: InputDecoration(
         hintText: 'Search by name, number, or meaning',
-        hintStyle: textTheme.bodyMedium?.copyWith(color: AppColors.muted),
-        prefixIcon: const Icon(Icons.search_rounded, color: AppColors.emerald),
+        hintStyle: textTheme.bodyMedium?.copyWith(color: colors.textSecondary),
+        prefixIcon: Icon(Icons.search_rounded, color: colors.accent),
         suffixIcon: hasText
             ? IconButton(
                 onPressed: _clear,
@@ -436,7 +460,7 @@ class _SurahSearchFieldState extends ConsumerState<_SurahSearchField> {
               )
             : null,
         filled: true,
-        fillColor: AppColors.ivory,
+        fillColor: colors.canvas,
         isDense: true,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.md,
@@ -444,15 +468,15 @@ class _SurahSearchFieldState extends ConsumerState<_SurahSearchField> {
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: AppColors.sand),
+          borderSide: BorderSide(color: colors.border),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: AppColors.sand),
+          borderSide: BorderSide(color: colors.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: AppColors.emerald, width: 1.5),
+          borderSide: BorderSide(color: colors.accent, width: 1.5),
         ),
       ),
     );
@@ -464,6 +488,7 @@ class _SurahFilterBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colors = context.appColors;
     final selectedFilter = ref.watch(
       surahCatalogControllerProvider.select((state) => state.filter),
     );
@@ -482,20 +507,18 @@ class _SurahFilterBar extends ConsumerWidget {
                   .read(surahCatalogControllerProvider.notifier)
                   .setFilter(filter);
             },
-            selectedColor: AppColors.emerald,
-            backgroundColor: AppColors.ivory,
+            selectedColor: colors.accent,
+            backgroundColor: colors.canvas,
             side: BorderSide(
-              color: filter == selectedFilter
-                  ? AppColors.emerald
-                  : AppColors.sand,
+              color: filter == selectedFilter ? colors.accent : colors.border,
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(999),
             ),
             labelStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
               color: filter == selectedFilter
-                  ? AppColors.white
-                  : AppColors.charcoal,
+                  ? colors.onAccent
+                  : colors.textPrimary,
             ),
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           ),
@@ -511,6 +534,7 @@ class _SelectedSurahCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
     final hasRecording =
         ref.watch(surahRecordingProvider(surah.number)) != null;
@@ -518,10 +542,10 @@ class _SelectedSurahCard extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [AppColors.emerald, AppColors.emeraldDark],
+          colors: [colors.headerStart, colors.headerEnd],
         ),
         borderRadius: AppSpacing.cardBorderRadius,
       ),
@@ -531,15 +555,11 @@ class _SelectedSurahCard extends ConsumerWidget {
             width: 42,
             height: 42,
             decoration: BoxDecoration(
-              color: AppColors.white.withValues(alpha: 0.12),
+              color: colors.onBrand.withValues(alpha: 0.12),
               shape: BoxShape.circle,
-              border: Border.all(color: AppColors.gold.withValues(alpha: 0.4)),
+              border: Border.all(color: colors.gold.withValues(alpha: 0.4)),
             ),
-            child: const Icon(
-              Icons.check_rounded,
-              color: AppColors.gold,
-              size: 22,
-            ),
+            child: Icon(Icons.check_rounded, color: colors.gold, size: 22),
           ),
           const SizedBox(width: AppSpacing.md),
           Expanded(
@@ -549,23 +569,21 @@ class _SelectedSurahCard extends ConsumerWidget {
                 Text(
                   'SELECTED SURAH',
                   style: textTheme.labelSmall?.copyWith(
-                    color: AppColors.gold,
+                    color: colors.gold,
                     letterSpacing: 1.1,
                   ),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   '${surah.number}. ${surah.transliteration}',
-                  style: textTheme.titleMedium?.copyWith(
-                    color: AppColors.white,
-                  ),
+                  style: textTheme.titleMedium?.copyWith(color: colors.onBrand),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   '${surah.englishMeaning}  •  ${surah.ayahCount} Ayahs  •  '
                   '${surah.revelationPlace.label}',
                   style: textTheme.bodySmall?.copyWith(
-                    color: AppColors.white.withValues(alpha: 0.72),
+                    color: colors.onBrand.withValues(alpha: 0.72),
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -576,7 +594,7 @@ class _SelectedSurahCard extends ConsumerWidget {
                           ? Icons.offline_pin_rounded
                           : Icons.schedule_rounded,
                       size: 14,
-                      color: AppColors.gold,
+                      color: colors.gold,
                     ),
                     const SizedBox(width: 4),
                     Expanded(
@@ -585,7 +603,7 @@ class _SelectedSurahCard extends ConsumerWidget {
                             ? 'Local recording available'
                             : 'Recording not yet available',
                         style: textTheme.labelSmall?.copyWith(
-                          color: AppColors.white.withValues(alpha: 0.72),
+                          color: colors.onBrand.withValues(alpha: 0.72),
                         ),
                       ),
                     ),
@@ -600,7 +618,7 @@ class _SelectedSurahCard extends ConsumerWidget {
               _openPlayer(context, ref, surah);
             },
             tooltip: 'Open player',
-            color: AppColors.white,
+            color: colors.onBrand,
             visualDensity: VisualDensity.compact,
             constraints: const BoxConstraints.tightFor(width: 36, height: 36),
             padding: EdgeInsets.zero,
@@ -611,7 +629,7 @@ class _SelectedSurahCard extends ConsumerWidget {
               ref.read(selectedSurahNumberProvider.notifier).clear();
             },
             tooltip: 'Clear selection',
-            color: AppColors.white.withValues(alpha: 0.82),
+            color: colors.onBrand.withValues(alpha: 0.82),
             visualDensity: VisualDensity.compact,
             constraints: const BoxConstraints.tightFor(width: 36, height: 36),
             padding: EdgeInsets.zero,
@@ -628,6 +646,7 @@ class _ResultSummary extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colors = context.appColors;
     final catalogState = ref.watch(surahCatalogControllerProvider);
     final count = ref.watch(filteredSurahsProvider).value?.length;
 
@@ -638,7 +657,7 @@ class _ResultSummary extends ConsumerWidget {
             _summaryLabel(count, catalogState),
             style: Theme.of(
               context,
-            ).textTheme.titleMedium?.copyWith(color: AppColors.muted),
+            ).textTheme.titleMedium?.copyWith(color: colors.textSecondary),
           ),
         ),
         if (catalogState.hasActiveFilters)
@@ -647,7 +666,7 @@ class _ResultSummary extends ConsumerWidget {
               ref.read(surahCatalogControllerProvider.notifier).clear();
             },
             style: TextButton.styleFrom(
-              foregroundColor: AppColors.emerald,
+              foregroundColor: colors.accent,
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
               minimumSize: const Size(0, 36),
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -678,14 +697,15 @@ class _EmptyCatalog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.xl),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: colors.surface,
         borderRadius: AppSpacing.cardBorderRadius,
-        border: Border.all(color: AppColors.sand),
+        border: Border.all(color: colors.border),
       ),
       child: Column(
         children: [
@@ -693,10 +713,10 @@ class _EmptyCatalog extends StatelessWidget {
             width: 52,
             height: 52,
             decoration: BoxDecoration(
-              color: AppColors.sand.withValues(alpha: 0.7),
+              color: colors.surfaceMuted,
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.search_off_rounded, color: AppColors.muted),
+            child: Icon(Icons.search_off_rounded, color: colors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.md),
           Text('No Surahs found', style: textTheme.titleLarge),
@@ -704,7 +724,7 @@ class _EmptyCatalog extends StatelessWidget {
           Text(
             'Try a different name, number, or revelation filter.',
             textAlign: TextAlign.center,
-            style: textTheme.bodyMedium?.copyWith(color: AppColors.muted),
+            style: textTheme.bodyMedium?.copyWith(color: colors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.lg),
           OutlinedButton.icon(
@@ -723,6 +743,8 @@ class _LoadingCatalog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Column(
       children: [
         const SizedBox(
@@ -735,7 +757,7 @@ class _LoadingCatalog extends StatelessWidget {
           'Loading the Surah catalogue...',
           style: Theme.of(
             context,
-          ).textTheme.bodyMedium?.copyWith(color: AppColors.muted),
+          ).textTheme.bodyMedium?.copyWith(color: colors.textSecondary),
         ),
       ],
     );
@@ -749,22 +771,19 @@ class _CatalogError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: colors.surface,
         borderRadius: AppSpacing.cardBorderRadius,
-        border: Border.all(color: AppColors.error.withValues(alpha: 0.24)),
+        border: Border.all(color: colors.error.withValues(alpha: 0.24)),
       ),
       child: Column(
         children: [
-          const Icon(
-            Icons.error_outline_rounded,
-            color: AppColors.error,
-            size: 32,
-          ),
+          Icon(Icons.error_outline_rounded, color: colors.error, size: 32),
           const SizedBox(height: AppSpacing.md),
           Text(
             'Unable to load the Surah catalogue',
@@ -775,7 +794,7 @@ class _CatalogError extends StatelessWidget {
           Text(
             'The bundled metadata could not be read. Please try again.',
             textAlign: TextAlign.center,
-            style: textTheme.bodyMedium?.copyWith(color: AppColors.muted),
+            style: textTheme.bodyMedium?.copyWith(color: colors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.lg),
           OutlinedButton.icon(
@@ -794,23 +813,20 @@ class _OfflinePromiseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: AppColors.sand.withValues(alpha: 0.7),
+        color: colors.surfaceMuted,
         borderRadius: AppSpacing.cardBorderRadius,
-        border: Border.all(color: AppColors.gold.withValues(alpha: 0.28)),
+        border: Border.all(color: colors.gold.withValues(alpha: 0.28)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(
-            Icons.offline_bolt_rounded,
-            color: AppColors.goldDeep,
-            size: 24,
-          ),
+          Icon(Icons.offline_bolt_rounded, color: colors.goldStrong, size: 24),
           const SizedBox(width: AppSpacing.md),
           Expanded(
             child: Column(
@@ -821,7 +837,9 @@ class _OfflinePromiseCard extends StatelessWidget {
                 Text(
                   'All 114 Surahs and their metadata are stored on your '
                   'device. No account, no network, and no distractions.',
-                  style: textTheme.bodySmall?.copyWith(color: AppColors.muted),
+                  style: textTheme.bodySmall?.copyWith(
+                    color: colors.textSecondary,
+                  ),
                 ),
               ],
             ),

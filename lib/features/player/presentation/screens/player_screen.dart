@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/app_theme_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/widgets/islamic_pattern.dart';
 import '../../../surahs/domain/surah.dart';
@@ -80,6 +80,7 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final playback = ref.watch(playbackControllerProvider);
     final controller = ref.read(playbackControllerProvider.notifier);
     final recording = ref.watch(surahRecordingProvider(_surah.number));
@@ -123,10 +124,12 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen> {
         ? catalog[currentIndex + 1]
         : null;
 
+    final overlayStyle = Theme.of(context).brightness == Brightness.dark
+        ? SystemUiOverlayStyle.light
+        : SystemUiOverlayStyle.dark;
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark.copyWith(
-        statusBarColor: Colors.transparent,
-      ),
+      value: overlayStyle.copyWith(statusBarColor: Colors.transparent),
       child: Scaffold(
         body: SafeArea(
           child: Column(
@@ -162,7 +165,7 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen> {
                             _surah.englishMeaning,
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.bodyMedium
-                                ?.copyWith(color: AppColors.muted),
+                                ?.copyWith(color: colors.textSecondary),
                           ),
                           const SizedBox(height: AppSpacing.md),
                           Wrap(
@@ -270,7 +273,7 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen> {
                                       'recording is added.',
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(color: AppColors.muted),
+                                ?.copyWith(color: colors.textSecondary),
                           ),
                           const SizedBox(height: AppSpacing.xl),
                           TextButton.icon(
@@ -339,24 +342,26 @@ class _SurahMedallion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Container(
       width: 232,
       height: 232,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [AppColors.emerald, AppColors.emeraldDark],
+          colors: [colors.headerStart, colors.headerEnd],
         ),
         border: Border.all(
-          color: AppColors.gold.withValues(alpha: 0.55),
+          color: colors.gold.withValues(alpha: 0.55),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.emerald.withValues(alpha: 0.18),
+            color: colors.accent.withValues(alpha: 0.18),
             blurRadius: 36,
             offset: const Offset(0, 18),
           ),
@@ -364,9 +369,9 @@ class _SurahMedallion extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          const Positioned.fill(
+          Positioned.fill(
             child: IslamicPattern(
-              color: AppColors.gold,
+              color: colors.gold,
               opacity: 0.16,
               spacing: 40,
             ),
@@ -385,7 +390,7 @@ class _SurahMedallion extends StatelessWidget {
                       style: AppTypography.arabic(
                         fontSize: 52,
                         weight: 700,
-                        color: AppColors.gold,
+                        color: colors.gold,
                         height: 1.3,
                       ),
                     ),
@@ -394,7 +399,7 @@ class _SurahMedallion extends StatelessWidget {
                   Text(
                     'SURAH ${surah.number.toString().padLeft(2, '0')}',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: AppColors.white.withValues(alpha: 0.78),
+                      color: colors.onBrand.withValues(alpha: 0.78),
                       letterSpacing: 2,
                     ),
                   ),
@@ -416,23 +421,25 @@ class _InfoPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: AppColors.sand.withValues(alpha: 0.7),
+        color: colors.surfaceMuted,
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: AppColors.sand),
+        border: Border.all(color: colors.border),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 14, color: AppColors.muted),
+          Icon(icon, size: 14, color: colors.textSecondary),
           const SizedBox(width: 5),
           Text(
             label,
             style: Theme.of(
               context,
-            ).textTheme.labelSmall?.copyWith(color: AppColors.muted),
+            ).textTheme.labelSmall?.copyWith(color: colors.textSecondary),
           ),
         ],
       ),
@@ -457,6 +464,7 @@ class _PlaybackStatusChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final IconData icon;
     final String label;
     final Color foreground;
@@ -465,33 +473,33 @@ class _PlaybackStatusChip extends StatelessWidget {
     if (!hasRecording) {
       icon = Icons.hourglass_empty_rounded;
       label = 'NOT YET AVAILABLE';
-      foreground = AppColors.goldDeep;
-      background = AppColors.gold.withValues(alpha: 0.14);
+      foreground = colors.goldStrong;
+      background = colors.gold.withValues(alpha: 0.14);
     } else if (hasError) {
       icon = Icons.error_outline_rounded;
       label = 'PLAYBACK ERROR';
-      foreground = AppColors.error;
-      background = AppColors.error.withValues(alpha: 0.08);
+      foreground = colors.error;
+      background = colors.error.withValues(alpha: 0.08);
     } else if (isBusy) {
       icon = Icons.graphic_eq_rounded;
       label = 'PREPARING RECORDING';
-      foreground = AppColors.emerald;
-      background = AppColors.emerald.withValues(alpha: 0.08);
+      foreground = colors.accent;
+      background = colors.accent.withValues(alpha: 0.08);
     } else if (isPlaying) {
       icon = Icons.graphic_eq_rounded;
       label = 'PLAYING THIS SURAH';
-      foreground = AppColors.emerald;
-      background = AppColors.emerald.withValues(alpha: 0.08);
+      foreground = colors.accent;
+      background = colors.accent.withValues(alpha: 0.08);
     } else if (isCurrentSurah) {
       icon = Icons.pause_circle_outline_rounded;
       label = 'PAUSED';
-      foreground = AppColors.emerald;
-      background = AppColors.emerald.withValues(alpha: 0.08);
+      foreground = colors.accent;
+      background = colors.accent.withValues(alpha: 0.08);
     } else {
       icon = Icons.offline_pin_rounded;
       label = 'LOCAL RECORDING READY';
-      foreground = AppColors.emerald;
-      background = AppColors.emerald.withValues(alpha: 0.08);
+      foreground = colors.accent;
+      background = colors.accent.withValues(alpha: 0.08);
     }
 
     return Container(
@@ -530,6 +538,7 @@ class _OtherPlaybackNotice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
@@ -541,23 +550,19 @@ class _OtherPlaybackNotice extends StatelessWidget {
         AppSpacing.sm,
       ),
       decoration: BoxDecoration(
-        color: AppColors.emerald.withValues(alpha: 0.06),
+        color: colors.accent.withValues(alpha: 0.06),
         borderRadius: AppSpacing.cardBorderRadius,
-        border: Border.all(color: AppColors.emerald.withValues(alpha: 0.18)),
+        border: Border.all(color: colors.accent.withValues(alpha: 0.18)),
       ),
       child: Row(
         children: [
-          const Icon(
-            Icons.graphic_eq_rounded,
-            size: 18,
-            color: AppColors.emerald,
-          ),
+          Icon(Icons.graphic_eq_rounded, size: 18, color: colors.accent),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Text(
               'Currently playing: Surah ${surah.number} · '
               '${surah.transliteration}',
-              style: textTheme.bodySmall?.copyWith(color: AppColors.charcoal),
+              style: textTheme.bodySmall?.copyWith(color: colors.textPrimary),
             ),
           ),
           TextButton(
@@ -582,15 +587,16 @@ class _UnavailableRecordingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.sand.withValues(alpha: 0.7),
+        color: colors.surfaceMuted,
         borderRadius: AppSpacing.cardBorderRadius,
-        border: Border.all(color: AppColors.gold.withValues(alpha: 0.35)),
+        border: Border.all(color: colors.gold.withValues(alpha: 0.35)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -599,12 +605,12 @@ class _UnavailableRecordingCard extends StatelessWidget {
             width: 44,
             height: 44,
             decoration: BoxDecoration(
-              color: AppColors.gold.withValues(alpha: 0.16),
+              color: colors.gold.withValues(alpha: 0.16),
               shape: BoxShape.circle,
             ),
-            child: const Icon(
+            child: Icon(
               Icons.hourglass_empty_rounded,
-              color: AppColors.goldDeep,
+              color: colors.goldStrong,
               size: 22,
             ),
           ),
@@ -622,7 +628,9 @@ class _UnavailableRecordingCard extends StatelessWidget {
                   "The Sheikh's tafsir recording for Surah ${surah.number} has "
                   'not been added to the app yet. Playback and seeking will '
                   'unlock when the local recording is bundled.',
-                  style: textTheme.bodySmall?.copyWith(color: AppColors.muted),
+                  style: textTheme.bodySmall?.copyWith(
+                    color: colors.textSecondary,
+                  ),
                 ),
               ],
             ),
@@ -640,24 +648,21 @@ class _PlaybackErrorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.error.withValues(alpha: 0.06),
+        color: colors.error.withValues(alpha: 0.06),
         borderRadius: AppSpacing.cardBorderRadius,
-        border: Border.all(color: AppColors.error.withValues(alpha: 0.24)),
+        border: Border.all(color: colors.error.withValues(alpha: 0.24)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(
-            Icons.error_outline_rounded,
-            color: AppColors.error,
-            size: 22,
-          ),
+          Icon(Icons.error_outline_rounded, color: colors.error, size: 22),
           const SizedBox(width: AppSpacing.md),
           Expanded(
             child: Column(
@@ -670,7 +675,7 @@ class _PlaybackErrorCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   message,
-                  style: textTheme.bodySmall?.copyWith(color: AppColors.error),
+                  style: textTheme.bodySmall?.copyWith(color: colors.error),
                 ),
               ],
             ),
@@ -702,6 +707,7 @@ class _PlaybackProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
 
     return Column(
@@ -710,7 +716,7 @@ class _PlaybackProgress extends StatelessWidget {
         Text(
           'PLAYBACK',
           style: textTheme.labelSmall?.copyWith(
-            color: AppColors.muted,
+            color: colors.textSecondary,
             letterSpacing: 1,
           ),
         ),
@@ -719,16 +725,16 @@ class _PlaybackProgress extends StatelessWidget {
             trackHeight: 4,
             thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 7),
             overlayShape: const RoundSliderOverlayShape(overlayRadius: 16),
-            disabledActiveTrackColor: AppColors.gold.withValues(alpha: 0.45),
-            disabledInactiveTrackColor: AppColors.sand,
-            disabledThumbColor: AppColors.muted.withValues(alpha: 0.5),
+            disabledActiveTrackColor: colors.gold.withValues(alpha: 0.45),
+            disabledInactiveTrackColor: colors.border,
+            disabledThumbColor: colors.textSecondary.withValues(alpha: 0.5),
           ),
           child: Slider(
             key: PlayerScreen.seekSliderKey,
             value: value,
             max: max,
-            activeColor: AppColors.emerald,
-            inactiveColor: AppColors.sand,
+            activeColor: colors.accent,
+            inactiveColor: colors.border,
             onChanged: canSeek ? onChanged : null,
             onChangeEnd: canSeek ? onChangeEnd : null,
           ),
@@ -741,14 +747,14 @@ class _PlaybackProgress extends StatelessWidget {
               Text(
                 formatPlaybackDuration(position),
                 style: textTheme.labelMedium?.copyWith(
-                  color: AppColors.muted,
+                  color: colors.textSecondary,
                   fontFeatures: const [FontFeature.tabularFigures()],
                 ),
               ),
               Text(
                 formatPlaybackDuration(duration),
                 style: textTheme.labelMedium?.copyWith(
-                  color: AppColors.muted,
+                  color: colors.textSecondary,
                   fontFeatures: const [FontFeature.tabularFigures()],
                 ),
               ),
@@ -783,6 +789,8 @@ class _TransportControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -792,8 +800,10 @@ class _TransportControls extends StatelessWidget {
           tooltip: previousTooltip,
           iconSize: 36,
           style: IconButton.styleFrom(
-            foregroundColor: AppColors.emerald,
-            disabledForegroundColor: AppColors.muted.withValues(alpha: 0.35),
+            foregroundColor: colors.accent,
+            disabledForegroundColor: colors.textSecondary.withValues(
+              alpha: 0.35,
+            ),
           ),
           icon: const Icon(Icons.skip_previous_rounded),
         ),
@@ -803,12 +813,12 @@ class _TransportControls extends StatelessWidget {
           height: 78,
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
-            color: hasRecording ? AppColors.emerald : AppColors.sand,
+            color: hasRecording ? colors.accent : colors.surfaceMuted,
             shape: BoxShape.circle,
             boxShadow: hasRecording
                 ? [
                     BoxShadow(
-                      color: AppColors.emerald.withValues(alpha: 0.18),
+                      color: colors.accent.withValues(alpha: 0.18),
                       blurRadius: 22,
                       offset: const Offset(0, 10),
                     ),
@@ -821,15 +831,15 @@ class _TransportControls extends StatelessWidget {
             tooltip: !hasRecording
                 ? 'Recording not yet available'
                 : (isPlaying ? 'Pause' : 'Play'),
-            color: AppColors.white,
-            disabledColor: AppColors.muted,
+            color: colors.onAccent,
+            disabledColor: colors.textSecondary,
             icon: isBusy
-                ? const SizedBox(
+                ? SizedBox(
                     width: 24,
                     height: 24,
                     child: CircularProgressIndicator(
                       strokeWidth: 2.4,
-                      color: AppColors.white,
+                      color: colors.onAccent,
                     ),
                   )
                 : Icon(
@@ -845,8 +855,10 @@ class _TransportControls extends StatelessWidget {
           tooltip: nextTooltip,
           iconSize: 36,
           style: IconButton.styleFrom(
-            foregroundColor: AppColors.emerald,
-            disabledForegroundColor: AppColors.muted.withValues(alpha: 0.35),
+            foregroundColor: colors.accent,
+            disabledForegroundColor: colors.textSecondary.withValues(
+              alpha: 0.35,
+            ),
           ),
           icon: const Icon(Icons.skip_next_rounded),
         ),

@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/constants/app_constants.dart';
 import 'core/theme/app_theme.dart';
-import 'features/surahs/presentation/screens/surah_list_screen.dart';
+import 'features/home/presentation/screens/home_screen.dart';
+import 'features/settings/presentation/providers/theme_providers.dart';
 
-class TafseerAudioApp extends StatelessWidget {
+class TafseerAudioApp extends ConsumerWidget {
   const TafseerAudioApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeModeControllerProvider);
+
     return MaterialApp(
       title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      themeMode: ThemeMode.light,
-      home: const SurahListScreen(),
+      darkTheme: AppTheme.dark,
+      themeMode: themeMode,
+      home: const HomeScreen(),
     );
   }
 }

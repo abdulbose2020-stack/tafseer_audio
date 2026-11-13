@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/app_theme_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../domain/surah.dart';
 
@@ -19,6 +19,7 @@ class SurahTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
 
     return Semantics(
@@ -31,14 +32,14 @@ class SurahTile extends StatelessWidget {
       excludeSemantics: true,
       child: Card(
         color: isSelected
-            ? AppColors.emerald.withValues(alpha: 0.06)
-            : AppColors.white,
+            ? colors.accent.withValues(alpha: 0.08)
+            : colors.surface,
         elevation: 0,
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
           side: BorderSide(
-            color: isSelected ? AppColors.emerald : AppColors.sand,
+            color: isSelected ? colors.accent : colors.border,
             width: isSelected ? 1.5 : 1,
           ),
         ),
@@ -60,8 +61,8 @@ class SurahTile extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: textTheme.titleMedium?.copyWith(
                           color: isSelected
-                              ? AppColors.emerald
-                              : AppColors.charcoal,
+                              ? colors.accent
+                              : colors.textPrimary,
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -70,7 +71,7 @@ class SurahTile extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: textTheme.bodySmall?.copyWith(
-                          color: AppColors.muted,
+                          color: colors.textSecondary,
                         ),
                       ),
                       const SizedBox(height: AppSpacing.sm),
@@ -107,8 +108,8 @@ class SurahTile extends StatelessWidget {
                             fontSize: 26,
                             weight: 700,
                             color: isSelected
-                                ? AppColors.emerald
-                                : AppColors.charcoal,
+                                ? colors.accent
+                                : colors.textPrimary,
                             height: 1.4,
                           ),
                         ),
@@ -119,7 +120,7 @@ class SurahTile extends StatelessWidget {
                             ? Icons.check_circle_rounded
                             : Icons.radio_button_unchecked_rounded,
                         size: 18,
-                        color: isSelected ? AppColors.emerald : AppColors.sand,
+                        color: isSelected ? colors.accent : colors.border,
                       ),
                     ],
                   ),
@@ -141,25 +142,27 @@ class _SurahNumberBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Container(
       width: 44,
       height: 44,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: isSelected
-            ? AppColors.emerald
-            : AppColors.emerald.withValues(alpha: 0.08),
+            ? colors.accent
+            : colors.accent.withValues(alpha: 0.1),
         shape: BoxShape.circle,
         border: Border.all(
           color: isSelected
-              ? AppColors.gold
-              : AppColors.emerald.withValues(alpha: 0.2),
+              ? colors.gold
+              : colors.accent.withValues(alpha: 0.2),
         ),
       ),
       child: Text(
         '$number',
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-          color: isSelected ? AppColors.white : AppColors.emerald,
+          color: isSelected ? colors.onAccent : colors.accent,
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -175,22 +178,24 @@ class _MetaPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: AppColors.sand.withValues(alpha: 0.65),
+        color: colors.surfaceMuted,
         borderRadius: BorderRadius.circular(999),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 12, color: AppColors.muted),
+          Icon(icon, size: 12, color: colors.textSecondary),
           const SizedBox(width: 4),
           Text(
             label,
             style: Theme.of(
               context,
-            ).textTheme.labelSmall?.copyWith(color: AppColors.muted),
+            ).textTheme.labelSmall?.copyWith(color: colors.textSecondary),
           ),
         ],
       ),

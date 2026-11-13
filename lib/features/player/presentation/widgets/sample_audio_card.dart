@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/app_theme_colors.dart';
 import '../providers/playback_providers.dart';
 import '../utils/playback_time.dart';
 
@@ -22,6 +22,7 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     final playback = ref.watch(playbackControllerProvider);
     final controller = ref.read(playbackControllerProvider.notifier);
     final sampleState = playback.track?.isTemporarySample == true
@@ -48,9 +49,9 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: colors.surface,
         borderRadius: AppSpacing.cardBorderRadius,
-        border: Border.all(color: AppColors.gold.withValues(alpha: 0.5)),
+        border: Border.all(color: colors.gold.withValues(alpha: 0.5)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,12 +63,12 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: AppColors.gold.withValues(alpha: 0.16),
+                  color: colors.gold.withValues(alpha: 0.16),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.graphic_eq_rounded,
-                  color: AppColors.goldDeep,
+                  color: colors.goldStrong,
                   size: 22,
                 ),
               ),
@@ -79,7 +80,7 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
                     Text(
                       'TEMPORARY AUDIO ENGINE TEST',
                       style: textTheme.labelSmall?.copyWith(
-                        color: AppColors.goldDeep,
+                        color: colors.goldStrong,
                         letterSpacing: 1,
                       ),
                     ),
@@ -95,13 +96,13 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.sand,
+                  color: colors.surfaceMuted,
                   borderRadius: BorderRadius.circular(999),
                 ),
                 child: Text(
                   'NOT A SURAH',
                   style: textTheme.labelSmall?.copyWith(
-                    color: AppColors.goldDeep,
+                    color: colors.goldStrong,
                     letterSpacing: 0.6,
                   ),
                 ),
@@ -112,7 +113,7 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
           Text(
             'This recording only verifies audio-engine playback. It is not a '
             'Surah tafsir and is not linked to any Surah.',
-            style: textTheme.bodySmall?.copyWith(color: AppColors.muted),
+            style: textTheme.bodySmall?.copyWith(color: colors.textSecondary),
           ),
           const SizedBox(height: AppSpacing.md),
           Row(
@@ -120,20 +121,20 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
               FilledButton.icon(
                 onPressed: isBusy ? null : controller.toggleSample,
                 style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.emerald,
-                  foregroundColor: AppColors.white,
+                  backgroundColor: colors.accent,
+                  foregroundColor: colors.onAccent,
                   padding: const EdgeInsets.symmetric(
                     horizontal: AppSpacing.md,
                     vertical: 10,
                   ),
                 ),
                 icon: isBusy
-                    ? const SizedBox(
+                    ? SizedBox(
                         width: 16,
                         height: 16,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          color: AppColors.white,
+                          color: colors.onAccent,
                         ),
                       )
                     : Icon(
@@ -165,7 +166,7 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
                   textAlign: TextAlign.end,
                   overflow: TextOverflow.ellipsis,
                   style: textTheme.labelMedium?.copyWith(
-                    color: AppColors.muted,
+                    color: colors.textSecondary,
                     fontFeatures: const [FontFeature.tabularFigures()],
                   ),
                 ),
@@ -181,8 +182,8 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
             child: Slider(
               value: currentMilliseconds,
               max: maxMilliseconds,
-              activeColor: AppColors.emerald,
-              inactiveColor: AppColors.sand,
+              activeColor: colors.accent,
+              inactiveColor: colors.border,
               onChanged: canSeek
                   ? (value) {
                       setState(() {
@@ -206,18 +207,16 @@ class _SampleAudioCardState extends ConsumerState<SampleAudioCard> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.error_outline_rounded,
                     size: 16,
-                    color: AppColors.error,
+                    color: colors.error,
                   ),
                   const SizedBox(width: AppSpacing.xs),
                   Expanded(
                     child: Text(
                       sampleState?.errorMessage ?? 'Unable to play the sample.',
-                      style: textTheme.bodySmall?.copyWith(
-                        color: AppColors.error,
-                      ),
+                      style: textTheme.bodySmall?.copyWith(color: colors.error),
                     ),
                   ),
                 ],
