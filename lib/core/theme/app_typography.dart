@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 abstract final class AppTypography {
   static const String latinFamily = 'Inter';
   static const String arabicFamily = 'Amiri';
+  static const String calligraphicFamily = 'Katibeh';
 
   static TextStyle latin({
     double fontSize = 14,
@@ -32,6 +33,24 @@ abstract final class AppTypography {
       fontFamily: arabicFamily,
       fontSize: fontSize,
       fontWeight: weight >= 600 ? FontWeight.w700 : FontWeight.w400,
+      color: color,
+      height: height,
+    );
+  }
+
+  /// A display style for the single-weight Katibeh calligraphic face.
+  ///
+  /// Katibeh is reserved for ornamental Arabic headings. Body and reader text
+  /// continue to use [arabicFamily] (Amiri).
+  static TextStyle calligraphicArabic({
+    double fontSize = 46,
+    Color? color,
+    double? height,
+  }) {
+    return TextStyle(
+      fontFamily: calligraphicFamily,
+      fontSize: fontSize,
+      fontWeight: FontWeight.w400,
       color: color,
       height: height,
     );

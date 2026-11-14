@@ -71,6 +71,9 @@ flutter:
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter-Variable.ttf
+    - family: Katibeh
+      fonts:
+        - asset: assets/fonts/Katibeh-Regular.ttf
 
 flutter_launcher_icons:
   android: true

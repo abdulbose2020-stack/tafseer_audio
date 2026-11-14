@@ -9,6 +9,8 @@ import '../../../surahs/domain/surah.dart';
 import '../../../surahs/presentation/providers/surah_providers.dart';
 import 'quran_reader_screen.dart';
 
+const double _headerIconSize = 44;
+
 /// The reader's own catalogue of all 114 Surahs.
 ///
 /// This deliberately does not share the Tafseer catalogue's search, filter, or
@@ -18,6 +20,7 @@ class QuranReaderSurahsScreen extends ConsumerWidget {
 
   static const Key retryButtonKey = Key('quran-reader-surahs-retry');
   static const Key listKey = Key('quran-reader-surahs-list');
+  static const Key headingKey = Key('quran-reader-calligraphy-heading');
 
   static Key tileKey(int number) => ValueKey('quran-reader-surah-$number');
 
@@ -101,7 +104,6 @@ class _CatalogueHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.appColors;
-    final textTheme = Theme.of(context).textTheme;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(
@@ -135,11 +137,11 @@ class _CatalogueHeader extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 44,
-                          height: 44,
+                          width: _headerIconSize,
+                          height: _headerIconSize,
                           decoration: BoxDecoration(
                             color: colors.gold.withValues(alpha: 0.14),
                             borderRadius: BorderRadius.circular(14),
@@ -155,27 +157,27 @@ class _CatalogueHeader extends StatelessWidget {
                         ),
                         const SizedBox(width: AppSpacing.md),
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Read the Arabic Qur’an',
-                                style: textTheme.titleLarge?.copyWith(
-                                  color: colors.onBrand,
-                                ),
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            alignment: Alignment.center,
+                            child: Text(
+                              'الْقُرْآنُ الْكَرِيمُ',
+                              key: QuranReaderSurahsScreen.headingKey,
+                              textDirection: TextDirection.rtl,
+                              textAlign: TextAlign.center,
+                              maxLines: 1,
+                              softWrap: false,
+                              style: AppTypography.calligraphicArabic(
+                                fontSize: 50,
+                                color: colors.gold,
+                                height: 1.35,
                               ),
-                              const SizedBox(height: AppSpacing.xs),
-                              Text(
-                                'The complete Mushaf is available offline. '
-                                'Choose a Surah to begin reading.',
-                                style: textTheme.bodySmall?.copyWith(
-                                  color: colors.onBrand.withValues(alpha: 0.78),
-                                  height: 1.5,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
+                        // Balances the leading icon so the heading is centred
+                        // within the whole header rather than the remaining row.
+                        const SizedBox(width: _headerIconSize + AppSpacing.md),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.md),

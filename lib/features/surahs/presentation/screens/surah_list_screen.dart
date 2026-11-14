@@ -162,7 +162,6 @@ class _SurahListHeader extends StatelessWidget {
     final colors = context.appColors;
     final textTheme = Theme.of(context).textTheme;
     final topInset = MediaQuery.paddingOf(context).top;
-    final canGoBack = Navigator.canPop(context);
 
     return Container(
       clipBehavior: Clip.antiAlias,
@@ -195,21 +194,6 @@ class _SurahListHeader extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    if (canGoBack) ...[
-                      IconButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        tooltip: 'Back to home',
-                        color: colors.onBrand,
-                        visualDensity: VisualDensity.compact,
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints.tightFor(
-                          width: 40,
-                          height: 40,
-                        ),
-                        icon: const Icon(Icons.arrow_back_rounded),
-                      ),
-                      const SizedBox(width: AppSpacing.sm),
-                    ],
                     const BrandMark(size: 48),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
@@ -250,10 +234,6 @@ class _SurahListHeader extends StatelessWidget {
                   spacing: AppSpacing.sm,
                   runSpacing: AppSpacing.sm,
                   children: [
-                    const _HeaderPill(
-                      icon: Icons.offline_bolt_rounded,
-                      label: '100% offline',
-                    ),
                     _HeaderPill(
                       icon: Icons.menu_book_rounded,
                       label: '${AppConstants.surahCount} Surahs',

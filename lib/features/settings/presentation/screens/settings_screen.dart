@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/constants/app_constants.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_theme_colors.dart';
 import '../../../quran/presentation/screens/quran_sources_screen.dart';
@@ -42,68 +41,30 @@ class SettingsScreen extends ConsumerWidget {
             const SizedBox(height: AppSpacing.sm),
             Card(
               child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.lg),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Theme', style: textTheme.titleLarge),
-                    const SizedBox(height: AppSpacing.xs),
-                    Text(
-                      'Choose how the app looks. Your selection is saved on '
-                      'this device and applies to both modules.',
-                      style: textTheme.bodySmall?.copyWith(
-                        color: colors.textSecondary,
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.md),
-                    Semantics(
-                      label: 'Theme mode',
-                      child: Wrap(
-                        key: themeSelectorKey,
-                        spacing: AppSpacing.sm,
-                        runSpacing: AppSpacing.sm,
-                        children: [
-                          for (final option in _ThemeOption.values)
-                            ChoiceChip(
-                              key: ValueKey(
-                                'settings-theme-${option.mode.name}',
-                              ),
-                              label: Text(option.label),
-                              selected: themeMode == option.mode,
-                              showCheckmark: false,
-                              onSelected: (_) {
-                                unawaited(
-                                  ref
-                                      .read(
-                                        themeModeControllerProvider.notifier,
-                                      )
-                                      .setThemeMode(option.mode),
-                                );
-                              },
-                            ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.md),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.brightness_auto_rounded,
-                          size: 18,
-                          color: colors.textSecondary,
+                padding: const EdgeInsets.all(AppSpacing.md),
+                child: Semantics(
+                  label: 'Theme mode',
+                  child: Wrap(
+                    key: themeSelectorKey,
+                    spacing: AppSpacing.sm,
+                    runSpacing: AppSpacing.sm,
+                    children: [
+                      for (final option in _ThemeOption.values)
+                        ChoiceChip(
+                          key: ValueKey('settings-theme-${option.mode.name}'),
+                          label: Text(option.label),
+                          selected: themeMode == option.mode,
+                          showCheckmark: false,
+                          onSelected: (_) {
+                            unawaited(
+                              ref
+                                  .read(themeModeControllerProvider.notifier)
+                                  .setThemeMode(option.mode),
+                            );
+                          },
                         ),
-                        const SizedBox(width: AppSpacing.xs),
-                        Expanded(
-                          child: Text(
-                            'System follows your device appearance setting.',
-                            style: textTheme.bodySmall?.copyWith(
-                              color: colors.textSecondary,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -139,67 +100,6 @@ class SettingsScreen extends ConsumerWidget {
                   Icons.chevron_right_rounded,
                   color: colors.textSecondary,
                 ),
-              ),
-            ),
-            const SizedBox(height: AppSpacing.xl),
-            Text(
-              'ABOUT',
-              style: textTheme.labelSmall?.copyWith(
-                color: colors.textSecondary,
-                letterSpacing: 1.1,
-              ),
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            Card(
-              clipBehavior: Clip.antiAlias,
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: Icon(
-                      Icons.menu_book_rounded,
-                      color: colors.accent,
-                    ),
-                    title: const Text('Qur’an reading'),
-                    subtitle: Text(
-                      'Read the Arabic Qur’an offline with the English '
-                      'translation shown beneath each Ayah. Translation '
-                      'display can be shown or hidden for the current session '
-                      'in the reader.',
-                      style: textTheme.bodySmall?.copyWith(
-                        color: colors.textSecondary,
-                      ),
-                    ),
-                  ),
-                  Divider(height: 1, color: colors.border),
-                  ListTile(
-                    leading: Icon(
-                      Icons.headphones_rounded,
-                      color: colors.accent,
-                    ),
-                    title: const Text('Tafseer audio'),
-                    subtitle: Text(
-                      'The 114-Surah catalogue is available. Recordings will '
-                      'appear as they are bundled.',
-                      style: textTheme.bodySmall?.copyWith(
-                        color: colors.textSecondary,
-                      ),
-                    ),
-                  ),
-                  Divider(height: 1, color: colors.border),
-                  ListTile(
-                    leading: Icon(
-                      Icons.offline_bolt_rounded,
-                      color: colors.goldStrong,
-                    ),
-                    title: Text(AppConstants.appName),
-                    subtitle: Text(
-                      'Offline by design. No account, network, or analytics.',
-                      style: textTheme.bodySmall?.copyWith(
-                        color: colors.textSecondary,
-                      ),
-                    ),
-                  ),
-                ],
               ),
             ),
           ],

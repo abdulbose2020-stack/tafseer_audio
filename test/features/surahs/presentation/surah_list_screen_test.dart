@@ -122,7 +122,7 @@ void main() {
     expect(find.text(AppConstants.appName), findsOneWidget);
     expect(find.text(AppConstants.appNameArabic), findsOneWidget);
     expect(find.text(AppConstants.tagline), findsOneWidget);
-    expect(find.text('100% offline'), findsOneWidget);
+    expect(find.text('100% offline'), findsNothing);
     expect(find.text('114 Surahs'), findsOneWidget);
   });
 

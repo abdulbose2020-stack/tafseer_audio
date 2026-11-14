@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/constants/app_constants.dart';
 import 'core/theme/app_theme.dart';
-import 'features/home/presentation/screens/home_screen.dart';
+import 'features/home/presentation/screens/main_shell.dart';
 import 'features/settings/presentation/providers/theme_providers.dart';
 
 class TafseerAudioApp extends ConsumerWidget {
@@ -19,7 +19,7 @@ class TafseerAudioApp extends ConsumerWidget {
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: themeMode,
-      home: const HomeScreen(),
+      home: const MainShell(),
     );
   }
 }

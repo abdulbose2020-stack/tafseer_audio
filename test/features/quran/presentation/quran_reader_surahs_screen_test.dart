@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tafseer_audio/core/theme/app_theme.dart';
+import 'package:tafseer_audio/core/theme/app_typography.dart';
 import 'package:tafseer_audio/features/player/presentation/providers/playback_providers.dart';
 import 'package:tafseer_audio/features/player/presentation/widgets/mini_player.dart';
 import 'package:tafseer_audio/features/quran/presentation/providers/quran_surah_providers.dart';
@@ -13,8 +14,8 @@ import 'package:tafseer_audio/features/surahs/presentation/providers/surah_provi
 import '../../player/support/fake_audio_engine.dart';
 import 'support/quran_reader_test_support.dart';
 
-void _setTestView(WidgetTester tester) {
-  tester.view.physicalSize = const Size(900, 1600);
+void _setTestView(WidgetTester tester, {Size size = const Size(900, 1600)}) {
+  tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
   addTearDown(tester.view.resetDevicePixelRatio);
@@ -37,8 +38,9 @@ Future<_CatalogueHarness> _pumpCatalogue(
   AsyncValue<List<Surah>>? surahs,
   FakeQuranSurahDataSource? source,
   bool settle = true,
+  Size size = const Size(900, 1600),
 }) async {
-  _setTestView(tester);
+  _setTestView(tester, size: size);
 
   final engine = FakeAudioEngine();
   addTearDown(engine.dispose);
@@ -85,7 +87,26 @@ void main() {
     await _pumpCatalogue(tester);
 
     expect(find.text('Qur’an Reading'), findsOneWidget);
-    expect(find.text('Read the Arabic Qur’an'), findsOneWidget);
+    expect(find.text('الْقُرْآنُ الْكَرِيمُ'), findsOneWidget);
+    expect(find.text('Read the Arabic Qur’an'), findsNothing);
+    expect(find.textContaining('The complete Mushaf'), findsNothing);
+
+    final heading = tester.widget<Text>(
+      find.byKey(QuranReaderSurahsScreen.headingKey),
+    );
+    expect(heading.textDirection, TextDirection.rtl);
+    expect(heading.textAlign, TextAlign.center);
+    expect(heading.maxLines, 1);
+    expect(heading.style?.fontFamily, AppTypography.calligraphicFamily);
+    expect(heading.style?.fontWeight, FontWeight.w400);
+    expect(
+      find.ancestor(
+        of: find.byKey(QuranReaderSurahsScreen.headingKey),
+        matching: find.byType(FittedBox),
+      ),
+      findsOneWidget,
+    );
+
     expect(find.text('114 Surahs'), findsOneWidget);
     expect(find.byType(TextField), findsNothing);
 
@@ -119,6 +140,27 @@ void main() {
     expect(find.text('An-Naas'), findsOneWidget);
     expect(find.text('Mankind'), findsOneWidget);
     expect(find.text('6 Ayahs'), findsOneWidget);
+  });
+
+  testWidgets('keeps the calligraphic heading on one line on a narrow screen', (
+    tester,
+  ) async {
+    await _pumpCatalogue(
+      tester,
+      surahs: const AsyncValue.data(<Surah>[]),
+      size: const Size(360, 800),
+    );
+
+    expect(tester.takeException(), isNull);
+    expect(find.byKey(QuranReaderSurahsScreen.headingKey), findsOneWidget);
+
+    final fittedBox = tester.widget<FittedBox>(
+      find.ancestor(
+        of: find.byKey(QuranReaderSurahsScreen.headingKey),
+        matching: find.byType(FittedBox),
+      ),
+    );
+    expect(fittedBox.fit, BoxFit.scaleDown);
   });
 
   testWidgets('shows a loading state while the catalogue is read', (

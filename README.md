@@ -81,9 +81,10 @@ is not catalogue content. No tafsir audio has been synthesized or fabricated.
 
 ## Qur’an reading
 
-The home screen offers two independent modules: **Qur’an reading** and
-**Tafseer audio**. Reading has its own catalogue and never changes the Tafseer
-selection, the playback queue, or the mini player.
+The app opens on the **Qur’an** tab. A persistent bottom bar switches between
+**Tafseer**, **Qur’an**, and **Settings**; each tab keeps its own scroll and
+in-screen state while the app is running. Reading has its own catalogue and
+never changes the Tafseer selection, the playback queue, or the mini player.
 
 - **Reader catalogue** — all 114 Surahs with Arabic name, transliteration,
   English meaning, Ayah count, and revelation place.
