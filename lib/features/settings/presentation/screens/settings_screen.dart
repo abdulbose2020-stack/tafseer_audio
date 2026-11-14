@@ -129,7 +129,8 @@ class SettingsScreen extends ConsumerWidget {
                 ),
                 title: const Text('Qur’an sources'),
                 subtitle: Text(
-                  'Tanzil Arabic text and QuranEnc English translation.',
+                  'Tanzil Arabic text and Surah metadata; QuranEnc English '
+                  'translation.',
                   style: textTheme.bodySmall?.copyWith(
                     color: colors.textSecondary,
                   ),
@@ -160,7 +161,9 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                     title: const Text('Qur’an reading'),
                     subtitle: Text(
-                      'Arabic text and English translation are being prepared.',
+                      'Arabic Qur’an reading is available offline. English '
+                      'translation data is bundled, but its display in the '
+                      'reader is not implemented yet.',
                       style: textTheme.bodySmall?.copyWith(
                         color: colors.textSecondary,
                       ),

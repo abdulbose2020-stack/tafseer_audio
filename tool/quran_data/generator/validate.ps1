@@ -1,16 +1,29 @@
 # Independent validation pass over the acquired sources, manifest and generated Surah files.
 # Run from anywhere:
 #   powershell -ExecutionPolicy Bypass -File tool/quran_data/generator/validate.ps1
+#   powershell -ExecutionPolicy Bypass -File tool/quran_data/generator/validate.ps1 -Mode pre-publish
+#   powershell -ExecutionPolicy Bypass -File tool/quran_data/generator/validate.ps1 -Mode post-publish
 #
-# This script only reads the sources and generated dataset. Its sole output is
-# tool/quran_data/validation/independent-validation.json.
+# -Mode auto (the default) validates the published runtime tree when
+# assets/data/quran exists; otherwise it validates generated output only.
+# -Mode pre-publish validates the sources and generated output without requiring
+# runtime assets. -Mode post-publish additionally verifies every runtime file
+# against the generated dataset, the runtime manifest SHA-256 entries and the
+# content checksum.
+#
+# The script only reads the sources and datasets. A successful run writes
+# tool/quran_data/validation/independent-validation.json. A failed run writes
+# independent-validation.failed.json and never overwrites a previously
+# successful report.
 #
 # It does not reuse the generator's control flow or validation results: it
 # re-parses both original sources and re-derives every result from them.
 
 [CmdletBinding()]
 param(
-    [string]$ValidatedAtUtc = ''
+    [string]$ValidatedAtUtc = '',
+    [ValidateSet('auto', 'pre-publish', 'post-publish')]
+    [string]$Mode = 'auto'
 )
 
 Set-StrictMode -Version Latest
@@ -31,6 +44,7 @@ $manifestPath = Join-Path $generatedDir 'manifest.json'
 $generationReportPath = Join-Path $validationDir 'validation-report.json'
 $checksumsPath = Join-Path $validationDir 'checksums.sha256'
 $independentPath = Join-Path $validationDir 'independent-validation.json'
+$failedIndependentPath = Join-Path $validationDir 'independent-validation.failed.json'
 $cataloguePath = Join-Path $projectRoot 'assets\data\surahs.json'
 $pubspecPath = Join-Path $projectRoot 'pubspec.yaml'
 $appQuranDir = Join-Path $projectRoot 'assets\data\quran'
@@ -41,6 +55,16 @@ if ([string]::IsNullOrEmpty($ValidatedAtUtc)) {
 
 if ($ValidatedAtUtc -notmatch '^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$') {
     throw 'ValidatedAtUtc must look like 2026-11-13T12:34:56Z.'
+}
+
+$resolvedMode = $Mode
+if ($Mode -eq 'auto') {
+    if ([System.IO.Directory]::Exists($appQuranDir)) {
+        $resolvedMode = 'post-publish'
+    }
+    else {
+        $resolvedMode = 'pre-publish'
+    }
 }
 
 $script:checks = New-Object System.Collections.ArrayList
@@ -227,6 +251,7 @@ $recomputedTotals = [ordered]@{}
 $contentChecksumInfo = [ordered]@{}
 $generationCrossCheck = [ordered]@{}
 $readOnlyGuard = [ordered]@{}
+$runtimeInfo = [ordered]@{}
 $spotCheckRecords = New-Object System.Collections.ArrayList
 $sajdahKeys = New-Object System.Collections.ArrayList
 $actualSajdahKeys = @()
@@ -1326,6 +1351,28 @@ try {
     Add-TextSetCheck -Id 'spot.all' -Category 'spot-checks' -Description 'All five required spot checks pass against the original sources.' -Issues $spotCheckIssues -SuccessDetails '1:1, 1:2, 2:1, 9:1, 114:6 exact'
 
     # ---------------------------------------------------------------
+    # pubspec.yaml guard inputs
+    # ---------------------------------------------------------------
+
+    $pubspecTextNow = Read-Utf8TextFile -Path $pubspecPath
+    $pubspecHashNow = Get-Sha256Hex -Path $pubspecPath
+    $pubspecDeclaredLines = @(
+        $pubspecTextNow -split "`r?`n" | ForEach-Object { $_.Trim() }
+    )
+    $pubspecDeclaresQuranAssets = ($pubspecDeclaredLines -ccontains '- assets/data/quran/')
+    $pubspecDeclaresQuranSurahs = ($pubspecDeclaredLines -ccontains '- assets/data/quran/surahs/')
+
+    # The generator records the pubspec hash before runtime assets are declared.
+    # Ignore only those two approved declaration lines when comparing, so the
+    # guard still detects every other edit while allowing the publish step.
+    $pubspecNormalizedText = $pubspecTextNow
+    foreach ($declaration in @('- assets/data/quran/', '- assets/data/quran/surahs/')) {
+        $declarationPattern = '(?m)^[ \t]*' + [regex]::Escape($declaration) + '[ \t]*\r?\n'
+        $pubspecNormalizedText = [regex]::Replace($pubspecNormalizedText, $declarationPattern, '')
+    }
+    $pubspecNormalizedHash = Get-Sha256Text -Text $pubspecNormalizedText
+
+    # ---------------------------------------------------------------
     # Cross-check generated reports
     # ---------------------------------------------------------------
 
@@ -1391,11 +1438,12 @@ try {
             if (-not (Test-OrdinalEqual -Left ([string]$generationReport.read_only_guard.catalogue_sha256) -Right (Get-Sha256Hex -Path $cataloguePath))) {
                 [void]$generationReportIssues.Add('catalogue guard hash mismatch')
             }
-            if (-not (Test-OrdinalEqual -Left ([string]$generationReport.read_only_guard.pubspec_sha256) -Right (Get-Sha256Hex -Path $pubspecPath))) {
+            $reportPubspecHash = [string]$generationReport.read_only_guard.pubspec_sha256
+            if (
+                -not (Test-OrdinalEqual -Left $pubspecHashNow -Right $reportPubspecHash) -and
+                -not (Test-OrdinalEqual -Left $pubspecNormalizedHash -Right $reportPubspecHash)
+            ) {
                 [void]$generationReportIssues.Add('pubspec guard hash mismatch')
-            }
-            if ([bool]$generationReport.read_only_guard.app_quran_dir_exists) {
-                [void]$generationReportIssues.Add('app Qur''an asset directory exists')
             }
         }
 
@@ -1441,12 +1489,13 @@ try {
     # ---------------------------------------------------------------
 
     $catalogueHashNow = Get-Sha256Hex -Path $cataloguePath
-    $pubspecHashNow = Get-Sha256Hex -Path $pubspecPath
     $appQuranDirExistsNow = [System.IO.Directory]::Exists($appQuranDir)
 
     $catalogueMatchesManifest = (Test-OrdinalEqual -Left $catalogueHashNow -Right ([string]$manifest.sources.catalogue.sha256))
     $catalogueMatchesReport = ($null -ne $generationReport) -and (Test-OrdinalEqual -Left $catalogueHashNow -Right ([string]$generationReport.read_only_guard.catalogue_sha256))
     $pubspecMatchesReport = ($null -ne $generationReport) -and (Test-OrdinalEqual -Left $pubspecHashNow -Right ([string]$generationReport.read_only_guard.pubspec_sha256))
+    $pubspecNormalizedMatchesReport = ($null -ne $generationReport) -and (Test-OrdinalEqual -Left $pubspecNormalizedHash -Right ([string]$generationReport.read_only_guard.pubspec_sha256))
+    $pubspecMatchesReportAllowingRuntimeAssets = ($pubspecMatchesReport -or $pubspecNormalizedMatchesReport)
 
     $readOnlyGuard = [ordered]@{
         catalogue_path = 'assets/data/surahs.json'
@@ -1455,6 +1504,11 @@ try {
         catalogue_matches_generation_report = [bool]$catalogueMatchesReport
         pubspec_sha256 = $pubspecHashNow
         pubspec_matches_generation_report = [bool]$pubspecMatchesReport
+        pubspec_normalized_sha256 = $pubspecNormalizedHash
+        pubspec_normalized_matches_generation_report = [bool]$pubspecNormalizedMatchesReport
+        pubspec_matches_generation_report_allowing_runtime_assets = [bool]$pubspecMatchesReportAllowingRuntimeAssets
+        pubspec_declares_quran_assets = [bool]$pubspecDeclaresQuranAssets
+        pubspec_declares_quran_surahs = [bool]$pubspecDeclaresQuranSurahs
         app_quran_dir_exists = [bool]$appQuranDirExistsNow
         app_quran_dir_created = $false
     }
@@ -1463,9 +1517,256 @@ try {
         $catalogueMatchesManifest -and $catalogueMatchesReport
     ) -Details ('sha256={0}' -f $catalogueHashNow)
 
-    Add-Check -Id 'guard.pubspec' -Category 'guard' -Description 'pubspec.yaml is unchanged and still matches the generation report.' -Passed $pubspecMatchesReport -Details ('sha256={0}' -f $pubspecHashNow)
+    Add-Check -Id 'guard.pubspec' -Category 'guard' -Description 'pubspec.yaml is unchanged apart from the approved runtime asset declarations and declares both Qur''an asset directories.' -Passed (
+        $pubspecMatchesReportAllowingRuntimeAssets -and
+        $pubspecDeclaresQuranAssets -and
+        $pubspecDeclaresQuranSurahs
+    ) -Details (
+        'sha256={0}; normalized={1}; matches_report={2}; normalized_matches_report={3}; declares_manifest_assets={4}; declares_surah_assets={5}' -f
+        $pubspecHashNow,
+        $pubspecNormalizedHash,
+        $pubspecMatchesReport,
+        $pubspecNormalizedMatchesReport,
+        $pubspecDeclaresQuranAssets,
+        $pubspecDeclaresQuranSurahs
+    )
 
-    Add-Check -Id 'guard.no_app_quran_assets' -Category 'guard' -Description 'No generated data has been copied into assets/data/quran/.' -Passed (-not $appQuranDirExistsNow) -Details ('exists={0}' -f $appQuranDirExistsNow)
+    # ---------------------------------------------------------------
+    # Published runtime assets (post-publish)
+    # ---------------------------------------------------------------
+
+    $runtimePathLabel = 'assets/data/quran'
+    $runtimeInfo = [ordered]@{
+        checked = ($resolvedMode -eq 'post-publish')
+        mode = $resolvedMode
+        path = $runtimePathLabel
+        exists = [bool]$appQuranDirExistsNow
+    }
+
+    if ($resolvedMode -eq 'post-publish') {
+        Add-Check -Id 'runtime.directory' -Category 'runtime' -Description 'assets/data/quran exists after publishing.' -Passed $appQuranDirExistsNow -Details ('exists={0}' -f $appQuranDirExistsNow)
+
+        if (-not $appQuranDirExistsNow) {
+            $runtimeInfo['file_count'] = 0
+            $runtimeInfo['surah_file_count'] = 0
+            $runtimeInfo['matches_generated'] = $false
+        }
+        else {
+            $runtimeManifestPath = Join-Path $appQuranDir 'manifest.json'
+            $expectedRuntimeFiles = New-Object System.Collections.ArrayList
+            [void]$expectedRuntimeFiles.Add('manifest.json')
+            for ($n = 1; $n -le 114; $n++) {
+                [void]$expectedRuntimeFiles.Add(('surahs/{0:D3}.json' -f $n))
+            }
+
+            $actualRuntimeFiles = @(
+                Get-ChildItem -LiteralPath $appQuranDir -Recurse -File -Force | ForEach-Object {
+                    $_.FullName.Substring($appQuranDir.Length + 1).Replace('\', '/')
+                }
+            )
+            $missingRuntimeFiles = @($expectedRuntimeFiles | Where-Object { $actualRuntimeFiles -notcontains $_ })
+            $extraRuntimeFiles = @($actualRuntimeFiles | Where-Object { $expectedRuntimeFiles -notcontains $_ })
+
+            $runtimeFileSetOk = (
+                $actualRuntimeFiles.Count -eq 115 -and
+                $missingRuntimeFiles.Count -eq 0 -and
+                $extraRuntimeFiles.Count -eq 0
+            )
+            Add-Check -Id 'runtime.file_set' -Category 'runtime' -Description 'Runtime assets contain exactly manifest.json and the 114 expected Surah files, with no extra files.' -Passed $runtimeFileSetOk -Details (
+                'files={0}; missing=[{1}]; extra=[{2}]' -f $actualRuntimeFiles.Count, (Format-IssueList -Items $missingRuntimeFiles), (Format-IssueList -Items $extraRuntimeFiles)
+            )
+
+            $runtimeManifestExists = [System.IO.File]::Exists($runtimeManifestPath)
+            $runtimeManifestHash = ''
+            $runtimeManifest = $null
+            $runtimeManifestParses = $false
+            if ($runtimeManifestExists) {
+                $runtimeManifestHash = Get-Sha256Hex -Path $runtimeManifestPath
+                try {
+                    $runtimeManifest = (Read-Utf8TextFile -Path $runtimeManifestPath) | ConvertFrom-Json
+                    $runtimeManifestParses = $true
+                }
+                catch {
+                    $runtimeManifest = $null
+                }
+            }
+
+            $runtimeManifestDetails = if (-not $runtimeManifestExists) {
+                'manifest.json is missing'
+            }
+            elseif (-not $runtimeManifestParses) {
+                'manifest.json could not be parsed'
+            }
+            else {
+                'path={0}; sha256={1}' -f $runtimePathLabel, $runtimeManifestHash
+            }
+            Add-Check -Id 'runtime.manifest' -Category 'runtime' -Description 'Runtime manifest.json exists, is valid UTF-8 JSON and has the generated manifest schema.' -Passed (
+                $runtimeManifestExists -and
+                $runtimeManifestParses -and
+                (Test-KeySet -Object $runtimeManifest -Expected $requiredManifestTopLevel)
+            ) -Details $runtimeManifestDetails
+
+            Add-Check -Id 'runtime.manifest_encoding' -Category 'runtime' -Description 'Runtime manifest.json is UTF-8 without a BOM.' -Passed (
+                $runtimeManifestExists -and -not (Test-Utf8Bom -Path $runtimeManifestPath)
+            ) -Details $runtimePathLabel
+
+            $runtimeManifestMatchesGenerated = (
+                $runtimeManifestExists -and
+                (Test-OrdinalEqual -Left $runtimeManifestHash -Right $manifestHash)
+            )
+            Add-Check -Id 'runtime.manifest_identity' -Category 'runtime' -Description 'Runtime manifest.json is byte-identical to the current generated manifest, with no stale timestamp or metadata.' -Passed $runtimeManifestMatchesGenerated -Details (
+                'runtime={0}; generated={1}' -f $runtimeManifestHash, $manifestHash
+            )
+
+            $runtimeEntryByNumber = @{}
+            $runtimeManifestEntryIssues = New-Object System.Collections.ArrayList
+            if ($runtimeManifestParses) {
+                $runtimeSurahEntries = @(Get-JsonProperty -Object $runtimeManifest -Name 'surahs')
+                if ($runtimeSurahEntries.Count -ne 114) {
+                    [void]$runtimeManifestEntryIssues.Add(('entry count={0}, expected=114' -f $runtimeSurahEntries.Count))
+                }
+
+                foreach ($entry in $runtimeSurahEntries) {
+                    $number = [int](Get-JsonProperty -Object $entry -Name 'number')
+                    if ($number -lt 1 -or $number -gt 114) {
+                        [void]$runtimeManifestEntryIssues.Add(('invalid Surah {0}' -f $number))
+                        continue
+                    }
+                    if ($runtimeEntryByNumber.ContainsKey($number)) {
+                        [void]$runtimeManifestEntryIssues.Add(('duplicate {0}' -f $number))
+                        continue
+                    }
+                    $runtimeEntryByNumber[$number] = $entry
+
+                    $expectedFileName = 'surahs/{0:D3}.json' -f $number
+                    $entryFile = [string](Get-JsonProperty -Object $entry -Name 'file')
+                    if (-not (Test-OrdinalEqual -Left $entryFile -Right $expectedFileName)) {
+                        [void]$runtimeManifestEntryIssues.Add(('Surah {0} file={1}' -f $number, $entryFile))
+                    }
+
+                    $entryHash = [string](Get-JsonProperty -Object $entry -Name 'sha256')
+                    if ($entryHash -notmatch '^[0-9a-f]{64}$') {
+                        [void]$runtimeManifestEntryIssues.Add(('Surah {0} has an invalid sha256' -f $number))
+                    }
+                }
+
+                for ($n = 1; $n -le 114; $n++) {
+                    if (-not $runtimeEntryByNumber.ContainsKey($n)) {
+                        [void]$runtimeManifestEntryIssues.Add(('missing {0}' -f $n))
+                    }
+                }
+            }
+            else {
+                [void]$runtimeManifestEntryIssues.Add('runtime manifest unavailable')
+            }
+            Add-TextSetCheck -Id 'runtime.manifest_entries' -Category 'runtime' -Description 'Runtime manifest has one unique SHA-256 entry for every Surah with the expected file name.' -Issues $runtimeManifestEntryIssues -SuccessDetails '114 runtime manifest entries matched'
+
+            $runtimeManifestHashIssues = New-Object System.Collections.ArrayList
+            $runtimeGeneratedMismatchIssues = New-Object System.Collections.ArrayList
+            $runtimeHashByNumber = @{}
+            $runtimeContentHashBuilder = New-Object System.Text.StringBuilder
+
+            for ($suraNumber = 1; $suraNumber -le 114; $suraNumber++) {
+                $fileName = '{0:D3}.json' -f $suraNumber
+                $runtimeSurahPath = Join-Path $appQuranDir ('surahs\' + $fileName)
+                if (-not [System.IO.File]::Exists($runtimeSurahPath)) {
+                    [void]$runtimeManifestHashIssues.Add(('Surah {0}: missing file' -f $suraNumber))
+                    [void]$runtimeGeneratedMismatchIssues.Add(('Surah {0}: missing file' -f $suraNumber))
+                    continue
+                }
+
+                $runtimeSurahHash = Get-Sha256Hex -Path $runtimeSurahPath
+                $runtimeHashByNumber[$suraNumber] = $runtimeSurahHash
+                [void]$runtimeContentHashBuilder.Append($fileName)
+                [void]$runtimeContentHashBuilder.Append("`n")
+                [void]$runtimeContentHashBuilder.Append($runtimeSurahHash)
+                [void]$runtimeContentHashBuilder.Append("`n")
+
+                if ($runtimeEntryByNumber.ContainsKey($suraNumber)) {
+                    $entryHash = [string](Get-JsonProperty -Object $runtimeEntryByNumber[$suraNumber] -Name 'sha256')
+                    if (-not (Test-OrdinalEqual -Left $runtimeSurahHash -Right $entryHash)) {
+                        [void]$runtimeManifestHashIssues.Add(('Surah {0}: hash mismatch' -f $suraNumber))
+                    }
+                }
+                else {
+                    [void]$runtimeManifestHashIssues.Add(('Surah {0}: no manifest entry' -f $suraNumber))
+                }
+
+                if (-not $actualHashByNumber.ContainsKey($suraNumber)) {
+                    [void]$runtimeGeneratedMismatchIssues.Add(('Surah {0}: generated file missing' -f $suraNumber))
+                }
+                elseif (-not (Test-OrdinalEqual -Left $runtimeSurahHash -Right ([string]$actualHashByNumber[$suraNumber]))) {
+                    [void]$runtimeGeneratedMismatchIssues.Add(('Surah {0}: differs from generated' -f $suraNumber))
+                }
+            }
+
+            Add-TextSetCheck -Id 'runtime.manifest_hashes' -Category 'runtime' -Description 'All 114 runtime Surah files match their SHA-256 entries in the runtime manifest.' -Issues $runtimeManifestHashIssues -SuccessDetails '114 runtime hashes matched'
+            Add-TextSetCheck -Id 'runtime.generated_identity' -Category 'runtime' -Description 'Every runtime Surah is byte-identical to the current generated dataset; no file is missing, modified or stale.' -Issues $runtimeGeneratedMismatchIssues -SuccessDetails '114 runtime files matched generated output'
+
+            $runtimeComputedContentChecksum = Get-Sha256Text -Text $runtimeContentHashBuilder.ToString()
+            $runtimeManifestContentChecksum = ''
+            $runtimeManifestChecksumAlgorithm = ''
+            $runtimeManifestChecksumFileCount = 0
+            if ($runtimeManifestParses) {
+                $runtimeManifestChecksum = Get-JsonProperty -Object $runtimeManifest -Name 'content_checksum'
+                if ($null -ne $runtimeManifestChecksum) {
+                    $runtimeManifestContentChecksum = [string](Get-JsonProperty -Object $runtimeManifestChecksum -Name 'value')
+                    $runtimeManifestChecksumAlgorithm = [string](Get-JsonProperty -Object $runtimeManifestChecksum -Name 'algorithm')
+                    $runtimeManifestChecksumFileCount = [int](Get-JsonProperty -Object $runtimeManifestChecksum -Name 'file_count')
+                }
+            }
+
+            $runtimeChecksumMatchesManifest = (
+                $runtimeManifestParses -and
+                (Test-OrdinalEqual -Left $runtimeComputedContentChecksum -Right $runtimeManifestContentChecksum)
+            )
+            $runtimeChecksumMatchesGenerated = (Test-OrdinalEqual -Left $runtimeComputedContentChecksum -Right $recomputedContentChecksum)
+            $runtimeContentChecksumOk = (
+                $runtimeChecksumMatchesManifest -and
+                $runtimeChecksumMatchesGenerated -and
+                $runtimeManifestChecksumAlgorithm -eq 'SHA-256' -and
+                $runtimeManifestChecksumFileCount -eq 114
+            )
+
+            Add-Check -Id 'runtime.content_checksum' -Category 'runtime' -Description 'The content checksum recomputed from runtime Surah files matches the runtime and generated manifest values.' -Passed $runtimeContentChecksumOk -Details (
+                'runtime_recomputed={0}; runtime_manifest={1}; generated={2}; algorithm={3}; file_count={4}' -f
+                $runtimeComputedContentChecksum,
+                $runtimeManifestContentChecksum,
+                $recomputedContentChecksum,
+                $runtimeManifestChecksumAlgorithm,
+                $runtimeManifestChecksumFileCount
+            )
+
+            $runtimeMatchesGenerated = (
+                $runtimeFileSetOk -and
+                $runtimeManifestMatchesGenerated -and
+                ($runtimeManifestEntryIssues.Count -eq 0) -and
+                ($runtimeManifestHashIssues.Count -eq 0) -and
+                ($runtimeGeneratedMismatchIssues.Count -eq 0) -and
+                $runtimeContentChecksumOk
+            )
+
+            $runtimeInfo = [ordered]@{
+                checked = $true
+                mode = $resolvedMode
+                path = $runtimePathLabel
+                exists = $true
+                file_count = [int]$actualRuntimeFiles.Count
+                surah_file_count = [int]$runtimeHashByNumber.Count
+                manifest_exists = [bool]$runtimeManifestExists
+                manifest_sha256 = [string]$runtimeManifestHash
+                manifest_matches_generated = [bool]$runtimeManifestMatchesGenerated
+                manifest_entries_valid = [bool]($runtimeManifestEntryIssues.Count -eq 0)
+                manifest_hashes_match = [bool]($runtimeManifestHashIssues.Count -eq 0)
+                file_set_valid = [bool]$runtimeFileSetOk
+                surah_files_match_generated = [bool]($runtimeGeneratedMismatchIssues.Count -eq 0)
+                content_checksum = [string]$runtimeComputedContentChecksum
+                content_checksum_matches_manifest = [bool]$runtimeChecksumMatchesManifest
+                content_checksum_matches_generated = [bool]$runtimeChecksumMatchesGenerated
+                matches_generated = [bool]$runtimeMatchesGenerated
+            }
+        }
+    }
 
 }
 catch {
@@ -1478,27 +1779,44 @@ $checksPassed = @($script:checks | Where-Object { $_.passed }).Count
 $checksFailed = $script:failures.Count
 $reportStatus = if ($checksFailed -eq 0 -and [string]::IsNullOrEmpty($fatalMessage)) { 'passed' } else { 'failed' }
 
+$preservedSuccessfulReport = $false
+if ($reportStatus -ne 'passed' -and [System.IO.File]::Exists($independentPath)) {
+    try {
+        $previousReport = (Read-Utf8TextFile -Path $independentPath) | ConvertFrom-Json
+        $preservedSuccessfulReport = ([string]$previousReport.status -eq 'passed')
+    }
+    catch {
+        $preservedSuccessfulReport = $false
+    }
+}
+
+$reportPath = if ($reportStatus -eq 'passed') { $independentPath } else { $failedIndependentPath }
+
 $report = [ordered]@{
     status = $reportStatus
+    mode = $resolvedMode
+    requested_mode = $Mode
     validated_at_utc = $ValidatedAtUtc
     fatal_error = $fatalMessage
     validator = [ordered]@{
         name = 'tafseer_audio independent Qur''an data validator'
-        version = '1.0.0'
+        version = '1.1.0'
         entry_point = 'tool/quran_data/generator/validate.ps1'
         library = 'tool/quran_data/generator/quran_data_lib.psm1'
-        independence_note = 'Re-parses the original XML and CSV and re-derives all counts, mappings, Basmala rules, markers, footnotes, spot checks and checksums.'
+        independence_note = 'Re-parses the original XML and CSV and re-derives all counts, mappings, Basmala rules, markers, footnotes, spot checks and checksums. Post-publish mode independently verifies every runtime file and the published manifest.'
     }
     manifest = $manifestInfo
     sources = $sourceInfo
     catalogue = $catalogueInfo
     generated = $generatedInfo
+    runtime_assets = $runtimeInfo
     totals = $recomputedTotals
     content_checksum = $contentChecksumInfo
     sajdah_locations = @($actualSajdahKeys)
     spot_checks = $spotCheckRecords.ToArray()
     generation_report_cross_check = $generationCrossCheck
     read_only_guard = $readOnlyGuard
+    previous_successful_report_preserved = [bool]$preservedSuccessfulReport
     checks_total = [int]$script:checks.Count
     checks_passed = [int]$checksPassed
     checks_failed = [int]$checksFailed
@@ -1506,14 +1824,33 @@ $report = [ordered]@{
 }
 
 $reportJson = (ConvertTo-JsonText -Value $report) + "`n"
-Write-Utf8TextFile -Path $independentPath -Text $reportJson
+if ($reportStatus -eq 'passed') {
+    Write-Utf8TextFile -Path $independentPath -Text $reportJson
+    if ([System.IO.File]::Exists($failedIndependentPath)) {
+        [System.IO.File]::Delete($failedIndependentPath)
+    }
+}
+else {
+    # Never replace a previously successful report with a failed result.
+    Write-Utf8TextFile -Path $failedIndependentPath -Text $reportJson
+}
+
+$summarySurahs = if ($recomputedTotals.Contains('surahs')) { [int]$recomputedTotals['surahs'] } else { 0 }
+$summaryAyahs = if ($recomputedTotals.Contains('ayahs')) { [int]$recomputedTotals['ayahs'] } else { 0 }
+$summaryArabic = if ($recomputedTotals.Contains('arabic_records')) { [int]$recomputedTotals['arabic_records'] } else { 0 }
+$summaryTranslations = if ($recomputedTotals.Contains('translation_records')) { [int]$recomputedTotals['translation_records'] } else { 0 }
+$summaryContentChecksum = if ($contentChecksumInfo.Contains('value')) { [string]$contentChecksumInfo['value'] } else { '' }
 
 Write-Output ''
+Write-Output ('Validation mode: {0}' -f $resolvedMode)
 Write-Output ('Independent validation: {0}' -f $reportStatus.ToUpperInvariant())
 Write-Output ('Checks: {0}/{1} passed; {2} failed' -f $checksPassed, $script:checks.Count, $checksFailed)
-Write-Output ('Surahs: {0}; Ayahs: {1}; Arabic records: {2}; translations: {3}' -f $recomputedTotals.surahs, $recomputedTotals.ayahs, $recomputedTotals.arabic_records, $recomputedTotals.translation_records)
-Write-Output ('Content checksum: {0}' -f $contentChecksumInfo.value)
-Write-Output ('Report: {0}' -f $independentPath)
+Write-Output ('Surahs: {0}; Ayahs: {1}; Arabic records: {2}; translations: {3}' -f $summarySurahs, $summaryAyahs, $summaryArabic, $summaryTranslations)
+Write-Output ('Content checksum: {0}' -f $summaryContentChecksum)
+Write-Output ('Report: {0}' -f $reportPath)
+if ($preservedSuccessfulReport) {
+    Write-Output ('Preserved successful report: {0}' -f $independentPath)
+}
 
 if ($reportStatus -ne 'passed') {
     $failureSummary = (@($script:failures | Select-Object -First 8 | ForEach-Object {
@@ -1522,5 +1859,5 @@ if ($reportStatus -ne 'passed') {
     if ([string]::IsNullOrEmpty($failureSummary)) {
         $failureSummary = $fatalMessage
     }
-    throw ('Independent validation failed ({0} failed check(s)). {1} See {2}' -f $checksFailed, $failureSummary, $independentPath)
+    throw ('Independent validation failed ({0} failed check(s)). {1} See {2}' -f $checksFailed, $failureSummary, $reportPath)
 }

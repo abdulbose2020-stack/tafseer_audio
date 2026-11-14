@@ -1,12 +1,13 @@
 # Tafseer Audio
 
-An Android-first Flutter application for listening to complete audio tafseer
-for all 114 Surahs of the Qur'an. It is designed to work fully offline, with no
-account, Firebase, or online backend.
+An Android-first Flutter application for reading the Qur’an offline and
+listening to complete audio tafseer for all 114 Surahs of the Qur’an. It is
+designed to work fully offline, with no account, Firebase, or online backend.
 
 ## Status
 
-**Phases 0–4 are complete. Phase 5 — hardening — is next.**
+**Phases 0–4, the offline Qur’an reader, and the Qur’an data pipeline are
+complete. Phase 5 — audio hardening — is next.**
 
 - **Phase 0 — Foundation (complete):** project setup, Android application ID,
   audio-service configuration, dependencies, fonts, brand assets, and Git
@@ -31,6 +32,18 @@ account, Firebase, or online backend.
   recording repository resolves a Surah's local file when one is bundled and
   otherwise shows a clear unavailable state. Automated provider, repository, and
   widget tests cover the player and mini player.
+- **Offline Qur’an reading (complete):** a separate Arabic reader for all 114
+  Surahs, its own Surah catalogue and navigation, adjustable Arabic text size,
+  Basmala handling, Sajdah indicators, and an in-app sources and
+  acknowledgements screen.
+- **Qur’an data pipeline (complete):** reproducible source acquisition,
+  generation, independent pre- and post-publish validation, staged publishing
+  with backup and rollback, and an asset-integrity regression test.
+
+The English translation and footnotes are bundled with every Ayah, but the
+reader does not display them yet. Only the Arabic reader is presented as
+available. The app supports Light, Dark, and System themes; the selection is
+saved locally and System follows the device appearance setting.
 
 The Android audio-service components are connected to a real handler, and the
 player UI reads playback state through Riverpod. No real tafsir recordings are
@@ -43,9 +56,10 @@ is not catalogue content. No tafsir audio has been synthesized or fabricated.
 
 ## Product principles
 
-- **Offline first** — Surah metadata, fonts, and artwork are bundled locally.
-  Playback is intended to work offline; the audio packaging decision is still
-  pending (see the [distribution note](#distribution-note)).
+- **Offline first** — the Qur’an text, bundled translation data, Surah
+  metadata, fonts, and artwork are stored locally. Playback is intended to work
+  offline; the audio packaging decision is still pending (see the
+  [distribution note](#distribution-note)).
 - **Simple and focused** — the design target is one recording per Surah and one
   clear player.
 - **Quietly Islamic** — emerald, ivory, and restrained gold; Amiri Arabic
@@ -61,11 +75,109 @@ is not catalogue content. No tafsir audio has been synthesized or fabricated.
   Android is configured for the background audio service
 - `path_provider` installed for future asset-packaging work; it is not used by
   the current playback path
+- `shared_preferences` for the saved Light/Dark/System theme preference
 - Locally bundled Amiri and Inter fonts
 
-## Surah catalogue
+## Qur’an reading
 
-The complete catalogue is bundled at
+The home screen offers two independent modules: **Qur’an reading** and
+**Tafseer audio**. Reading has its own catalogue and never changes the Tafseer
+selection, the playback queue, or the mini player.
+
+- **Reader catalogue** — all 114 Surahs with Arabic name, transliteration,
+  English meaning, Ayah count, and revelation place.
+- **Arabic reader** — opens one bundled Surah at a time. The Arabic text is
+  rendered exactly as supplied, with Ayah numbers in separate badges, the
+  prefatory Basmala where the source provides one (all Surahs except 1 and 9),
+  and a Sajdah indicator on Sajdah Ayahs.
+- **Text size** — a session-only Arabic size control from 26 to 48. It is
+  intentionally not persisted in Settings.
+- **Selection** — Arabic text and the prefatory Basmala are selectable and
+  copyable.
+- **Sources** — the reader and Settings open the same acknowledgements screen,
+  which reads versions and required notices from the bundled manifest.
+- **Offline** — every Surah is a local JSON asset. The reader loads only the
+  requested Surah; it does not enumerate the directory or download content.
+
+The English translation and footnotes are bundled with every Ayah and parsed
+into the domain model, but the reader does not display them yet. The Ayah view
+has a reserved optional translation slot that remains empty. No English
+translation reading UI is implemented.
+
+The app supports **Light**, **Dark**, and **System** themes. The selection is
+saved with `SharedPreferences` and restored before the first frame; System
+follows the device appearance setting.
+
+## Qur’an data
+
+The complete Qur’an dataset is bundled at `assets/data/quran/`:
+
+- `manifest.json` — dataset and schema versions, generator metadata, source
+  versions and required notices, totals, Basmala summary, 114 per-Surah
+  SHA-256 digests, and the content checksum.
+- `surahs/001.json` … `surahs/114.json` — Arabic text, English translation,
+  footnotes, and Sajdah markers for each Surah.
+
+The manifest and the 114 Surah files are the only runtime files. Each Surah
+file is verified by its manifest digest, and the content checksum is SHA-256
+over the sorted file names and digests. The data layout and fields are
+documented in [`assets/data/README.md`](assets/data/README.md).
+
+### Qur’an data provenance
+
+- **Arabic text:** Tanzil Quran Text (Uthmani, Version 1.1), copyright
+  (C) 2007-2026 Tanzil Project, licensed under CC BY 3.0.
+- **English translation:** QuranEnc `english_saheeh` (Version 1.1.2,
+  `v1.1.2-csv.1`), published by Noor International Center through QuranEnc.
+- **Surah catalogue:** Tanzil Quran Metadata, copyright (C) 2008-2009
+  Tanzil.info, licensed under CC BY; cross-checked with the Quran.com Chapters
+  API.
+
+The manifest stores the exact required notices. The app shows them under
+**Settings → Qur’an sources** without duplicating the notice text in the UI.
+
+## Qur’an data pipeline
+
+The reviewed source files are processed by PowerShell scripts under
+`tool/quran_data/generator/`. The scripts never repair or hand-edit source
+data, and they derive the project root from their own location.
+
+```powershell
+# Acquire reviewed sources only when intentionally updating versions.
+powershell -ExecutionPolicy Bypass -File tool/quran_data/generator/fetch-sources.ps1
+
+# Generate the dataset and its validation reports.
+powershell -ExecutionPolicy Bypass -File tool/quran_data/generator/generate.ps1
+
+# Validate sources and generated output before publishing.
+powershell -ExecutionPolicy Bypass -File tool/quran_data/generator/validate.ps1 -Mode pre-publish
+
+# Stage, back up, verify, swap, and post-validate runtime assets.
+powershell -ExecutionPolicy Bypass -File tool/quran_data/generator/publish.ps1
+
+# Independently verify the published runtime assets.
+powershell -ExecutionPolicy Bypass -File tool/quran_data/generator/validate.ps1 -Mode post-publish
+```
+
+`validate.ps1` defaults to `-Mode auto`, which selects post-publish validation
+when `assets/data/quran` exists and pre-publish validation otherwise. A failed
+run writes `independent-validation.failed.json` and never overwrites the last
+successful report.
+
+`publish.ps1` verifies generated data, stages a copy, verifies all 115 staged
+files, backs up the current runtime directory to `tool/quran_data/backups/`,
+swaps in the verified staging copy, and runs post-publish validation. Any
+failure after the swap restores the backup; if no runtime directory existed,
+the new copy is removed. The backup is kept by default; pass
+`-RemoveBackupOnSuccess` after confirming a publish. Staging lives under
+`tool/quran_data/publish-work/` and is cleaned up.
+
+See [`tool/quran_data/README.md`](tool/quran_data/README.md) for the complete
+workflow and safeguards.
+
+## Tafseer catalogue
+
+The complete Tafseer catalogue is bundled at
 [`assets/data/surahs.json`](assets/data/surahs.json) and is loaded without
 network access.
 
@@ -150,16 +262,18 @@ the Sheikh's recordings before release; do not treat it as tafsir content.
 ```text
 tafseer_audio/
 ├─ lib/                 Flutter application source
-├─ test/                Unit, metadata, provider, repository, and widget tests
+├─ test/                Unit, metadata, asset-integrity, provider, and widget tests
 ├─ assets/
 │  ├─ audio/            Temporary sample and reserved Surah recordings
-│  ├─ data/             surahs.json and provenance notes
+│  ├─ data/             surahs.json, Qur’an runtime data, and provenance notes
+│  │  └─ quran/         manifest.json and 114 Surah JSON files
 │  ├─ fonts/            Amiri and Inter, with OFL licenses
 │  └─ images/           App icon, splash, and brand artwork
 ├─ docs/
 │  └─ architecture.md
 ├─ tool/
-│  └─ generate_brand_assets.ps1
+│  ├─ generate_brand_assets.ps1
+│  └─ quran_data/       Sources, generator, validator, publisher, and reports
 ├─ android/             Android host and audio-service configuration
 ├─ ios/                 Default Flutter platform folder
 ├─ linux/               Default Flutter platform folder
@@ -185,7 +299,8 @@ Useful checks:
 ```bash
 dart format --set-exit-if-changed lib test
 flutter analyze
-flutter test
+flutter test test/assets/quran_assets_test.dart
+flutter test --reporter expanded
 flutter build apk --debug
 ```
 
@@ -217,10 +332,10 @@ dart run flutter_native_splash:create
 The generated files are committed so a normal build does not need to run the
 generators.
 
-> The app is intentionally light-only for now. If you regenerate the native
-> splash, keep the `values-night` themes on `Theme.Light.NoTitleBar` and
-> `@color/splash_background` so Android does not flash a dark window before
-> Flutter starts.
+> The Flutter UI supports light, dark, and system themes. The native splash is
+> still light-only; if you regenerate it, keep the `values-night` themes on
+> `Theme.Light.NoTitleBar` and `@color/splash_background` so Android does not
+> flash a dark window before Flutter starts.
 
 ## Fonts and licenses
 
@@ -231,12 +346,16 @@ generators.
 
 ## Roadmap
 
-Phases 0–4 are complete. Remaining work:
+Phases 0–4, the offline Qur’an reader, and the Qur’an data pipeline are
+complete. Remaining work:
 
 - **Phase 5 (next) — Hardening:** final full test pass, device verification, and
   documentation for adding the Sheikh's recordings. This includes replacing the
   temporary sample, populating `LocalSurahRecordingRepository`, and manually
   verifying notification, lock-screen, headset, and interruption behavior.
+- **Reading follow-up:** display the bundled English translation and footnotes
+  in the reader. The data is bundled and parsed already; the display UI is not
+  implemented.
 
 ## Distribution note
 

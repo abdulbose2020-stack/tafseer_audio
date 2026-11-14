@@ -2,9 +2,10 @@
 
 ## Phase status
 
-Phases 0–4 are complete. The codebase contains the foundation, design shell,
-Surah catalogue, audio engine, and the Phase 4 player UI. Phase 5 is the
-remaining hardening pass.
+Phases 0–4 are complete, along with the offline Qur’an reader and the Qur’an
+data pipeline. Phase 5 is the remaining audio hardening pass. The reader
+displays Arabic only; the bundled English translation and footnotes are parsed
+but not rendered yet.
 
 | Phase | Status | Scope |
 | --- | --- | --- |
@@ -14,13 +15,17 @@ remaining hardening pass.
 | 3 — Audio playback | Complete; automated tests pass and basic playback smoke-tested on the Android emulator | Audio engine, temporary sample audio, playback queue, background playback, notification/lock-screen controls, and Riverpod integration. |
 | 4 — Player UI | Complete; automated tests pass | Full player screen, mini player, recording resolution, unavailable/error states, seeking, and catalogue navigation. Device verification is part of Phase 5. |
 | 5 — Hardening | Planned | Final full test pass, device verification, and documentation for adding the Sheikh's recordings. |
+| Qur’an reader | Complete | Offline Arabic reader for all 114 Surahs, reader catalogue/navigation, Basmala and Sajdah handling, Arabic text-size control, source acknowledgements, and Light/Dark/System themes. |
+| Qur’an data pipeline | Complete | Source acquisition, generation, independent pre/post-publish validation, staged publishing with backup/rollback, and asset-integrity tests. |
 
-The app launches into `SurahListScreen`. Tapping a Surah opens `PlayerScreen`;
-the selected-Surah summary and mini player keep the catalogue connected to
-playback. A small card above the catalogue remains a temporary control for the
-Phase 3 engine. It is explicitly labelled as an engine test and is not connected
-to any Surah. No real Surah recordings are bundled yet, so the player shows its
-unavailable state for every Surah until the Sheikh's files are added.
+The app launches into `HomeScreen`, which links to the two independent modules:
+the Qur’an reader and the Tafseer catalogue. Settings is reachable from the home
+screen. Tapping a Surah in the Tafseer catalogue opens `PlayerScreen`; the
+selected-Surah summary and mini player keep that catalogue connected to
+playback. A small card above the Tafseer catalogue remains a temporary control
+for the Phase 3 engine. It is explicitly labelled as an engine test and is not
+connected to any Surah. No real Surah recordings are bundled yet, so the player
+shows its unavailable state for every Surah until the Sheikh's files are added.
 
 ## Approach
 
@@ -62,6 +67,63 @@ surahsProvider
 The catalogue is read once from a bundled JSON asset. Search and filtering are
 pure domain functions. Selection is UI state only; it does not create an audio
 player or start playback.
+
+## Offline Qur’an reading
+
+Reading is a separate feature module with its own catalogue and state. It never
+reads or writes Tafseer selection, playback state, or the mini player.
+
+```text
+assets/data/surahs.json
+        │
+        ▼
+surahsProvider ──► QuranReaderSurahsScreen
+        │                  │ selected Surah
+        │                  ▼
+        │            QuranReaderScreen
+        │                  │
+        │                  ├── quranSurahProvider(number)
+        │                  │        │
+        │                  │        ▼
+        │                  │   quranSurahRepositoryProvider
+        │                  │        │
+        │                  │        ▼
+        │                  │   QuranSurahAssetDataSource
+        │                  │   assets/data/quran/surahs/NNN.json
+        │                  │
+        │                  └── quranReaderFontSizeProvider (session only)
+
+assets/data/quran/manifest.json
+        │
+        ▼
+quranSourceManifestProvider ──► QuranSourcesScreen
+```
+
+- The reader catalogue uses the same 114-Surah metadata as the Tafseer
+  catalogue but has independent navigation.
+- `QuranReaderScreen` loads only the requested Surah.
+  `QuranSurahAssetDataSource` validates the Surah number and JSON shape; the
+  manifest is not consulted for reading.
+- `QuranSurah` enforces the Basmala mode rules (Ayah for Surah 1, none for
+  Surah 9, prefatory for the rest), sequential Ayah numbers, and non-empty
+  Arabic and translation values.
+- `QuranAyahView` renders the Arabic string exactly as supplied. It supports an
+  optional translation widget, but the reader passes none.
+  `QuranAyah.translation` and `.footnotes` are parsed and available for the
+  future translation UI; they are not displayed today.
+- The source acknowledgements screen loads `manifest.json` lazily and renders
+  the exact versions, notices, licence terms, and links recorded there. The same
+  screen is reachable from Settings and the reader.
+- Reader font size is session-only Riverpod state; it is deliberately not
+  persisted.
+
+### Themes
+
+`themeModeControllerProvider` reads and writes `ThemeMode` through
+`SettingsStore`. `main` supplies a `SharedPreferencesSettingsStore` (falling
+back to `MemorySettingsStore`), and `TafseerAudioApp` passes the mode to
+`MaterialApp` with light and dark themes. Light, Dark, and System are
+supported; System is the default.
 
 ## Audio data flow
 
@@ -152,25 +214,99 @@ sermon, not a Surah tafsir. The `AudioTrack` has `surahNumber == null` and
 catalogue content, and no tafsir audio is synthesized or fabricated. The sample
 must be replaced with the Sheikh's recordings before release.
 
+## Qur’an data architecture
+
+Generated data and runtime data are separate outputs of one validated pipeline:
+
+```text
+tool/quran_data/sources (reviewed XML/CSV)
+        │
+        ▼
+generate.ps1 ──► tool/quran_data/generated/
+        │          manifest.json + surahs/001..114.json
+        │
+        ▼
+validate.ps1 -Mode pre-publish
+        │
+        ▼
+publish.ps1 ──► staging verification
+        │           backup existing runtime
+        │           swap assets/data/quran
+        │           validate.ps1 -Mode post-publish
+        │           rollback on failure
+        ▼
+assets/data/quran/
+```
+
+- The generator validates sources and in-memory records before writing, records
+  per-Surah SHA-256 values and a content checksum in the manifest, and writes
+  validation reports and `checksums.sha256`.
+- `validate.ps1` is independent of the generator's control flow: it re-parses
+  both sources and re-derives counts, mappings, Basmala rules, markers,
+  footnotes, spot checks, and checksums. `-Mode auto` selects post-publish when
+  the runtime directory exists.
+- Post-publish mode verifies the runtime file set, the runtime manifest, all 114
+  per-Surah hashes, byte identity with the generated dataset, and the content
+  checksum.
+- A failed validation writes `independent-validation.failed.json` and preserves
+  the last successful `independent-validation.json`.
+- `publish.ps1` verifies generated data, stages and verifies all 115 files,
+  backs up the existing runtime to `tool/quran_data/backups/`, swaps in the
+  staged copy, and rolls back on any post-swap failure. The backup is retained
+  unless `-RemoveBackupOnSuccess` is passed.
+- The app reads only `assets/data/quran`; it never reads `tool/` at runtime.
+  Commands and safeguards are documented in
+  [`tool/quran_data/README.md`](../tool/quran_data/README.md).
+
 ## Current lib layout
 
 ```text
 lib/
-├─ main.dart                 # initializes the handler and app lifecycle
-├─ app.dart
+├─ main.dart                 # settings/audio initialization and app lifecycle
+├─ app.dart                  # MaterialApp, light/dark themes, theme mode
 ├─ core/
 │  ├─ constants/
 │  │  ├─ app_constants.dart
 │  │  └─ asset_paths.dart
+│  ├─ settings/
+│  │  └─ settings_store.dart
 │  ├─ theme/
 │  │  ├─ app_colors.dart
 │  │  ├─ app_spacing.dart
 │  │  ├─ app_theme.dart
+│  │  ├─ app_theme_colors.dart
 │  │  └─ app_typography.dart
 │  └─ widgets/
 │     ├─ brand_mark.dart
 │     └─ islamic_pattern.dart
 └─ features/
+   ├─ home/
+   │  └─ presentation/screens/home_screen.dart
+   ├─ quran/
+   │  ├─ domain/
+   │  │  ├─ quran_ayah.dart
+   │  │  ├─ quran_repository.dart
+   │  │  ├─ quran_source_manifest.dart
+   │  │  └─ quran_surah.dart
+   │  ├─ data/
+   │  │  ├─ asset_quran_repository.dart
+   │  │  ├─ quran_manifest_data_source.dart
+   │  │  ├─ quran_surah_asset_data_source.dart
+   │  │  └─ quran_surah_data_source.dart
+   │  └─ presentation/
+   │     ├─ providers/
+   │     │  ├─ quran_reader_providers.dart
+   │     │  ├─ quran_sources_providers.dart
+   │     │  └─ quran_surah_providers.dart
+   │     ├─ screens/
+   │     │  ├─ quran_reader_screen.dart
+   │     │  ├─ quran_reader_surahs_screen.dart
+   │     │  └─ quran_sources_screen.dart
+   │     └─ widgets/quran_ayah_view.dart
+   ├─ settings/
+   │  └─ presentation/
+   │     ├─ providers/theme_providers.dart
+   │     └─ screens/settings_screen.dart
    ├─ surahs/
    │  ├─ domain/
    │  │  ├─ revelation_place.dart
@@ -220,6 +356,14 @@ lib/
 - `filteredSurahsProvider` derives the visible list.
 - `selectedSurahNumberProvider` and `selectedSurahProvider` track catalogue
   selection, and `surahByNumberProvider` looks up metadata by Mushaf number.
+- `quranSurahProvider(number)` lazily loads one Surah through
+  `QuranRepository`; each family instance reads only its own asset.
+- `quranReaderFontSizeProvider` holds the reader's session-only Arabic size.
+- `quranSourceManifestProvider` lazily loads the source manifest for the
+  acknowledgements screen.
+- `themeModeControllerProvider` reads and persists the Light/Dark/System
+  selection through `settingsStoreProvider`. `main` overrides the store with
+  SharedPreferences; tests use `MemorySettingsStore`.
 - `audioEngineProvider` is overridden in `main` with the initialized
   `TafseerAudioHandler`.
 - `playbackControllerProvider` mirrors the handler's authoritative
@@ -237,7 +381,10 @@ lib/
 - No Firebase, authentication, analytics, HTTP client, or remote audio URL.
 - No `INTERNET` permission in the release manifest. Debug and profile builds
   retain the Flutter tooling's development `INTERNET` permission.
-- Fonts, artwork, Surah metadata, and the temporary sample are local assets.
+- Fonts, artwork, Surah metadata, the Qur’an text, bundled English translation
+  data, and the temporary sample are local assets.
+- The reader and acknowledgements screen read only bundled JSON; they make no
+  network requests.
 - The audio notification uses local app resources only.
 
 ## Testing strategy
@@ -245,6 +392,16 @@ lib/
 - Metadata tests validate all 114 entries, sequential numbering, unique
   numbers, the 6,236 total Ayah count, revelation-place counts, known values,
   and the recorded source.
+- The asset-integrity suite verifies that exactly 115 Qur’an assets are bundled,
+  that every Surah file matches its manifest SHA-256, and that the content
+  checksum recomputed from the bundled files matches the manifest. It also
+  checks known SHA-256 vectors and rejects raw XML/CSV sources in the bundle.
+- Reader tests cover the 114-Surah reading catalogue, loading and error states,
+  Basmala modes, exact Arabic text, separate Ayah numbers, Sajdah indicators,
+  session font-size controls, source acknowledgements, and isolation from
+  playback state.
+- Theme tests cover Light, Dark, and System, persistence, and following platform
+  brightness.
 - Unit tests cover search normalization, filtering, repository behavior, JSON
   parsing, and Riverpod state.
 - Widget tests cover catalogue rendering, search, filters, empty state,
@@ -280,9 +437,12 @@ note](../README.md#distribution-note) for the current options.
 
 ## Related documentation
 
-- [`README.md`](../README.md) — project status, setup, catalogue attribution,
-  audio engine, roadmap, and distribution note.
-- [`assets/data/README.md`](../assets/data/README.md) — catalogue provenance,
-  fields, and validation.
+- [`README.md`](../README.md) — project status, setup, reader and catalogue
+  behaviour, data pipeline commands, audio engine, roadmap, and distribution
+  note.
+- [`assets/data/README.md`](../assets/data/README.md) — bundled Qur’an data
+  layout, field definitions, provenance, and integrity checks.
+- [`tool/quran_data/README.md`](../tool/quran_data/README.md) — source
+  acquisition, generation, validation, publishing, and rollback workflow.
 - [`assets/audio/README.md`](../assets/audio/README.md) — audio asset layout
   and instructions for adding real Surah recordings.
