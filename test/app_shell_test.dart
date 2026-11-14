@@ -88,15 +88,15 @@ NavigationBar _navigationBar(WidgetTester tester) {
 }
 
 void main() {
-  testWidgets('launches on the Qur’an tab with three destinations', (
+  testWidgets('launches on the Tafseer tab with three destinations', (
     tester,
   ) async {
     await _pumpApp(tester);
 
     final navigationBar = _navigationBar(tester);
     expect(navigationBar.destinations, hasLength(3));
-    expect(navigationBar.selectedIndex, MainShell.quranIndex);
-    expect(_tabIndex(tester), MainShell.quranIndex);
+    expect(navigationBar.selectedIndex, MainShell.tafseerIndex);
+    expect(_tabIndex(tester), MainShell.tafseerIndex);
 
     final labels = tester
         .widgetList<NavigationDestination>(find.byType(NavigationDestination))
@@ -115,10 +115,10 @@ void main() {
     );
     expect(find.byType(SettingsScreen, skipOffstage: false), findsOneWidget);
 
-    expect(find.text('Qur’an Reading'), findsOneWidget);
-    expect(find.text('الْقُرْآنُ الْكَرِيمُ'), findsOneWidget);
-    expect(find.text('Read the Arabic Qur’an'), findsNothing);
-    expect(find.textContaining('The complete Mushaf'), findsNothing);
+    expect(find.byType(SurahListScreen), findsOneWidget);
+    expect(find.text('Surah catalog'), findsOneWidget);
+    expect(find.byType(QuranReaderSurahsScreen), findsNothing);
+    expect(find.byType(SettingsScreen), findsNothing);
 
     final app = tester.widget<MaterialApp>(find.byType(MaterialApp));
     expect(app.themeMode, ThemeMode.system);
@@ -146,13 +146,8 @@ void main() {
       find.byType(Navigator).first,
     );
     expect(navigator.canPop(), isFalse);
-
-    await tester.tap(find.byKey(MainShell.tafseerDestinationKey));
-    await tester.pumpAndSettle();
-
     expect(_tabIndex(tester), MainShell.tafseerIndex);
     expect(_navigationBar(tester).selectedIndex, MainShell.tafseerIndex);
-    expect(navigator.canPop(), isFalse);
 
     final tafseerSearch = find.descendant(
       of: find.byType(SurahListScreen),
@@ -180,6 +175,15 @@ void main() {
       ),
       findsOneWidget,
     );
+
+    await tester.tap(find.byKey(MainShell.quranDestinationKey));
+    await tester.pumpAndSettle();
+
+    expect(_tabIndex(tester), MainShell.quranIndex);
+    expect(_navigationBar(tester).selectedIndex, MainShell.quranIndex);
+    expect(find.byType(QuranReaderSurahsScreen), findsOneWidget);
+    expect(find.byType(SurahListScreen), findsNothing);
+    expect(navigator.canPop(), isFalse);
 
     await tester.tap(find.byKey(MainShell.settingsDestinationKey));
     await tester.pumpAndSettle();
@@ -271,6 +275,10 @@ void main() {
       find.byType(Navigator).first,
     );
 
+    await tester.tap(find.byKey(MainShell.quranDestinationKey));
+    await tester.pumpAndSettle();
+    expect(_tabIndex(tester), MainShell.quranIndex);
+
     await tester.tap(find.byKey(QuranReaderSurahsScreen.tileKey(1)));
     await tester.pumpAndSettle();
 
@@ -314,7 +322,7 @@ void main() {
     expect(_tabIndex(tester), MainShell.tafseerIndex);
   });
 
-  testWidgets('back returns the Tafseer and Settings tabs to Qur’an', (
+  testWidgets('back returns the Qur’an and Settings tabs to Tafseer', (
     tester,
   ) async {
     await _pumpApp(tester);
@@ -323,24 +331,29 @@ void main() {
       find.byType(Navigator).first,
     );
 
+    expect(_tabIndex(tester), MainShell.tafseerIndex);
+    expect(await navigator.maybePop(), isFalse);
+    await tester.pumpAndSettle();
+    expect(_tabIndex(tester), MainShell.tafseerIndex);
+
     await tester.tap(find.byKey(MainShell.settingsDestinationKey));
     await tester.pumpAndSettle();
     expect(_tabIndex(tester), MainShell.settingsIndex);
 
     expect(await navigator.maybePop(), isTrue);
     await tester.pumpAndSettle();
-    expect(_tabIndex(tester), MainShell.quranIndex);
-
-    await tester.tap(find.byKey(MainShell.tafseerDestinationKey));
-    await tester.pumpAndSettle();
     expect(_tabIndex(tester), MainShell.tafseerIndex);
+
+    await tester.tap(find.byKey(MainShell.quranDestinationKey));
+    await tester.pumpAndSettle();
+    expect(_tabIndex(tester), MainShell.quranIndex);
 
     expect(await navigator.maybePop(), isTrue);
     await tester.pumpAndSettle();
-    expect(_tabIndex(tester), MainShell.quranIndex);
+    expect(_tabIndex(tester), MainShell.tafseerIndex);
 
     expect(await navigator.maybePop(), isFalse);
     await tester.pumpAndSettle();
-    expect(_tabIndex(tester), MainShell.quranIndex);
+    expect(_tabIndex(tester), MainShell.tafseerIndex);
   });
 }

@@ -34,19 +34,19 @@ class MainShell extends StatefulWidget {
 }
 
 class _MainShellState extends State<MainShell> {
-  int _selectedIndex = MainShell.quranIndex;
+  int _selectedIndex = MainShell.tafseerIndex;
 
   @override
   Widget build(BuildContext context) {
     final colors = context.appColors;
 
     return PopScope(
-      canPop: _selectedIndex == MainShell.quranIndex,
+      canPop: _selectedIndex == MainShell.tafseerIndex,
       onPopInvokedWithResult: (didPop, result) {
-        if (didPop || _selectedIndex == MainShell.quranIndex) {
+        if (didPop || _selectedIndex == MainShell.tafseerIndex) {
           return;
         }
-        setState(() => _selectedIndex = MainShell.quranIndex);
+        setState(() => _selectedIndex = MainShell.tafseerIndex);
       },
       child: Scaffold(
         body: IndexedStack(

@@ -81,7 +81,7 @@ is not catalogue content. No tafsir audio has been synthesized or fabricated.
 
 ## Qur’an reading
 
-The app opens on the **Qur’an** tab. A persistent bottom bar switches between
+The app opens on the **Tafseer** tab. A persistent bottom bar switches between
 **Tafseer**, **Qur’an**, and **Settings**; each tab keeps its own scroll and
 in-screen state while the app is running. Reading has its own catalogue and
 never changes the Tafseer selection, the playback queue, or the mini player.

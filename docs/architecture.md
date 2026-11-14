@@ -20,15 +20,15 @@ not rendered.
 | Qur’an data pipeline | Complete | Source acquisition, generation, independent pre/post-publish validation, staged publishing with backup/rollback, and asset-integrity tests. |
 
 The app launches into `MainShell`, a persistent three-destination shell:
-Tafseer (index 0), Qur’an (index 1, default), and Settings (index 2). Each
+Tafseer (index 0, default), Qur’an (index 1), and Settings (index 2). Each
 destination is a separate root screen kept alive by an `IndexedStack`, so tab
 switches preserve scroll position and in-screen state without pushing routes.
 Tapping a Surah in the Tafseer catalogue opens `PlayerScreen`; the
 selected-Surah summary and mini player keep that catalogue connected to
 playback. The Qur’an catalogue opens `QuranReaderScreen`, and Settings opens
 `QuranSourcesScreen`; all detail routes sit above the shell. A `PopScope` policy
-returns the Tafseer and Settings tabs to Qur’an on back, while back on the
-Qur’an root follows the platform default. A small card above the Tafseer
+returns the Qur’an and Settings tabs to Tafseer on back, while back on the
+Tafseer root follows the platform default. A small card above the Tafseer
 catalogue remains a temporary control for the Phase 3 engine. It is explicitly
 labelled as an engine test and is not connected to any Surah. No real Surah
 recordings are bundled yet, so the player shows its unavailable state for every
@@ -425,9 +425,9 @@ lib/
   brightness.
 - Unit tests cover search normalization, filtering, repository behavior, JSON
   parsing, and Riverpod state.
-- App-shell widget tests cover the three destinations, the default Qur’an tab,
+- App-shell widget tests cover the three destinations, the default Tafseer tab,
   tab switching without route pushes, retained tab state, the navigation bar
-  being covered by detail routes, and back-to-Qur’an behaviour.
+  being covered by detail routes, and back-to-Tafseer behaviour.
 - Widget tests cover catalogue rendering, search, filters, empty state,
   selection, the temporary sample card, the mini player, and the full player.
   They verify unavailable and ready states, seeking, catalogue navigation,
