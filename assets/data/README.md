@@ -75,9 +75,14 @@ Each `quran/surahs/NNN.json` contains:
   - `footnotes` — the complete QuranEnc footnote text, or an empty string
   - `sajdah` — whether the Ayah includes a Sajdah
 
-The Arabic reader currently displays the Arabic text, Ayah numbers, Basmala,
-and Sajdah indicator. The English translation and footnotes are bundled and
-parsed into the domain model, but they are **not displayed in the reader yet**.
+The reader displays the Arabic text, Ayah numbers, Basmala, and Sajdah
+indicator, plus the bundled English translation beneath each Ayah by default.
+Translation display can be shown or hidden for the current session from the
+reader app bar; that choice is not persisted. The English text is rendered
+exactly as bundled, including inline footnote markers such as `[2]`, but the
+footnote text itself is not displayed. The prefatory Basmala has no English
+translation record and remains Arabic-only. Surah 1's Basmala is Ayah 1 and uses
+that Ayah's normal translation, and Surah 9 has no Basmala.
 
 ### Source and attribution
 

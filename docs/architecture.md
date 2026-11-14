@@ -4,8 +4,9 @@
 
 Phases 0–4 are complete, along with the offline Qur’an reader and the Qur’an
 data pipeline. Phase 5 is the remaining audio hardening pass. The reader
-displays Arabic only; the bundled English translation and footnotes are parsed
-but not rendered yet.
+displays Arabic with the bundled English translation beneath each Ayah by
+default; translation visibility is session-only, and footnotes are parsed but
+not rendered.
 
 | Phase | Status | Scope |
 | --- | --- | --- |
@@ -15,7 +16,7 @@ but not rendered yet.
 | 3 — Audio playback | Complete; automated tests pass and basic playback smoke-tested on the Android emulator | Audio engine, temporary sample audio, playback queue, background playback, notification/lock-screen controls, and Riverpod integration. |
 | 4 — Player UI | Complete; automated tests pass | Full player screen, mini player, recording resolution, unavailable/error states, seeking, and catalogue navigation. Device verification is part of Phase 5. |
 | 5 — Hardening | Planned | Final full test pass, device verification, and documentation for adding the Sheikh's recordings. |
-| Qur’an reader | Complete | Offline Arabic reader for all 114 Surahs, reader catalogue/navigation, Basmala and Sajdah handling, Arabic text-size control, source acknowledgements, and Light/Dark/System themes. |
+| Qur’an reader | Complete | Offline Arabic reader for all 114 Surahs, reader catalogue/navigation, default-visible English translation with session-only visibility, Basmala and Sajdah handling, Arabic text-size control, source acknowledgements, and Light/Dark/System themes. |
 | Qur’an data pipeline | Complete | Source acquisition, generation, independent pre/post-publish validation, staged publishing with backup/rollback, and asset-integrity tests. |
 
 The app launches into `HomeScreen`, which links to the two independent modules:
@@ -91,7 +92,9 @@ surahsProvider ──► QuranReaderSurahsScreen
         │                  │   QuranSurahAssetDataSource
         │                  │   assets/data/quran/surahs/NNN.json
         │                  │
-        │                  └── quranReaderFontSizeProvider (session only)
+        │                  ├── quranReaderFontSizeProvider (session only)
+        │                  └── quranReaderShowTranslationProvider
+        │                           (session only, visible by default)
 
 assets/data/quran/manifest.json
         │
@@ -107,15 +110,23 @@ quranSourceManifestProvider ──► QuranSourcesScreen
 - `QuranSurah` enforces the Basmala mode rules (Ayah for Surah 1, none for
   Surah 9, prefatory for the rest), sequential Ayah numbers, and non-empty
   Arabic and translation values.
-- `QuranAyahView` renders the Arabic string exactly as supplied. It supports an
-  optional translation widget, but the reader passes none.
-  `QuranAyah.translation` and `.footnotes` are parsed and available for the
-  future translation UI; they are not displayed today.
+- `QuranAyahView` renders the Arabic string exactly as supplied. When translation
+  visibility is on, the reader passes a `QuranAyahTranslationView` into the
+  Ayah's optional translation slot. It renders `QuranAyah.translation` exactly
+  as bundled, left-to-right and selectable, beneath the Arabic text. Inline
+  footnote markers such as `[2]` are preserved. `QuranAyah.footnotes` is parsed
+  but not displayed.
+- The translation view has its own typography and does not follow the Arabic
+  text-size control. The reader shows the translation by default and offers a
+  session-only show/hide action in the app bar. The choice is shared across
+  Surahs and resets after a full restart. Prefatory Basmalas remain
+  Arabic-only; Surah 1's Basmala is Ayah 1 and uses its normal translation, and
+  Surah 9 has no Basmala.
 - The source acknowledgements screen loads `manifest.json` lazily and renders
   the exact versions, notices, licence terms, and links recorded there. The same
   screen is reachable from Settings and the reader.
-- Reader font size is session-only Riverpod state; it is deliberately not
-  persisted.
+- Reader font size and translation visibility are session-only Riverpod state;
+  they are deliberately not persisted.
 
 ### Themes
 
@@ -359,6 +370,8 @@ lib/
 - `quranSurahProvider(number)` lazily loads one Surah through
   `QuranRepository`; each family instance reads only its own asset.
 - `quranReaderFontSizeProvider` holds the reader's session-only Arabic size.
+- `quranReaderShowTranslationProvider` holds the reader's session-only English
+  translation visibility, defaulting to visible.
 - `quranSourceManifestProvider` lazily loads the source manifest for the
   acknowledgements screen.
 - `themeModeControllerProvider` reads and persists the Light/Dark/System
@@ -398,8 +411,10 @@ lib/
   checks known SHA-256 vectors and rejects raw XML/CSV sources in the bundle.
 - Reader tests cover the 114-Surah reading catalogue, loading and error states,
   Basmala modes, exact Arabic text, separate Ayah numbers, Sajdah indicators,
-  session font-size controls, source acknowledgements, and isolation from
-  playback state.
+  default-visible English translation, show/hide behavior, translation and
+  footnote-marker preservation, session persistence across Surahs, session
+  font-size controls, source acknowledgements, and isolation from playback
+  state.
 - Theme tests cover Light, Dark, and System, persistence, and following platform
   brightness.
 - Unit tests cover search normalization, filtering, repository behavior, JSON

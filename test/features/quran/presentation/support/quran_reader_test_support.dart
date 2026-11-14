@@ -14,8 +14,16 @@ const testBasmalaText = 'بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ 
 const testComplexAyahText =
     'ذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ';
 
-const testHiddenTranslation = 'Test translation that must stay hidden';
-const testHiddenFootnotes = 'Test footnote that must stay hidden';
+const testSurah1Ayah1Translation = 'The Opening, Ayah 1';
+const testSurah1Ayah2Translation = 'The Opening, Ayah 2';
+
+const testSurah2Ayah1Translation = 'Al-Baqara, Ayah 1 [11]';
+const testSurah2Ayah1Footnotes = '[11] Footnote for Al-Baqara Ayah 1';
+const testSurah2Ayah2Translation = 'Al-Baqara, Ayah 2 [12]';
+const testSurah2Ayah2Footnotes = '[12] Footnote for Al-Baqara Ayah 2';
+
+const testSurah9Ayah1Translation = 'The Repentance, Ayah 1';
+const testSurah9Ayah2Translation = 'The Repentance, Ayah 2';
 
 const testSurah1 = Surah(
   number: 1,
@@ -64,14 +72,14 @@ QuranSurah testQuranSurah1() {
       const QuranAyah(
         number: 1,
         arabic: testBasmalaText,
-        translation: 'The Opening, Ayah 1',
+        translation: testSurah1Ayah1Translation,
         footnotes: '',
         sajdah: false,
       ),
       const QuranAyah(
         number: 2,
         arabic: 'ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ',
-        translation: 'The Opening, Ayah 2',
+        translation: testSurah1Ayah2Translation,
         footnotes: '',
         sajdah: false,
       ),
@@ -88,15 +96,15 @@ QuranSurah testQuranSurah2() {
       const QuranAyah(
         number: 1,
         arabic: 'الٓمٓ',
-        translation: testHiddenTranslation,
-        footnotes: testHiddenFootnotes,
+        translation: testSurah2Ayah1Translation,
+        footnotes: testSurah2Ayah1Footnotes,
         sajdah: false,
       ),
       const QuranAyah(
         number: 2,
         arabic: testComplexAyahText,
-        translation: testHiddenTranslation,
-        footnotes: testHiddenFootnotes,
+        translation: testSurah2Ayah2Translation,
+        footnotes: testSurah2Ayah2Footnotes,
         sajdah: true,
       ),
     ],
@@ -112,14 +120,14 @@ QuranSurah testQuranSurah9() {
       const QuranAyah(
         number: 1,
         arabic: 'بَرَآءَةٌ مِّنَ ٱللَّهِ وَرَسُولِهِ',
-        translation: 'The Repentance, Ayah 1',
+        translation: testSurah9Ayah1Translation,
         footnotes: '',
         sajdah: false,
       ),
       const QuranAyah(
         number: 2,
         arabic: 'فَسِيحُوا۟ فِى ٱلْأَرْضِ أَرْبَعَةَ أَشْهُرٍ',
-        translation: 'The Repentance, Ayah 2',
+        translation: testSurah9Ayah2Translation,
         footnotes: '',
         sajdah: false,
       ),

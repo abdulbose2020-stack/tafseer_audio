@@ -9,6 +9,7 @@ import '../../../surahs/domain/surah.dart';
 import '../../domain/quran_surah.dart';
 import '../providers/quran_reader_providers.dart';
 import '../providers/quran_surah_providers.dart';
+import '../widgets/quran_ayah_translation_view.dart';
 import '../widgets/quran_ayah_view.dart';
 import 'quran_sources_screen.dart';
 
@@ -23,6 +24,9 @@ class QuranReaderScreen extends ConsumerWidget {
   final Surah surah;
 
   static const Key fontSizeButtonKey = Key('quran-reader-font-size-button');
+  static const Key translationToggleKey = Key(
+    'quran-reader-translation-toggle',
+  );
   static const Key fontSizeSliderKey = Key('quran-reader-font-size-slider');
   static const Key fontSizeValueKey = Key('quran-reader-font-size-value');
   static const Key fontSizeResetKey = Key('quran-reader-font-size-reset');
@@ -50,11 +54,14 @@ class QuranReaderScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colors = context.appColors;
     final content = ref.watch(quranSurahProvider(surah.number));
     final fontSize = ref.watch(quranReaderFontSizeProvider);
+    final showTranslation = ref.watch(quranReaderShowTranslationProvider);
 
     final contentSlivers = content.when<List<Widget>>(
-      data: (quranSurah) => _contentSlivers(quranSurah, fontSize),
+      data: (quranSurah) =>
+          _contentSlivers(quranSurah, fontSize, showTranslation),
       loading: () => const [
         SliverFillRemaining(hasScrollBody: false, child: _ReaderLoading()),
       ],
@@ -74,6 +81,19 @@ class QuranReaderScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(surah.transliteration),
         actions: [
+          IconButton(
+            key: translationToggleKey,
+            tooltip: showTranslation
+                ? 'Hide English translation'
+                : 'Show English translation',
+            onPressed: ref
+                .read(quranReaderShowTranslationProvider.notifier)
+                .toggle,
+            icon: Icon(
+              Icons.translate_rounded,
+              color: showTranslation ? colors.goldStrong : colors.textSecondary,
+            ),
+          ),
           IconButton(
             key: fontSizeButtonKey,
             tooltip: 'Arabic text size',
@@ -106,7 +126,11 @@ class QuranReaderScreen extends ConsumerWidget {
     );
   }
 
-  List<Widget> _contentSlivers(QuranSurah quranSurah, double fontSize) {
+  List<Widget> _contentSlivers(
+    QuranSurah quranSurah,
+    double fontSize,
+    bool showTranslation,
+  ) {
     return [
       if (quranSurah.basmalaMode == BasmalaMode.prefatory)
         SliverToBoxAdapter(
@@ -132,7 +156,13 @@ class QuranReaderScreen extends ConsumerWidget {
                     ? 0
                     : AppSpacing.md,
               ),
-              child: QuranAyahView(ayah: ayah, fontSize: fontSize),
+              child: QuranAyahView(
+                ayah: ayah,
+                fontSize: fontSize,
+                translation: showTranslation
+                    ? QuranAyahTranslationView(ayah: ayah)
+                    : null,
+              ),
             );
           },
         ),

@@ -161,9 +161,10 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                     title: const Text('Qur’an reading'),
                     subtitle: Text(
-                      'Arabic Qur’an reading is available offline. English '
-                      'translation data is bundled, but its display in the '
-                      'reader is not implemented yet.',
+                      'Read the Arabic Qur’an offline with the English '
+                      'translation shown beneath each Ayah. Translation '
+                      'display can be shown or hidden for the current session '
+                      'in the reader.',
                       style: textTheme.bodySmall?.copyWith(
                         color: colors.textSecondary,
                       ),

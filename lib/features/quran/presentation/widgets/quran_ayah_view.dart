@@ -24,10 +24,10 @@ class QuranAyahView extends StatelessWidget {
   /// Arabic text size supplied by the reader's session font-size control.
   final double fontSize;
 
-  /// Optional content reserved for a future English translation section.
+  /// Optional English translation rendered beneath the Arabic text.
   ///
-  /// Stage 2 intentionally leaves this null: neither
-  /// [QuranAyah.translation] nor [QuranAyah.footnotes] is displayed yet.
+  /// The reader supplies this only while translation display is visible.
+  /// [QuranAyah.footnotes] are never displayed.
   final Widget? translation;
 
   static Key cardKey(int number) => ValueKey('quran-ayah-$number');

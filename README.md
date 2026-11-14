@@ -34,16 +34,17 @@ complete. Phase 5 — audio hardening — is next.**
   widget tests cover the player and mini player.
 - **Offline Qur’an reading (complete):** a separate Arabic reader for all 114
   Surahs, its own Surah catalogue and navigation, adjustable Arabic text size,
-  Basmala handling, Sajdah indicators, and an in-app sources and
-  acknowledgements screen.
+  the bundled English translation beneath each Ayah, a session-only translation
+  visibility control, Basmala handling, Sajdah indicators, and an in-app sources
+  and acknowledgements screen.
 - **Qur’an data pipeline (complete):** reproducible source acquisition,
   generation, independent pre- and post-publish validation, staged publishing
   with backup and rollback, and an asset-integrity regression test.
 
-The English translation and footnotes are bundled with every Ayah, but the
-reader does not display them yet. Only the Arabic reader is presented as
-available. The app supports Light, Dark, and System themes; the selection is
-saved locally and System follows the device appearance setting.
+The English translation is displayed beneath each Ayah by default and can be
+shown or hidden for the current app session. Footnotes remain bundled and
+parsed but are not displayed. The app supports Light, Dark, and System themes;
+the selection is saved locally and System follows the device appearance setting.
 
 The Android audio-service components are connected to a real handler, and the
 player UI reads playback state through Riverpod. No real tafsir recordings are
@@ -92,17 +93,23 @@ selection, the playback queue, or the mini player.
   and a Sajdah indicator on Sajdah Ayahs.
 - **Text size** — a session-only Arabic size control from 26 to 48. It is
   intentionally not persisted in Settings.
-- **Selection** — Arabic text and the prefatory Basmala are selectable and
-  copyable.
+- **English translation** — the QuranEnc translation is shown beneath each
+  Ayah by default. A reader app-bar control shows or hides it for the current
+  session; the choice carries across Surahs and resets to visible after a full
+  restart. It is rendered left-to-right and does not follow the Arabic text-size
+  control. Prefatory Basmalas have no translation record and remain
+  Arabic-only; Surah 1's Basmala is Ayah 1 and uses its normal translation, and
+  Surah 9 has no Basmala.
+- **Selection** — Arabic text, English translation, and the prefatory Basmala
+  are selectable and copyable.
 - **Sources** — the reader and Settings open the same acknowledgements screen,
   which reads versions and required notices from the bundled manifest.
 - **Offline** — every Surah is a local JSON asset. The reader loads only the
   requested Surah; it does not enumerate the directory or download content.
 
-The English translation and footnotes are bundled with every Ayah and parsed
-into the domain model, but the reader does not display them yet. The Ayah view
-has a reserved optional translation slot that remains empty. No English
-translation reading UI is implemented.
+Translation strings are rendered exactly as supplied, including inline
+footnote markers such as `[2]`. Footnote text is bundled and parsed into the
+domain model but is not displayed in this stage.
 
 The app supports **Light**, **Dark**, and **System** themes. The selection is
 saved with `SharedPreferences` and restored before the first frame; System
@@ -353,9 +360,9 @@ complete. Remaining work:
   documentation for adding the Sheikh's recordings. This includes replacing the
   temporary sample, populating `LocalSurahRecordingRepository`, and manually
   verifying notification, lock-screen, headset, and interruption behavior.
-- **Reading follow-up:** display the bundled English translation and footnotes
-  in the reader. The data is bundled and parsed already; the display UI is not
-  implemented.
+- **Reading follow-up:** add optional footnote display. Footnote text is
+  bundled and parsed, and inline markers already render with the translation,
+  but the footnotes themselves are not displayed yet.
 
 ## Distribution note
 

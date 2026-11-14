@@ -32,3 +32,23 @@ final quranReaderFontSizeProvider =
     NotifierProvider<QuranReaderFontSizeController, double>(
       QuranReaderFontSizeController.new,
     );
+
+/// Whether the reader displays the bundled English translation.
+///
+/// This is session state, like [QuranReaderFontSizeController]. The choice is
+/// shared by every Surah opened during the same app session and resets to
+/// visible after a full restart.
+class QuranReaderTranslationVisibilityController extends Notifier<bool> {
+  @override
+  bool build() => true;
+
+  /// Shows the translation when hidden, or hides it when visible.
+  void toggle() {
+    state = !state;
+  }
+}
+
+final quranReaderShowTranslationProvider =
+    NotifierProvider<QuranReaderTranslationVisibilityController, bool>(
+      QuranReaderTranslationVisibilityController.new,
+    );
