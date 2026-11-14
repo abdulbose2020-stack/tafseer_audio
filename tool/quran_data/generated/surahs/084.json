@@ -1,0 +1,182 @@
+{
+  "surah_number": 84,
+  "basmala_mode": "prefatory",
+  "basmala_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+  "ayahs": [
+    {
+      "number": 1,
+      "arabic": "إِذَا ٱلسَّمَآءُ ٱنشَقَّتْ",
+      "translation": "When the sky has split [open]",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 2,
+      "arabic": "وَأَذِنَتْ لِرَبِّهَا وَحُقَّتْ",
+      "translation": "And has listened [i.e., responded][1888] to its Lord and was obligated [to do so]",
+      "footnotes": "[1888] It will have heard Allāh's command and will have inclined immediately to compliance and willing obedience.",
+      "sajdah": false
+    },
+    {
+      "number": 3,
+      "arabic": "وَإِذَا ٱلْأَرْضُ مُدَّتْ",
+      "translation": "And when the earth has been extended[1889]",
+      "footnotes": "[1889] i.e., stretched flat and spread out.",
+      "sajdah": false
+    },
+    {
+      "number": 4,
+      "arabic": "وَأَلْقَتْ مَا فِيهَا وَتَخَلَّتْ",
+      "translation": "And has cast out that within it[1890] and relinquished [it]",
+      "footnotes": "[1890] Of the dead and all else buried therein.",
+      "sajdah": false
+    },
+    {
+      "number": 5,
+      "arabic": "وَأَذِنَتْ لِرَبِّهَا وَحُقَّتْ",
+      "translation": "And has listened [i.e., responded] to its Lord and was obligated [to do so] –",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 6,
+      "arabic": "يَـٰٓأَيُّهَا ٱلْإِنسَـٰنُ إِنَّكَ كَادِحٌ إِلَىٰ رَبِّكَ كَدْحًا فَمُلَـٰقِيهِ",
+      "translation": "O mankind, indeed you are laboring toward your Lord with [great] exertion[1891] and will meet it.[1892]",
+      "footnotes": "[1891] i.e., striving throughout your life until you meet your Lord, hastening toward death.\n[1892] i.e., you will find all that you intended and accomplished awaiting you in the Hereafter. Another meaning is \"And will meet Him [i.e., your Lord]\" and be recompensed in full by Him.",
+      "sajdah": false
+    },
+    {
+      "number": 7,
+      "arabic": "فَأَمَّا مَنْ أُوتِىَ كِتَـٰبَهُۥ بِيَمِينِهِۦ",
+      "translation": "Then as for he who is given his record in his right hand,",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 8,
+      "arabic": "فَسَوْفَ يُحَاسَبُ حِسَابًا يَسِيرًا",
+      "translation": "He will be judged with an easy account",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 9,
+      "arabic": "وَيَنقَلِبُ إِلَىٰٓ أَهْلِهِۦ مَسْرُورًا",
+      "translation": "And return to his people in happiness.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 10,
+      "arabic": "وَأَمَّا مَنْ أُوتِىَ كِتَـٰبَهُۥ وَرَآءَ ظَهْرِهِۦ",
+      "translation": "But as for he who is given his record behind his back,",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 11,
+      "arabic": "فَسَوْفَ يَدْعُوا۟ ثُبُورًا",
+      "translation": "He will cry out for destruction",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 12,
+      "arabic": "وَيَصْلَىٰ سَعِيرًا",
+      "translation": "And [enter to] burn in a Blaze.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 13,
+      "arabic": "إِنَّهُۥ كَانَ فِىٓ أَهْلِهِۦ مَسْرُورًا",
+      "translation": "Indeed, he had [once] been among his people in happiness;",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 14,
+      "arabic": "إِنَّهُۥ ظَنَّ أَن لَّن يَحُورَ",
+      "translation": "Indeed, he had thought he would never return [to Allāh].",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 15,
+      "arabic": "بَلَىٰٓ إِنَّ رَبَّهُۥ كَانَ بِهِۦ بَصِيرًا",
+      "translation": "But yes! Indeed, his Lord was ever, of him, Seeing.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 16,
+      "arabic": "فَلَآ أُقْسِمُ بِٱلشَّفَقِ",
+      "translation": "So I swear by the twilight glow",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 17,
+      "arabic": "وَٱلَّيْلِ وَمَا وَسَقَ",
+      "translation": "And [by] the night and what it envelops",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 18,
+      "arabic": "وَٱلْقَمَرِ إِذَا ٱتَّسَقَ",
+      "translation": "And [by] the moon when it becomes full",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 19,
+      "arabic": "لَتَرْكَبُنَّ طَبَقًا عَن طَبَقٍ",
+      "translation": "[That] you will surely embark upon [i.e., experience] state after state.[1893]",
+      "footnotes": "[1893] i.e., various stages, both in this life and in the Hereafter.",
+      "sajdah": false
+    },
+    {
+      "number": 20,
+      "arabic": "فَمَا لَهُمْ لَا يُؤْمِنُونَ",
+      "translation": "So what is [the matter] with them [that] they do not believe,",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 21,
+      "arabic": "وَإِذَا قُرِئَ عَلَيْهِمُ ٱلْقُرْءَانُ لَا يَسْجُدُونَ ۩",
+      "translation": "And when the Qur’ān is recited to them, they do not prostrate [to Allāh]?",
+      "footnotes": "",
+      "sajdah": true
+    },
+    {
+      "number": 22,
+      "arabic": "بَلِ ٱلَّذِينَ كَفَرُوا۟ يُكَذِّبُونَ",
+      "translation": "But those who have disbelieved deny,",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 23,
+      "arabic": "وَٱللَّهُ أَعْلَمُ بِمَا يُوعُونَ",
+      "translation": "And Allāh is most knowing of what they keep within themselves.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 24,
+      "arabic": "فَبَشِّرْهُم بِعَذَابٍ أَلِيمٍ",
+      "translation": "So give them tidings of a painful punishment,",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 25,
+      "arabic": "إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ لَهُمْ أَجْرٌ غَيْرُ مَمْنُونٍۭ",
+      "translation": "Except for those who believe and do righteous deeds. For them is a reward uninterrupted.",
+      "footnotes": "",
+      "sajdah": false
+    }
+  ]
+}

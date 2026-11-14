@@ -58,6 +58,8 @@ flutter:
   assets:
     - assets/images/
     - assets/data/
+    - assets/data/quran/
+    - assets/data/quran/surahs/
     - assets/audio/sample/
 
   fonts:

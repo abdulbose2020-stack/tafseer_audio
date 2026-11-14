@@ -1,0 +1,716 @@
+{
+  "status": "passed",
+  "validated_at_utc": "2026-11-13T17:06:03Z",
+  "fatal_error": "",
+  "validator": {
+    "name": "tafseer_audio independent Qur'an data validator",
+    "version": "1.0.0",
+    "entry_point": "tool/quran_data/generator/validate.ps1",
+    "library": "tool/quran_data/generator/quran_data_lib.psm1",
+    "independence_note": "Re-parses the original XML and CSV and re-derives all counts, mappings, Basmala rules, markers, footnotes, spot checks and checksums."
+  },
+  "manifest": {
+    "path": "C:\\Users\\X390\\Documents\\FlutterProjects\\tafseer_audio\\tool\\quran_data\\generated\\manifest.json",
+    "size_bytes": 30176,
+    "sha256": "752b56053cbf717d9454b7115b4766512b53a40d84f4696e546b70aa488b31ce",
+    "generated_at_utc": "2026-11-13T16:48:38Z",
+    "schema_version": "1.0.0",
+    "dataset_version": "1.0.0"
+  },
+  "sources": {
+    "arabic": {
+      "path": "C:\\Users\\X390\\Documents\\FlutterProjects\\tafseer_audio\\tool\\quran_data\\sources\\tanzil-uthmani-v1.1.xml",
+      "size_bytes": 1541984,
+      "sha256": "c5052534d63d3856ce25413ff464d0b609f90169a202a1615aa8707efec81244",
+      "version": "1.1",
+      "release_date": "2021-02-12",
+      "copyright": "Copyright (C) 2007-2026 Tanzil Project",
+      "license": "Creative Commons Attribution 3.0"
+    },
+    "english": {
+      "path": "C:\\Users\\X390\\Documents\\FlutterProjects\\tafseer_audio\\tool\\quran_data\\sources\\quranenc-english_saheeh-v1.1.2.csv",
+      "size_bytes": 1146154,
+      "sha256": "6029cb17db0365e93856f2fec15561db64f3609dba90e28c72358ce71cacbc5e",
+      "version": "1.1.2",
+      "revision": "v1.1.2-csv.1",
+      "last_update_unix": 1750772247,
+      "last_update_utc": "2025-06-24T13:37:27Z",
+      "publisher": "Noor International Center",
+      "attribution": "Noor International Center, through QuranEnc."
+    }
+  },
+  "catalogue": {
+    "path": "C:\\Users\\X390\\Documents\\FlutterProjects\\tafseer_audio\\assets\\data\\surahs.json",
+    "sha256": "82f64df268291d5c803f60fdc1fac5235362f857139a436cc793e38ca9ffd59f",
+    "surah_count": 114,
+    "total_ayahs": 6236
+  },
+  "generated": {
+    "surah_file_count": 114,
+    "surah_files_total_size_bytes": 3167018,
+    "manifest_size_bytes": 30176,
+    "total_size_bytes": 3197194
+  },
+  "totals": {
+    "surahs": 114,
+    "ayahs": 6236,
+    "arabic_records": 6236,
+    "translation_records": 6236,
+    "footnote_records": 6236,
+    "footnotes_nonempty": 1613,
+    "footnotes_with_embedded_newlines": 225,
+    "footnotes_with_quotes": 294,
+    "sajdah_ayahs": 15,
+    "pause_marks": 4366,
+    "rub_el_hizb_marks": 199,
+    "tatweel_characters": 6736
+  },
+  "content_checksum": {
+    "algorithm": "SHA-256",
+    "scope": "SHA-256 over per-Surah file names 001.json..114.json and their actual SHA-256 digests, each followed by a newline; timestamps excluded.",
+    "value": "140a0c97a22bcb5c1227a5a7f05690ea498ec5d4c0de33f8c1270c8a91ae5ce6",
+    "file_count": 114,
+    "manifest_value": "140a0c97a22bcb5c1227a5a7f05690ea498ec5d4c0de33f8c1270c8a91ae5ce6",
+    "matches_manifest": true
+  },
+  "sajdah_locations": [
+    "7:206",
+    "13:15",
+    "16:50",
+    "17:109",
+    "19:58",
+    "22:18",
+    "22:77",
+    "25:60",
+    "27:26",
+    "32:15",
+    "38:24",
+    "41:38",
+    "53:62",
+    "84:21",
+    "96:19"
+  ],
+  "spot_checks": [
+    {
+      "key": "1:1",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "is_basmala_itself": true,
+      "starts_with_standard_basmala": true,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "1ad501ee473ec3953c6d669513e2ae2550ad333577aef0f156926b52f6972b61",
+      "translation_sha256": "9986e8649539ee6158cd327f727491ca89fe9ee024be39bdec677cad113d4540",
+      "footnotes_sha256": "a2755b76645c7b3a94f3598aa90479249b22cba5e3607bbb5d1bd11fc64325e4",
+      "arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+      "translation": "In the name of Allāh,[2] the Entirely Merciful, the Especially Merciful.[3]",
+      "footnotes": "[2] Allāh is a proper name belonging only to the one Almighty God, Creator and Sustainer of the heavens and the earth and all that is within them, the Eternal and Absolute, to whom alone all worship is due.\n[3] Ar-Raḥmān and ar-Raḥeem are two names of Allāh derived from the word \"raḥmah\" (mercy) . In Arabic grammar both are intensive forms of \"merciful\" (i.e., extremely merciful) . A complimentary and comprehensive meaning is intended by using both together. Raḥmān is used only to describe Allāh, while raḥeem might be used to describe a person as well. The Prophet (ﷺ) was described in the Qur’ān as raḥeem. Raḥmān is above the human level (i.e., intensely merciful) . Since one usually understands intensity to be something of short duration, Allāh describes Himself also as raḥeem (i.e., continually merciful) . Raḥmān also carries a wider meaning - merciful to all creation. Justice is a part of this mercy. Raḥeem includes the concept of speciality - especially and specifically merciful to the believers. Forgiveness is a part of this mercy. In addition, Raḥmān is adjectival, referring to an attribute of Allāh and is part of His essence. Raḥeem is verbal, indicating what He does: i.e., bestowing and implementing mercy.",
+      "sajdah": false
+    },
+    {
+      "key": "1:2",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "is_basmala_itself": false,
+      "starts_with_standard_basmala": false,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "463f13295bc7d90e0ea221942d7b39359a137da8686420b58f63d0774eebda09",
+      "translation_sha256": "49af29530016f95bc1dc11a034598255d87c425a47fc4fe0365b28eb537cbd08",
+      "footnotes_sha256": "84b3422b182e140267caf663f7f7999093600bb981c23ba73e04c9c456235d34",
+      "arabic": "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ",
+      "translation": "[All] praise is [due] to Allāh, Lord[4] of the worlds -",
+      "footnotes": "[4] When referring to Allāh (subḥānahu wa taʿālā) , the Arabic term \"rabb\" (translated as \"Lord\") includes all of the following meanings: \"owner, master, ruler, controller, sustainer, provider, guardian and caretaker.\"",
+      "sajdah": false
+    },
+    {
+      "key": "2:1",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "is_basmala_itself": false,
+      "starts_with_standard_basmala": false,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "49c5355bd921dc0d810e3be457432004847a72d5dbe754562be895be707be6c3",
+      "translation_sha256": "f6d960531078049a9494ccab3c70201113bbe37b435eea315ee4d5bf4dd7bef3",
+      "footnotes_sha256": "0772477f7b71eef755d928c56e9aad7d44fd2cdfe651fec895d45ef6eeba3887",
+      "arabic": "الٓمٓ",
+      "translation": "Alif, Lām, Meem.[7]",
+      "footnotes": "[7] These are among the fourteen opening letters which occur in various combinations at the beginning of twenty-nine sūrahs in the Qur’ān. Although there has been much speculation as to their meaning, it was not, in fact, revealed by Allāh to anyone and is known only to Him.",
+      "sajdah": false
+    },
+    {
+      "key": "9:1",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "is_basmala_itself": false,
+      "starts_with_standard_basmala": false,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "d18402a276407219dcaeb5cb91cb19ddaa8a92fe282eedc6c0028f83d40e5766",
+      "translation_sha256": "792aa18f4fba526f14e3da02b10a1fa77303f6b08cdad5cc0994c41a6af970e6",
+      "footnotes_sha256": "cb3dde08e0e7c51928f4b5f055180b3d4223d8a30c0969d579682dddeb544d7f",
+      "arabic": "بَرَآءَةٌ مِّنَ ٱللَّهِ وَرَسُولِهِۦٓ إِلَى ٱلَّذِينَ عَـٰهَدتُّم مِّنَ ٱلْمُشْرِكِينَ",
+      "translation": "[This is a declaration of] disassociation, from Allāh and His Messenger, to those with whom you had made a treaty among the polytheists.[461]",
+      "footnotes": "[461] But who had violated it.",
+      "sajdah": false
+    },
+    {
+      "key": "114:6",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "is_basmala_itself": false,
+      "starts_with_standard_basmala": false,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "afe439d2346201551930d0c231ab3a35f2c90f1a5ebb09fc797707059732d756",
+      "translation_sha256": "92fd0a8a67736ece9b2b18d5e9cbc573588ba3f62a93ffc3ef22d1c1b80006b7",
+      "footnotes_sha256": "ceca1d9ce313c3d97a8f8148f607432ea215b46d60cd4f34706cedf326dc15b9",
+      "arabic": "مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ",
+      "translation": "From among the jinn and mankind.\"[2017]",
+      "footnotes": "[2017] Evil prompters may be from men as well as from jinn.",
+      "sajdah": false
+    }
+  ],
+  "generation_report_cross_check": {
+    "report_path": "C:\\Users\\X390\\Documents\\FlutterProjects\\tafseer_audio\\tool\\quran_data\\validation\\validation-report.json",
+    "report_size_bytes": 52615,
+    "report_sha256": "49162a6481a3a2e2e28b25e9e5348aa9ee6f417f855ab635294e818a461c77ba",
+    "status": "passed",
+    "checks_total": 74,
+    "checks_passed": 74,
+    "checks_failed": 0,
+    "matches_current_dataset": true
+  },
+  "read_only_guard": {
+    "catalogue_path": "assets/data/surahs.json",
+    "catalogue_sha256": "82f64df268291d5c803f60fdc1fac5235362f857139a436cc793e38ca9ffd59f",
+    "catalogue_matches_manifest": true,
+    "catalogue_matches_generation_report": true,
+    "pubspec_sha256": "c1b7d03463cfeb0a2e3822d877ef05682b787805e8975ff4abd09019a9485550",
+    "pubspec_matches_generation_report": true,
+    "app_quran_dir_exists": false,
+    "app_quran_dir_created": false
+  },
+  "checks_total": 73,
+  "checks_passed": 73,
+  "checks_failed": 0,
+  "checks": [
+    {
+      "id": "acquisition.record",
+      "category": "sources",
+      "description": "Acquisition record parses and records both sources.",
+      "passed": true,
+      "details": "path=C:\\Users\\X390\\Documents\\FlutterProjects\\tafseer_audio\\tool\\quran_data\\validation\\source-acquisition.json; size=3823 bytes; sha256=3624e6e3771b8f0aea02d07a969e5f0381c2ee71a8e4d248ceefe2e7ddedf79f"
+    },
+    {
+      "id": "acquisition.timestamp",
+      "category": "sources",
+      "description": "Acquisition timestamp is a valid UTC timestamp.",
+      "passed": true,
+      "details": "2026-11-13T16:35:40Z"
+    },
+    {
+      "id": "sources.paths",
+      "category": "sources",
+      "description": "Source file names and approved acquisition URLs are recorded exactly.",
+      "passed": true,
+      "details": "arabic=sources/tanzil-uthmani-v1.1.xml; english=sources/quranenc-english_saheeh-v1.1.2.csv"
+    },
+    {
+      "id": "sources.arabic.integrity",
+      "category": "sources",
+      "description": "Source file size and SHA-256 match the acquisition record.",
+      "passed": true,
+      "details": "size=1541984 (record 1541984); sha256=c5052534d63d3856ce25413ff464d0b609f90169a202a1615aa8707efec81244 (record c5052534d63d3856ce25413ff464d0b609f90169a202a1615aa8707efec81244)"
+    },
+    {
+      "id": "sources.arabic.encoding",
+      "category": "sources",
+      "description": "Source file is valid UTF-8 without a BOM.",
+      "passed": true,
+      "details": "C:\\Users\\X390\\Documents\\FlutterProjects\\tafseer_audio\\tool\\quran_data\\sources\\tanzil-uthmani-v1.1.xml"
+    },
+    {
+      "id": "sources.english.integrity",
+      "category": "sources",
+      "description": "Source file size and SHA-256 match the acquisition record.",
+      "passed": true,
+      "details": "size=1146154 (record 1146154); sha256=6029cb17db0365e93856f2fec15561db64f3609dba90e28c72358ce71cacbc5e (record 6029cb17db0365e93856f2fec15561db64f3609dba90e28c72358ce71cacbc5e)"
+    },
+    {
+      "id": "sources.english.encoding",
+      "category": "sources",
+      "description": "Source file is valid UTF-8 without a BOM.",
+      "passed": true,
+      "details": "C:\\Users\\X390\\Documents\\FlutterProjects\\tafseer_audio\\tool\\quran_data\\sources\\quranenc-english_saheeh-v1.1.2.csv"
+    },
+    {
+      "id": "sources.versions",
+      "category": "sources",
+      "description": "Reviewed Tanzil and QuranEnc versions and update metadata are recorded exactly.",
+      "passed": true,
+      "details": "Tanzil 1.1 (2021-02-12); QuranEnc 1.1.2 (v1.1.2-csv.1); last update 2025-06-24T13:37:27Z"
+    },
+    {
+      "id": "sources.attribution",
+      "category": "sources",
+      "description": "Official Noor International Center attribution is recorded without an unconfirmed translator claim.",
+      "passed": true,
+      "details": "Noor International Center, through QuranEnc."
+    },
+    {
+      "id": "sources.license",
+      "category": "sources",
+      "description": "QuranEnc Terms and Policies are recorded with the official URL and full wording.",
+      "passed": true,
+      "details": "https://quranenc.com/en/home/about"
+    },
+    {
+      "id": "sources.arabic.structure",
+      "category": "sources",
+      "description": "Tanzil XML contains 114 Surahs and 6,236 Ayahs.",
+      "passed": true,
+      "details": "surahs=114; ayahs=6236"
+    },
+    {
+      "id": "sources.english.structure",
+      "category": "sources",
+      "description": "QuranEnc CSV contains 6,236 records from 1:1 through 114:6.",
+      "passed": true,
+      "details": "records=6236"
+    },
+    {
+      "id": "sources.arabic.notice",
+      "category": "sources",
+      "description": "Tanzil copyright block retains its version, licence and preservation notices.",
+      "passed": true,
+      "details": "Copyright (C) 2007-2026 Tanzil Project"
+    },
+    {
+      "id": "sources.english.notice",
+      "category": "sources",
+      "description": "QuranEnc preamble retains its ID, version, update URL and preservation notice.",
+      "passed": true,
+      "details": "QuranEnc InfoBlock present"
+    },
+    {
+      "id": "sources.arabic.encoding",
+      "category": "sources",
+      "description": "Tanzil XML declares UTF-8 encoding.",
+      "passed": true,
+      "details": "encoding=\"utf-8\""
+    },
+    {
+      "id": "sources.arabic.sequences",
+      "category": "sources",
+      "description": "Surah and Ayah numbering are sequential in the original source.",
+      "passed": true,
+      "details": "1..114; every Surah starts at Ayah 1"
+    },
+    {
+      "id": "sources.arabic.ayah_sequences",
+      "category": "sources",
+      "description": "Every Surah has contiguous Ayah numbering from 1.",
+      "passed": true,
+      "details": "all 114 Surahs sequential"
+    },
+    {
+      "id": "sources.mapping",
+      "category": "sources",
+      "description": "Every Arabic Ayah has exactly one English record and vice versa.",
+      "passed": true,
+      "details": "6,236 one-to-one mappings"
+    },
+    {
+      "id": "manifest.parse",
+      "category": "manifest",
+      "description": "Manifest parses as JSON and has the required top-level schema.",
+      "passed": true,
+      "details": "size=30176; sha256=752b56053cbf717d9454b7115b4766512b53a40d84f4696e546b70aa488b31ce"
+    },
+    {
+      "id": "manifest.encoding",
+      "category": "manifest",
+      "description": "Manifest is UTF-8 without a BOM.",
+      "passed": true,
+      "details": "C:\\Users\\X390\\Documents\\FlutterProjects\\tafseer_audio\\tool\\quran_data\\generated\\manifest.json"
+    },
+    {
+      "id": "manifest.versions",
+      "category": "manifest",
+      "description": "Schema and dataset versions are 1.0.0 and the generation timestamp is UTC.",
+      "passed": true,
+      "details": "schema=1.0.0; dataset=1.0.0; generated_at=2026-11-13T16:48:38Z"
+    },
+    {
+      "id": "manifest.generator",
+      "category": "manifest",
+      "description": "Manifest identifies the generator entry point, library and acquisition record.",
+      "passed": true,
+      "details": "tafseer_audio Qur'an data generator"
+    },
+    {
+      "id": "manifest.sources",
+      "category": "manifest",
+      "description": "Manifest source metadata matches the acquisition record and actual source files.",
+      "passed": true,
+      "details": "arabic=c5052534d63d3856ce25413ff464d0b609f90169a202a1615aa8707efec81244; english=6029cb17db0365e93856f2fec15561db64f3609dba90e28c72358ce71cacbc5e"
+    },
+    {
+      "id": "manifest.source_provenance",
+      "category": "manifest",
+      "description": "Manifest records the exact approved URLs, versions, copyright, licence and update metadata.",
+      "passed": true,
+      "details": "Tanzil 1.1; QuranEnc 1.1.2 (v1.1.2-csv.1)"
+    },
+    {
+      "id": "manifest.notices",
+      "category": "manifest",
+      "description": "Manifest preserves the exact Tanzil copyright block, QuranEnc preamble, attribution and Terms and Policies.",
+      "passed": true,
+      "details": "exact ordinal comparison"
+    },
+    {
+      "id": "manifest.catalogue",
+      "category": "manifest",
+      "description": "Manifest records the existing Surah catalogue path and its current SHA-256.",
+      "passed": true,
+      "details": "sha256=82f64df268291d5c803f60fdc1fac5235362f857139a436cc793e38ca9ffd59f"
+    },
+    {
+      "id": "manifest.surah_entries",
+      "category": "manifest",
+      "description": "Manifest has one unique entry for every Surah with the expected file name.",
+      "passed": true,
+      "details": "114 entries"
+    },
+    {
+      "id": "manifest.validation_summary",
+      "category": "manifest",
+      "description": "Manifest records a passed generation-stage validation summary and the 15 Sajdah locations.",
+      "passed": true,
+      "details": "status=passed; checks=72/72"
+    },
+    {
+      "id": "catalogue.structure",
+      "category": "catalogue",
+      "description": "Existing assets/data/surahs.json contains 114 unique Surahs and totals 6,236 Ayahs.",
+      "passed": true,
+      "details": "surahs=114; ayahs=6236"
+    },
+    {
+      "id": "sources.basmala_structure",
+      "category": "basmala",
+      "description": "Tanzil source has 112 prefatory Basmalas, all on first Ayahs, with none in Surahs 1 and 9.",
+      "passed": true,
+      "details": "112 attributes"
+    },
+    {
+      "id": "sources.basmala_spelling",
+      "category": "basmala",
+      "description": "Source Basmala spellings are preserved exactly, including the distinct 95/97 spelling.",
+      "passed": true,
+      "details": "standard_len=39; 95_len=40; 97_len=40; 1:1_equals_standard=True"
+    },
+    {
+      "id": "sources.nonempty",
+      "category": "sources",
+      "description": "No source Arabic Ayah or English translation is empty.",
+      "passed": true,
+      "details": "all Arabic records non-empty"
+    },
+    {
+      "id": "sources.english_nonempty",
+      "category": "sources",
+      "description": "No English translation record is empty.",
+      "passed": true,
+      "details": "all 6,236 translations non-empty"
+    },
+    {
+      "id": "sources.marker_baseline",
+      "category": "marks",
+      "description": "Source marker totals match the reviewed baseline.",
+      "passed": true,
+      "details": "pause=4366; rub=199; sajdah=15; tatweel=6736"
+    },
+    {
+      "id": "sources.footnote_baseline",
+      "category": "footnotes",
+      "description": "Source raw footnotes match the reviewed baseline, including embedded newlines and quotes.",
+      "passed": true,
+      "details": "non-empty=1613; with_newlines=225; with_quotes=294"
+    },
+    {
+      "id": "generated.file_set",
+      "category": "generated",
+      "description": "Exactly 114 Surah JSON files exist with names 001.json through 114.json.",
+      "passed": true,
+      "details": "files=114; missing=[]; extra=[]"
+    },
+    {
+      "id": "generated.json_parse",
+      "category": "generated",
+      "description": "All 114 generated Surah files parse as JSON.",
+      "passed": true,
+      "details": "114 files parsed"
+    },
+    {
+      "id": "generated.schema",
+      "category": "generated",
+      "description": "Every generated Surah and Ayah has exactly the required keys and types.",
+      "passed": true,
+      "details": "schema exact"
+    },
+    {
+      "id": "generated.types",
+      "category": "generated",
+      "description": "Every generated field has the required JSON type.",
+      "passed": true,
+      "details": "types exact"
+    },
+    {
+      "id": "generated.file_hashes",
+      "category": "generated",
+      "description": "Every generated file SHA-256 matches the manifest entry.",
+      "passed": true,
+      "details": "114 hashes matched"
+    },
+    {
+      "id": "generated.manifest_entries",
+      "category": "generated",
+      "description": "Every generated Surah is represented in the manifest.",
+      "passed": true,
+      "details": "114 entries matched"
+    },
+    {
+      "id": "generated.ayah_counts",
+      "category": "generated",
+      "description": "Generated, source and manifest Ayah counts agree for every Surah.",
+      "passed": true,
+      "details": "all counts agree"
+    },
+    {
+      "id": "generated.catalogue_counts",
+      "category": "generated",
+      "description": "Every generated Surah count agrees with assets/data/surahs.json.",
+      "passed": true,
+      "details": "all 114 counts agree"
+    },
+    {
+      "id": "generated.ayah_sequence",
+      "category": "generated",
+      "description": "Ayah numbers are sequential from 1 in every generated Surah.",
+      "passed": true,
+      "details": "all 114 Surahs sequential"
+    },
+    {
+      "id": "generated.arabic_exact",
+      "category": "generated",
+      "description": "Every generated Arabic Ayah matches the Tanzil source exactly.",
+      "passed": true,
+      "details": "6,236 exact Arabic records"
+    },
+    {
+      "id": "generated.translation_exact",
+      "category": "generated",
+      "description": "Every generated English translation matches the QuranEnc CSV exactly.",
+      "passed": true,
+      "details": "6,236 exact translations"
+    },
+    {
+      "id": "generated.footnotes_exact",
+      "category": "generated",
+      "description": "Every generated raw footnote string matches the QuranEnc CSV exactly.",
+      "passed": true,
+      "details": "6,236 exact footnote strings"
+    },
+    {
+      "id": "generated.sajdah_flags",
+      "category": "sajdah",
+      "description": "The sajdah flag is true at exactly the 15 known Sajdah Ayahs and false elsewhere.",
+      "passed": true,
+      "details": "15 true; 6,221 false"
+    },
+    {
+      "id": "generated.sajdah_marks",
+      "category": "sajdah",
+      "description": "Each Sajdah Ayah retains exactly one U+06E9 mark and no other Ayah has one.",
+      "passed": true,
+      "details": "15 marks preserved"
+    },
+    {
+      "id": "generated.basmala",
+      "category": "basmala",
+      "description": "Every generated Basmala mode and text matches the source and required rules.",
+      "passed": true,
+      "details": "Surah 1 ayah; 112 prefatory; Surah 9 none"
+    },
+    {
+      "id": "generated.nonempty_arabic",
+      "category": "generated",
+      "description": "No generated Arabic record is empty.",
+      "passed": true,
+      "details": "all non-empty"
+    },
+    {
+      "id": "generated.nonempty_translations",
+      "category": "generated",
+      "description": "No generated English translation is empty.",
+      "passed": true,
+      "details": "all non-empty"
+    },
+    {
+      "id": "generated.no_bom",
+      "category": "generated",
+      "description": "Every generated Surah file is UTF-8 without a BOM.",
+      "passed": true,
+      "details": "no BOM in 114 files"
+    },
+    {
+      "id": "generated.sajdah_locations",
+      "category": "sajdah",
+      "description": "The generated Sajdah locations match the 15 expected locations exactly.",
+      "passed": true,
+      "details": "found=7:206,13:15,16:50,17:109,19:58,22:18,22:77,25:60,27:26,32:15,38:24,41:38,53:62,84:21,96:19"
+    },
+    {
+      "id": "generated.basmala_mode_counts",
+      "category": "basmala",
+      "description": "Generated Basmala modes are ayah=1, prefatory=112, none=1.",
+      "passed": true,
+      "details": "ayah=1; prefatory=112; none=1"
+    },
+    {
+      "id": "generated.basmala_95_97",
+      "category": "basmala",
+      "description": "Surahs 95 and 97 preserve their distinct 40-character Basmala with the extra shadda.",
+      "passed": true,
+      "details": "95_len=40; 97_len=40"
+    },
+    {
+      "id": "generated.totals",
+      "category": "totals",
+      "description": "Generated totals are 114 Surahs, 6,236 Ayahs, 6,236 Arabic records and 6,236 translations.",
+      "passed": true,
+      "details": "surahs=114; ayahs=6236; translations=6236"
+    },
+    {
+      "id": "generated.marker_totals",
+      "category": "marks",
+      "description": "Generated pause, rub-el-hizb, Sajdah and tatweel totals match the source and manifest.",
+      "passed": true,
+      "details": "generated pause=4366, rub=199, sajdah=15, tatweel=6736; source pause=4366, rub=199, sajdah=15, tatweel=6736"
+    },
+    {
+      "id": "generated.footnote_totals",
+      "category": "footnotes",
+      "description": "Generated raw footnote counts match the source and manifest, including newlines and quotes.",
+      "passed": true,
+      "details": "records=6236; non-empty=1613; newlines=225; quotes=294"
+    },
+    {
+      "id": "manifest.totals",
+      "category": "manifest",
+      "description": "Manifest totals match all independently recomputed source and generated totals.",
+      "passed": true,
+      "details": "ayahs=6236; footnotes_nonempty=1613; sajdah=15; pause=4366; rub=199; tatweel=6736"
+    },
+    {
+      "id": "manifest.basmala_summary",
+      "category": "basmala",
+      "description": "Manifest Basmala summary records Surah 1, Surah 9, 112 prefatory cases and the special 95/97 spellings.",
+      "passed": true,
+      "details": "ayah=[1]; prefatory=112; none=[9]; special=[95,97]"
+    },
+    {
+      "id": "checksum.content",
+      "category": "checksums",
+      "description": "Recomputed per-Surah content checksum matches the manifest value.",
+      "passed": true,
+      "details": "recomputed=140a0c97a22bcb5c1227a5a7f05690ea498ec5d4c0de33f8c1270c8a91ae5ce6; manifest=140a0c97a22bcb5c1227a5a7f05690ea498ec5d4c0de33f8c1270c8a91ae5ce6"
+    },
+    {
+      "id": "checksum.file",
+      "category": "checksums",
+      "description": "checksums.sha256 contains exactly the 117 expected source, manifest and Surah file checksums.",
+      "passed": true,
+      "details": "117 checksums matched"
+    },
+    {
+      "id": "spot.1_1",
+      "category": "spot-checks",
+      "description": "Spot check 1:1 matches the original Arabic and English sources exactly.",
+      "passed": true,
+      "details": "arabic=True; translation=True; footnotes=True; sajdah=True; is_basmala_itself=True; starts_with_basmala=True; basmala_prepended=False"
+    },
+    {
+      "id": "spot.1_2",
+      "category": "spot-checks",
+      "description": "Spot check 1:2 matches the original Arabic and English sources exactly.",
+      "passed": true,
+      "details": "arabic=True; translation=True; footnotes=True; sajdah=True; is_basmala_itself=False; starts_with_basmala=False; basmala_prepended=False"
+    },
+    {
+      "id": "spot.2_1",
+      "category": "spot-checks",
+      "description": "Spot check 2:1 matches the original Arabic and English sources exactly.",
+      "passed": true,
+      "details": "arabic=True; translation=True; footnotes=True; sajdah=True; is_basmala_itself=False; starts_with_basmala=False; basmala_prepended=False"
+    },
+    {
+      "id": "spot.9_1",
+      "category": "spot-checks",
+      "description": "Spot check 9:1 matches the original Arabic and English sources exactly.",
+      "passed": true,
+      "details": "arabic=True; translation=True; footnotes=True; sajdah=True; is_basmala_itself=False; starts_with_basmala=False; basmala_prepended=False"
+    },
+    {
+      "id": "spot.114_6",
+      "category": "spot-checks",
+      "description": "Spot check 114:6 matches the original Arabic and English sources exactly.",
+      "passed": true,
+      "details": "arabic=True; translation=True; footnotes=True; sajdah=True; is_basmala_itself=False; starts_with_basmala=False; basmala_prepended=False"
+    },
+    {
+      "id": "spot.all",
+      "category": "spot-checks",
+      "description": "All five required spot checks pass against the original sources.",
+      "passed": true,
+      "details": "1:1, 1:2, 2:1, 9:1, 114:6 exact"
+    },
+    {
+      "id": "report.generation_cross_check",
+      "category": "report",
+      "description": "validation-report.json and spot-checks.json agree with the independently recomputed dataset.",
+      "passed": true,
+      "details": "generation reports cross-checked"
+    },
+    {
+      "id": "guard.catalogue",
+      "category": "guard",
+      "description": "assets/data/surahs.json is unchanged and still matches the manifest and generation report.",
+      "passed": true,
+      "details": "sha256=82f64df268291d5c803f60fdc1fac5235362f857139a436cc793e38ca9ffd59f"
+    },
+    {
+      "id": "guard.pubspec",
+      "category": "guard",
+      "description": "pubspec.yaml is unchanged and still matches the generation report.",
+      "passed": true,
+      "details": "sha256=c1b7d03463cfeb0a2e3822d877ef05682b787805e8975ff4abd09019a9485550"
+    },
+    {
+      "id": "guard.no_app_quran_assets",
+      "category": "guard",
+      "description": "No generated data has been copied into assets/data/quran/.",
+      "passed": true,
+      "details": "exists=False"
+    }
+  ]
+}

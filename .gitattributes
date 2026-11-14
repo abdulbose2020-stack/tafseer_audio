@@ -1,0 +1,6 @@
+# Keep JSON assets on LF across platforms.
+*.json text eol=lf
+
+# Preserve original downloaded Qur'an source files byte-for-byte.
+tool/quran_data/sources/*.csv -text
+tool/quran_data/sources/*.xml -text

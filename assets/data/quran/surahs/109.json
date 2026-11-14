@@ -1,0 +1,49 @@
+{
+  "surah_number": 109,
+  "basmala_mode": "prefatory",
+  "basmala_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+  "ayahs": [
+    {
+      "number": 1,
+      "arabic": "قُلْ يَـٰٓأَيُّهَا ٱلْكَـٰفِرُونَ",
+      "translation": "Say, \"O disbelievers,",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 2,
+      "arabic": "لَآ أَعْبُدُ مَا تَعْبُدُونَ",
+      "translation": "I do not worship what you worship.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 3,
+      "arabic": "وَلَآ أَنتُمْ عَـٰبِدُونَ مَآ أَعْبُدُ",
+      "translation": "Nor are you worshippers of what I worship.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 4,
+      "arabic": "وَلَآ أَنَا۠ عَابِدٌ مَّا عَبَدتُّمْ",
+      "translation": "Nor will I be a worshipper of what you worship.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 5,
+      "arabic": "وَلَآ أَنتُمْ عَـٰبِدُونَ مَآ أَعْبُدُ",
+      "translation": "Nor will you be worshippers of what I worship.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 6,
+      "arabic": "لَكُمْ دِينُكُمْ وَلِىَ دِينِ",
+      "translation": "For you is your religion, and for me is my religion.\"",
+      "footnotes": "",
+      "sajdah": false
+    }
+  ]
+}

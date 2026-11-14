@@ -1,0 +1,37 @@
+{
+  "acquired_at_utc": "2026-11-13T16:35:40Z",
+  "arabic": {
+    "name": "Tanzil Quran Text (Uthmani, Version 1.1)",
+    "provider": "Tanzil Project",
+    "url": "https://tanzil.net/pub/download/index.php?agree=true&marks=true&outType=xml&quranType=uthmani&sajdah=true&rub=true&tatweel=true",
+    "updates_url": "https://tanzil.net/docs/text_updates",
+    "version": "1.1",
+    "release_date": "2021-02-12",
+    "file": "sources/tanzil-uthmani-v1.1.xml",
+    "size_bytes": 1541984,
+    "sha256": "c5052534d63d3856ce25413ff464d0b609f90169a202a1615aa8707efec81244",
+    "copyright": "Copyright (C) 2007-2026 Tanzil Project",
+    "license": "Creative Commons Attribution 3.0",
+    "notice": "\n\n# PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK\n#====================================================================\n#\n#  Tanzil Quran Text (Uthmani, Version 1.1)\n#  Copyright (C) 2007-2026 Tanzil Project\n#  License: Creative Commons Attribution 3.0\n#\n#  This copy of the Quran text is carefully produced, highly \n#  verified and continuously monitored by a group of specialists \n#  at Tanzil Project.\n#\n#  TERMS OF USE:\n#\n#  - Permission is granted to copy and distribute verbatim copies \n#    of this text, but CHANGING IT IS NOT ALLOWED.\n#\n#  - This Quran text can be used in any website or application, \n#    provided that its source (Tanzil Project) is clearly indicated, \n#    and a link is made to tanzil.net to enable users to keep\n#    track of changes.\n#\n#  - This copyright notice shall be included in all verbatim copies \n#    of the text, and shall be reproduced appropriately in all files \n#    derived from or containing substantial portion of this text.\n#\n#  Please check updates at: http://tanzil.net/updates/\n#\n#====================================================================\n\t\n"
+  },
+  "english": {
+    "name": "QuranEnc English translation (english_saheeh)",
+    "provider": "QuranEnc",
+    "publisher": "Noor International Center",
+    "attribution": "Noor International Center, through QuranEnc.",
+    "url": "https://quranenc.com/en/home/d/csv/english_saheeh",
+    "browse_url": "https://quranenc.com/en/browse/english_saheeh",
+    "version": "1.1.2",
+    "revision": "v1.1.2-csv.1",
+    "last_update_unix": 1750772247,
+    "last_update_utc": "2025-06-24T13:37:27Z",
+    "last_update_source_text": "2025-06-24 16:37:27",
+    "file": "sources/quranenc-english_saheeh-v1.1.2.csv",
+    "size_bytes": 1146154,
+    "sha256": "6029cb17db0365e93856f2fec15561db64f3609dba90e28c72358ce71cacbc5e",
+    "license": "QuranEnc Terms and Policies",
+    "license_url": "https://quranenc.com/en/home/about",
+    "license_terms": "Contents of the translations can be downloaded and re-published, with the following terms and conditions: 1. No modification, addition, or deletion of the content. 2. Clearly referring to the publisher and the source (QuranEnc.com). 3. Mentioning the version number when re-publishing the translation. 4. Keeping the transcript information inside the document. 5. Notifying the source (QuranEnc.com) of any note on the translation. 6. Updating the translation according to the latest version issued from the source (QuranEnc.com). 7. Inappropriate advertisements must not be included when displaying translations of the meanings of the Noble Quran.",
+    "source_info_block": "Translation Info:\r\n#---------------------------\r\n# Translation of the meanings of the Noble Qur'an\r\n# Language: English\r\n# Translation ID: english_saheeh\r\n# Source: https://quranenc.com\r\n# URL: https://quranenc.com/en/browse/english_saheeh\r\n# Last update: 2025-06-24 16:37:27 (v1.1.2-csv.1)\r\n# Check for updates: https://quranenc.com/check/english_saheeh/v1.1.2-csv.1\r\n# PLEASE DON'T REMOVE THIS IMPORTANT INFORMATION!\r\n#---------------------------"
+  }
+}

@@ -1,0 +1,553 @@
+{
+  "surah_number": 55,
+  "basmala_mode": "prefatory",
+  "basmala_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+  "ayahs": [
+    {
+      "number": 1,
+      "arabic": "ٱلرَّحْمَـٰنُ",
+      "translation": "The Most Merciful",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 2,
+      "arabic": "عَلَّمَ ٱلْقُرْءَانَ",
+      "translation": "Taught the Qur’ān,",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 3,
+      "arabic": "خَلَقَ ٱلْإِنسَـٰنَ",
+      "translation": "Created man,",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 4,
+      "arabic": "عَلَّمَهُ ٱلْبَيَانَ",
+      "translation": "[And] taught him eloquence.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 5,
+      "arabic": "ٱلشَّمْسُ وَٱلْقَمَرُ بِحُسْبَانٍ",
+      "translation": "The sun and the moon [move] by precise calculation,",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 6,
+      "arabic": "وَٱلنَّجْمُ وَٱلشَّجَرُ يَسْجُدَانِ",
+      "translation": "And the stars and trees prostrate.[1593]",
+      "footnotes": "[1593] They submit obediently to the laws of Allāh. See 22:18. An additional meaning of \"najm\" is vegetation of a kind without a trunk, stalk or stem.",
+      "sajdah": false
+    },
+    {
+      "number": 7,
+      "arabic": "وَٱلسَّمَآءَ رَفَعَهَا وَوَضَعَ ٱلْمِيزَانَ",
+      "translation": "And the heaven He raised and imposed the balance",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 8,
+      "arabic": "أَلَّا تَطْغَوْا۟ فِى ٱلْمِيزَانِ",
+      "translation": "That you not transgress within the balance.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 9,
+      "arabic": "وَأَقِيمُوا۟ ٱلْوَزْنَ بِٱلْقِسْطِ وَلَا تُخْسِرُوا۟ ٱلْمِيزَانَ",
+      "translation": "And establish weight in justice and do not make deficient the balance.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 10,
+      "arabic": "وَٱلْأَرْضَ وَضَعَهَا لِلْأَنَامِ",
+      "translation": "And the earth He laid [out] for the creatures.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 11,
+      "arabic": "فِيهَا فَـٰكِهَةٌ وَٱلنَّخْلُ ذَاتُ ٱلْأَكْمَامِ",
+      "translation": "Therein is fruit and palm trees having sheaths [of dates]",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 12,
+      "arabic": "وَٱلْحَبُّ ذُو ٱلْعَصْفِ وَٱلرَّيْحَانُ",
+      "translation": "And grain having husks and scented plants.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 13,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?[1594]",
+      "footnotes": "[1594] Literally, \"you two,\" addressing the species of mankind and jinn.",
+      "sajdah": false
+    },
+    {
+      "number": 14,
+      "arabic": "خَلَقَ ٱلْإِنسَـٰنَ مِن صَلْصَـٰلٍ كَٱلْفَخَّارِ",
+      "translation": "He created man from clay like [that of] pottery.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 15,
+      "arabic": "وَخَلَقَ ٱلْجَآنَّ مِن مَّارِجٍ مِّن نَّارٍ",
+      "translation": "And He created the jinn from a smokeless flame of fire.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 16,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 17,
+      "arabic": "رَبُّ ٱلْمَشْرِقَيْنِ وَرَبُّ ٱلْمَغْرِبَيْنِ",
+      "translation": "[He is] Lord of the two sunrises and Lord of the two sunsets.[1595]",
+      "footnotes": "[1595] i.e., the points of sunrise in the east and sunset in the west in both summer and winter.",
+      "sajdah": false
+    },
+    {
+      "number": 18,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 19,
+      "arabic": "مَرَجَ ٱلْبَحْرَيْنِ يَلْتَقِيَانِ",
+      "translation": "He released the two seas,[1596] meeting [one another];",
+      "footnotes": "[1596] Two bodies of water or two sea waters of distinct characteristics.",
+      "sajdah": false
+    },
+    {
+      "number": 20,
+      "arabic": "بَيْنَهُمَا بَرْزَخٌ لَّا يَبْغِيَانِ",
+      "translation": "Between them is a barrier so neither of them transgresses.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 21,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 22,
+      "arabic": "يَخْرُجُ مِنْهُمَا ٱللُّؤْلُؤُ وَٱلْمَرْجَانُ",
+      "translation": "From both of them emerge pearl and coral.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 23,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 24,
+      "arabic": "وَلَهُ ٱلْجَوَارِ ٱلْمُنشَـَٔاتُ فِى ٱلْبَحْرِ كَٱلْأَعْلَـٰمِ",
+      "translation": "And to Him belong the ships [with sails] elevated in the sea like mountains.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 25,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 26,
+      "arabic": "كُلُّ مَنْ عَلَيْهَا فَانٍ",
+      "translation": "Everyone upon it [i.e., the earth] will perish,",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 27,
+      "arabic": "وَيَبْقَىٰ وَجْهُ رَبِّكَ ذُو ٱلْجَلَـٰلِ وَٱلْإِكْرَامِ",
+      "translation": "And there will remain the Face[1597] of your Lord, Owner of Majesty and Honor.",
+      "footnotes": "[1597] See footnote to 2:19.",
+      "sajdah": false
+    },
+    {
+      "number": 28,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 29,
+      "arabic": "يَسْـَٔلُهُۥ مَن فِى ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ ۚ كُلَّ يَوْمٍ هُوَ فِى شَأْنٍ",
+      "translation": "Whoever is within the heavens and earth asks Him; every day He is in [i.e., bringing about] a matter.[1598]",
+      "footnotes": "[1598] For each of His creatures.",
+      "sajdah": false
+    },
+    {
+      "number": 30,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 31,
+      "arabic": "سَنَفْرُغُ لَكُمْ أَيُّهَ ٱلثَّقَلَانِ",
+      "translation": "We will attend to you, O prominent beings.[1599]",
+      "footnotes": "[1599] Specifically two: mankind and jinn.",
+      "sajdah": false
+    },
+    {
+      "number": 32,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 33,
+      "arabic": "يَـٰمَعْشَرَ ٱلْجِنِّ وَٱلْإِنسِ إِنِ ٱسْتَطَعْتُمْ أَن تَنفُذُوا۟ مِنْ أَقْطَارِ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ فَٱنفُذُوا۟ ۚ لَا تَنفُذُونَ إِلَّا بِسُلْطَـٰنٍ",
+      "translation": "O company of jinn and mankind, if you are able to pass beyond the regions of the heavens and the earth, then pass. You will not pass except by authority [from Allāh].",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 34,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 35,
+      "arabic": "يُرْسَلُ عَلَيْكُمَا شُوَاظٌ مِّن نَّارٍ وَنُحَاسٌ فَلَا تَنتَصِرَانِ",
+      "translation": "There will be sent upon you a flame of fire and smoke,[1600] and you will not defend yourselves.",
+      "footnotes": "[1600] Another possible meaning is liquefied brass or copper.",
+      "sajdah": false
+    },
+    {
+      "number": 36,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 37,
+      "arabic": "فَإِذَا ٱنشَقَّتِ ٱلسَّمَآءُ فَكَانَتْ وَرْدَةً كَٱلدِّهَانِ",
+      "translation": "And when the heaven is split open and becomes rose-colored like oil[1601] -",
+      "footnotes": "[1601] Or \"like a tanned skin.\"",
+      "sajdah": false
+    },
+    {
+      "number": 38,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 39,
+      "arabic": "فَيَوْمَئِذٍ لَّا يُسْـَٔلُ عَن ذَنۢبِهِۦٓ إِنسٌ وَلَا جَآنٌّ",
+      "translation": "Then on that Day none will be asked about his sin among men or jinn.[1602]",
+      "footnotes": "[1602] Once they have been condemned to the Fire.",
+      "sajdah": false
+    },
+    {
+      "number": 40,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 41,
+      "arabic": "يُعْرَفُ ٱلْمُجْرِمُونَ بِسِيمَـٰهُمْ فَيُؤْخَذُ بِٱلنَّوَٰصِى وَٱلْأَقْدَامِ",
+      "translation": "The criminals will be known by their marks, and they will be seized by the forelocks and the feet.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 42,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 43,
+      "arabic": "هَـٰذِهِۦ جَهَنَّمُ ٱلَّتِى يُكَذِّبُ بِهَا ٱلْمُجْرِمُونَ",
+      "translation": "This is Hell, which the criminals deny.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 44,
+      "arabic": "يَطُوفُونَ بَيْنَهَا وَبَيْنَ حَمِيمٍ ءَانٍ",
+      "translation": "They will circulate between it and scalding water, heated [to the utmost degree].",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 45,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 46,
+      "arabic": "وَلِمَنْ خَافَ مَقَامَ رَبِّهِۦ جَنَّتَانِ",
+      "translation": "But for he who has feared the position of his Lord[1603] are two gardens -",
+      "footnotes": "[1603] An alternative meaning is \"the standing [for account] before his Lord.\"",
+      "sajdah": false
+    },
+    {
+      "number": 47,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 48,
+      "arabic": "ذَوَاتَآ أَفْنَانٍ",
+      "translation": "Having [spreading] branches.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 49,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 50,
+      "arabic": "فِيهِمَا عَيْنَانِ تَجْرِيَانِ",
+      "translation": "In both of them are two springs, flowing.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 51,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 52,
+      "arabic": "فِيهِمَا مِن كُلِّ فَـٰكِهَةٍ زَوْجَانِ",
+      "translation": "In both of them are of every fruit, two kinds.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 53,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 54,
+      "arabic": "مُتَّكِـِٔينَ عَلَىٰ فُرُشٍۭ بَطَآئِنُهَا مِنْ إِسْتَبْرَقٍ ۚ وَجَنَى ٱلْجَنَّتَيْنِ دَانٍ",
+      "translation": "[They are] reclining on beds whose linings are of silk brocade, and the fruit of the two gardens is hanging low.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 55,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 56,
+      "arabic": "فِيهِنَّ قَـٰصِرَٰتُ ٱلطَّرْفِ لَمْ يَطْمِثْهُنَّ إِنسٌ قَبْلَهُمْ وَلَا جَآنٌّ",
+      "translation": "In them are women limiting [their] glances,[1604] untouched[1605] before them by man or jinnī -",
+      "footnotes": "[1604] To their own mates, i.e., being chaste and modest.\n[1605] Literally, they have not been caused to bleed by loss of virginity.",
+      "sajdah": false
+    },
+    {
+      "number": 57,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 58,
+      "arabic": "كَأَنَّهُنَّ ٱلْيَاقُوتُ وَٱلْمَرْجَانُ",
+      "translation": "As if they were rubies and coral.[1606]",
+      "footnotes": "[1606] In purity, color and beauty.",
+      "sajdah": false
+    },
+    {
+      "number": 59,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 60,
+      "arabic": "هَلْ جَزَآءُ ٱلْإِحْسَـٰنِ إِلَّا ٱلْإِحْسَـٰنُ",
+      "translation": "Is the reward for good [anything] but good?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 61,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 62,
+      "arabic": "وَمِن دُونِهِمَا جَنَّتَانِ",
+      "translation": "And below them both [in excellence] are two [other] gardens -",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 63,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 64,
+      "arabic": "مُدْهَآمَّتَانِ",
+      "translation": "Dark green [in color].",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 65,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 66,
+      "arabic": "فِيهِمَا عَيْنَانِ نَضَّاخَتَانِ",
+      "translation": "In both of them are two springs, spouting.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 67,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 68,
+      "arabic": "فِيهِمَا فَـٰكِهَةٌ وَنَخْلٌ وَرُمَّانٌ",
+      "translation": "In both of them are fruit and palm trees and pomegranates.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 69,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 70,
+      "arabic": "فِيهِنَّ خَيْرَٰتٌ حِسَانٌ",
+      "translation": "In them are good and beautiful women -",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 71,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 72,
+      "arabic": "حُورٌ مَّقْصُورَٰتٌ فِى ٱلْخِيَامِ",
+      "translation": "Fair ones reserved in pavilions -",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 73,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 74,
+      "arabic": "لَمْ يَطْمِثْهُنَّ إِنسٌ قَبْلَهُمْ وَلَا جَآنٌّ",
+      "translation": "Untouched before them by man or jinnī -",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 75,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny? -",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 76,
+      "arabic": "مُتَّكِـِٔينَ عَلَىٰ رَفْرَفٍ خُضْرٍ وَعَبْقَرِىٍّ حِسَانٍ",
+      "translation": "Reclining on green cushions and beautiful fine carpets.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 77,
+      "arabic": "فَبِأَىِّ ءَالَآءِ رَبِّكُمَا تُكَذِّبَانِ",
+      "translation": "So which of the favors of your Lord would you deny?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 78,
+      "arabic": "تَبَـٰرَكَ ٱسْمُ رَبِّكَ ذِى ٱلْجَلَـٰلِ وَٱلْإِكْرَامِ",
+      "translation": "Blessed is the name of your Lord, Owner of Majesty and Honor.",
+      "footnotes": "",
+      "sajdah": false
+    }
+  ]
+}

@@ -1,0 +1,927 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "1.0.0",
+  "generated_at_utc": "2026-11-13T16:48:38Z",
+  "generator": {
+    "name": "tafseer_audio Qur'an data generator",
+    "version": "1.0.0",
+    "entry_point": "tool/quran_data/generator/generate.ps1",
+    "library": "tool/quran_data/generator/quran_data_lib.psm1",
+    "acquisition_record": "validation/source-acquisition.json"
+  },
+  "sources": {
+    "arabic": {
+      "name": "Tanzil Quran Text (Uthmani, Version 1.1)",
+      "provider": "Tanzil Project",
+      "url": "https://tanzil.net/pub/download/index.php?agree=true&marks=true&outType=xml&quranType=uthmani&sajdah=true&rub=true&tatweel=true",
+      "updates_url": "https://tanzil.net/docs/text_updates",
+      "version": "1.1",
+      "release_date": "2021-02-12",
+      "file": "sources/tanzil-uthmani-v1.1.xml",
+      "size_bytes": 1541984,
+      "sha256": "c5052534d63d3856ce25413ff464d0b609f90169a202a1615aa8707efec81244",
+      "copyright": "Copyright (C) 2007-2026 Tanzil Project",
+      "license": "Creative Commons Attribution 3.0",
+      "notice": "\n\n# PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK\n#====================================================================\n#\n#  Tanzil Quran Text (Uthmani, Version 1.1)\n#  Copyright (C) 2007-2026 Tanzil Project\n#  License: Creative Commons Attribution 3.0\n#\n#  This copy of the Quran text is carefully produced, highly \n#  verified and continuously monitored by a group of specialists \n#  at Tanzil Project.\n#\n#  TERMS OF USE:\n#\n#  - Permission is granted to copy and distribute verbatim copies \n#    of this text, but CHANGING IT IS NOT ALLOWED.\n#\n#  - This Quran text can be used in any website or application, \n#    provided that its source (Tanzil Project) is clearly indicated, \n#    and a link is made to tanzil.net to enable users to keep\n#    track of changes.\n#\n#  - This copyright notice shall be included in all verbatim copies \n#    of the text, and shall be reproduced appropriately in all files \n#    derived from or containing substantial portion of this text.\n#\n#  Please check updates at: http://tanzil.net/updates/\n#\n#====================================================================\n\t\n"
+    },
+    "english": {
+      "name": "QuranEnc English translation (english_saheeh)",
+      "provider": "QuranEnc",
+      "publisher": "Noor International Center",
+      "attribution": "Noor International Center, through QuranEnc.",
+      "url": "https://quranenc.com/en/home/d/csv/english_saheeh",
+      "browse_url": "https://quranenc.com/en/browse/english_saheeh",
+      "version": "1.1.2",
+      "revision": "v1.1.2-csv.1",
+      "last_update_unix": 1750772247,
+      "last_update_utc": "2025-06-24T13:37:27Z",
+      "last_update_source_text": "2025-06-24 16:37:27",
+      "file": "sources/quranenc-english_saheeh-v1.1.2.csv",
+      "size_bytes": 1146154,
+      "sha256": "6029cb17db0365e93856f2fec15561db64f3609dba90e28c72358ce71cacbc5e",
+      "license": "QuranEnc Terms and Policies",
+      "license_url": "https://quranenc.com/en/home/about",
+      "license_terms": "Contents of the translations can be downloaded and re-published, with the following terms and conditions: 1. No modification, addition, or deletion of the content. 2. Clearly referring to the publisher and the source (QuranEnc.com). 3. Mentioning the version number when re-publishing the translation. 4. Keeping the transcript information inside the document. 5. Notifying the source (QuranEnc.com) of any note on the translation. 6. Updating the translation according to the latest version issued from the source (QuranEnc.com). 7. Inappropriate advertisements must not be included when displaying translations of the meanings of the Noble Quran.",
+      "source_info_block": "Translation Info:\r\n#---------------------------\r\n# Translation of the meanings of the Noble Qur'an\r\n# Language: English\r\n# Translation ID: english_saheeh\r\n# Source: https://quranenc.com\r\n# URL: https://quranenc.com/en/browse/english_saheeh\r\n# Last update: 2025-06-24 16:37:27 (v1.1.2-csv.1)\r\n# Check for updates: https://quranenc.com/check/english_saheeh/v1.1.2-csv.1\r\n# PLEASE DON'T REMOVE THIS IMPORTANT INFORMATION!\r\n#---------------------------"
+    },
+    "catalogue": {
+      "name": "Tanzil Quran Metadata",
+      "url": "https://tanzil.net/res/text/metadata/quran-data.xml",
+      "license": "CC BY",
+      "copyright": "(C) 2008-2009 Tanzil.info",
+      "cross_checked_with": "Quran.com Chapters API (https://api.quran.com/api/v4/chapters)",
+      "path": "assets/data/surahs.json",
+      "sha256": "82f64df268291d5c803f60fdc1fac5235362f857139a436cc793e38ca9ffd59f",
+      "note": "Existing app catalogue; read-only. It is not part of the Qur'an text source."
+    }
+  },
+  "totals": {
+    "surahs": 114,
+    "ayahs": 6236,
+    "arabic_records": 6236,
+    "translation_records": 6236,
+    "footnote_records": 6236,
+    "footnotes_nonempty": 1613,
+    "footnotes_with_embedded_newlines": 225,
+    "footnotes_with_quotes": 294,
+    "sajdah_ayahs": 15,
+    "pause_marks": 4366,
+    "rub_el_hizb_marks": 199,
+    "tatweel_characters": 6736
+  },
+  "basmala": {
+    "ayah": [
+      1
+    ],
+    "prefatory": 112,
+    "none": [
+      9
+    ],
+    "special_spellings": [
+      95,
+      97
+    ]
+  },
+  "surahs": [
+    {
+      "number": 1,
+      "ayah_count": 7,
+      "basmala_mode": "ayah",
+      "file": "surahs/001.json",
+      "sha256": "d375c8bdb01caa9560d11f7c28b76b30244e7a0ca46261c50b3106ec6068502d"
+    },
+    {
+      "number": 2,
+      "ayah_count": 286,
+      "basmala_mode": "prefatory",
+      "file": "surahs/002.json",
+      "sha256": "1d154a0883cfa467c07a8507871b4133c489c8ca811dd57a71971dd800b095ba"
+    },
+    {
+      "number": 3,
+      "ayah_count": 200,
+      "basmala_mode": "prefatory",
+      "file": "surahs/003.json",
+      "sha256": "a6d8c4e126fc9513f175f483ad1865f85068e6d286e79cd9ea116ca057dbb6fc"
+    },
+    {
+      "number": 4,
+      "ayah_count": 176,
+      "basmala_mode": "prefatory",
+      "file": "surahs/004.json",
+      "sha256": "e12fa01e90f68ffb5609341415dbd15aef83682f8442dc98d11da4b74ffd7e65"
+    },
+    {
+      "number": 5,
+      "ayah_count": 120,
+      "basmala_mode": "prefatory",
+      "file": "surahs/005.json",
+      "sha256": "d4713624ed0d9abfa6e24725a8ca7c58a0d11e7b141c614af718ea920f577d38"
+    },
+    {
+      "number": 6,
+      "ayah_count": 165,
+      "basmala_mode": "prefatory",
+      "file": "surahs/006.json",
+      "sha256": "07e3e6dd98d7459c9c2a700a3efe3424f3eb9dbdb5b2c1fb31ca97face5826c2"
+    },
+    {
+      "number": 7,
+      "ayah_count": 206,
+      "basmala_mode": "prefatory",
+      "file": "surahs/007.json",
+      "sha256": "809e0b0ab9c76375e88fa2d279d78e03717c1b1b8a9f2876d689c0bfe221e654"
+    },
+    {
+      "number": 8,
+      "ayah_count": 75,
+      "basmala_mode": "prefatory",
+      "file": "surahs/008.json",
+      "sha256": "b8d5d33369ceaef29485c81f01fe3198c256eeb32c98939d5769f46ed949d320"
+    },
+    {
+      "number": 9,
+      "ayah_count": 129,
+      "basmala_mode": "none",
+      "file": "surahs/009.json",
+      "sha256": "d5ec1774d2476f28c1b7c8ce10eacc0d08bdfcc16ece603411c973c5b04d10f8"
+    },
+    {
+      "number": 10,
+      "ayah_count": 109,
+      "basmala_mode": "prefatory",
+      "file": "surahs/010.json",
+      "sha256": "82641303967778c209f63749a58fc2c496eb5f1c5d98576c09d5ede6badccf91"
+    },
+    {
+      "number": 11,
+      "ayah_count": 123,
+      "basmala_mode": "prefatory",
+      "file": "surahs/011.json",
+      "sha256": "e7794ba9b90d2dd56dcf1586a68ea0e16f94898f4e10ca877072cc07987818cf"
+    },
+    {
+      "number": 12,
+      "ayah_count": 111,
+      "basmala_mode": "prefatory",
+      "file": "surahs/012.json",
+      "sha256": "ec4ea8259112fa429d6e5cb38ce2486d5ebe77f40be33177d494661735788bb0"
+    },
+    {
+      "number": 13,
+      "ayah_count": 43,
+      "basmala_mode": "prefatory",
+      "file": "surahs/013.json",
+      "sha256": "9e7508847b2c5aaa1bc23f20b6a30a6e10dfae83c0a2d29d59883e99cf956e04"
+    },
+    {
+      "number": 14,
+      "ayah_count": 52,
+      "basmala_mode": "prefatory",
+      "file": "surahs/014.json",
+      "sha256": "c2a2505becebc59d9ac7bdc355b2b8499ac597cfa2b3e09addcec4db3cd8d9ea"
+    },
+    {
+      "number": 15,
+      "ayah_count": 99,
+      "basmala_mode": "prefatory",
+      "file": "surahs/015.json",
+      "sha256": "ba5c3151fb5291ff308921d63596b884996a4af989ba6ca83aa798bba2f5a070"
+    },
+    {
+      "number": 16,
+      "ayah_count": 128,
+      "basmala_mode": "prefatory",
+      "file": "surahs/016.json",
+      "sha256": "645cc7e67325a16c32bb74dfb7c56c4c438c23a11ac30aacf2f2ba5c231f55f4"
+    },
+    {
+      "number": 17,
+      "ayah_count": 111,
+      "basmala_mode": "prefatory",
+      "file": "surahs/017.json",
+      "sha256": "5964f9b4effe3fedde5ab090e02cf68420b0ae6d9e4820ce4dee8628995e2818"
+    },
+    {
+      "number": 18,
+      "ayah_count": 110,
+      "basmala_mode": "prefatory",
+      "file": "surahs/018.json",
+      "sha256": "6260c49054b93423b15a625517d47b5193da6dd092293483604a793249d3da9b"
+    },
+    {
+      "number": 19,
+      "ayah_count": 98,
+      "basmala_mode": "prefatory",
+      "file": "surahs/019.json",
+      "sha256": "8beb220f27e73675c41ba3c035c4b3e9520f54e761e479e2c4b0dadccc1b1477"
+    },
+    {
+      "number": 20,
+      "ayah_count": 135,
+      "basmala_mode": "prefatory",
+      "file": "surahs/020.json",
+      "sha256": "079ded6b4f35fa92c7fdc3efe81af2c5b17300b8b480fc781171019f37392e82"
+    },
+    {
+      "number": 21,
+      "ayah_count": 112,
+      "basmala_mode": "prefatory",
+      "file": "surahs/021.json",
+      "sha256": "4ad8635d0afc38b9c5f0eb13609ca9d4146f879ad5c0415f4305ec88893da818"
+    },
+    {
+      "number": 22,
+      "ayah_count": 78,
+      "basmala_mode": "prefatory",
+      "file": "surahs/022.json",
+      "sha256": "b482759a0ad28ce4e3eef0cc56797bc990ea15b3c98705dbbe586c40966da2eb"
+    },
+    {
+      "number": 23,
+      "ayah_count": 118,
+      "basmala_mode": "prefatory",
+      "file": "surahs/023.json",
+      "sha256": "bd2ce4b413d4f55bf26ce2f7af393056a7f32c2c92b592de6439757f5e7c53da"
+    },
+    {
+      "number": 24,
+      "ayah_count": 64,
+      "basmala_mode": "prefatory",
+      "file": "surahs/024.json",
+      "sha256": "5ef8ff9aeb2456e8db0a86691f609697ab4a26d2d145961fe5dc3979cb01ac8e"
+    },
+    {
+      "number": 25,
+      "ayah_count": 77,
+      "basmala_mode": "prefatory",
+      "file": "surahs/025.json",
+      "sha256": "dc31de0dc90cbb3b7d18f341f0b9c9122eb7c8f979f4279e9823aa9f87ff2a2c"
+    },
+    {
+      "number": 26,
+      "ayah_count": 227,
+      "basmala_mode": "prefatory",
+      "file": "surahs/026.json",
+      "sha256": "abb0fb69d1d8610fbc6b25bbd0e3418d714c50ba873335b7aae85c3f87894825"
+    },
+    {
+      "number": 27,
+      "ayah_count": 93,
+      "basmala_mode": "prefatory",
+      "file": "surahs/027.json",
+      "sha256": "ddf85d3ffcd67026390a85185eb614297b9551b86d93f1365bdf539f0fe305bc"
+    },
+    {
+      "number": 28,
+      "ayah_count": 88,
+      "basmala_mode": "prefatory",
+      "file": "surahs/028.json",
+      "sha256": "e140814d7f499c929faccfbeda19aa1c5ba73e2c51f38392c4aa088256e8fedb"
+    },
+    {
+      "number": 29,
+      "ayah_count": 69,
+      "basmala_mode": "prefatory",
+      "file": "surahs/029.json",
+      "sha256": "6b3418c4a139196b4e5aa32fd07f413aac67def0fffa6ba2e9549eb59b421824"
+    },
+    {
+      "number": 30,
+      "ayah_count": 60,
+      "basmala_mode": "prefatory",
+      "file": "surahs/030.json",
+      "sha256": "84c3534b276bfc311eb50d815b9c1c341b5100b3613ff8ccdd7fd18f74e94049"
+    },
+    {
+      "number": 31,
+      "ayah_count": 34,
+      "basmala_mode": "prefatory",
+      "file": "surahs/031.json",
+      "sha256": "05db13917fae3829153f545cdbd4c686b08c82dfbe4b7c078984a1a78342f30c"
+    },
+    {
+      "number": 32,
+      "ayah_count": 30,
+      "basmala_mode": "prefatory",
+      "file": "surahs/032.json",
+      "sha256": "b81005577a0045fd0494eb611f369ae6064841a2171aac37d51bc06ed2801a20"
+    },
+    {
+      "number": 33,
+      "ayah_count": 73,
+      "basmala_mode": "prefatory",
+      "file": "surahs/033.json",
+      "sha256": "3a7cc11f668115811409ffff3a72b47ea6945e3d2c1bc96984298534036f443a"
+    },
+    {
+      "number": 34,
+      "ayah_count": 54,
+      "basmala_mode": "prefatory",
+      "file": "surahs/034.json",
+      "sha256": "0642d3360518a12b822e6965a39310f3eb2d327e5912a26a06959f2d874d9dbc"
+    },
+    {
+      "number": 35,
+      "ayah_count": 45,
+      "basmala_mode": "prefatory",
+      "file": "surahs/035.json",
+      "sha256": "7e306c6cb0964dd4f3dc2448c2d19e85a9da0e767c00086f6040de14e868d91d"
+    },
+    {
+      "number": 36,
+      "ayah_count": 83,
+      "basmala_mode": "prefatory",
+      "file": "surahs/036.json",
+      "sha256": "85c0981a741ffd25d07495ad4ecc180875b9edd9ded6546dbbef701ff46a1299"
+    },
+    {
+      "number": 37,
+      "ayah_count": 182,
+      "basmala_mode": "prefatory",
+      "file": "surahs/037.json",
+      "sha256": "06ec555644e4ce0d5852f0ed2833e5a0b99d68386929ae9ddffd3385340b250a"
+    },
+    {
+      "number": 38,
+      "ayah_count": 88,
+      "basmala_mode": "prefatory",
+      "file": "surahs/038.json",
+      "sha256": "f7e66d645a3f023c49d3dfd45dcf0ab4fcdbb363cefd30f9dbbe9f352e2c8b36"
+    },
+    {
+      "number": 39,
+      "ayah_count": 75,
+      "basmala_mode": "prefatory",
+      "file": "surahs/039.json",
+      "sha256": "c8e4951156995ac9df9daeda2df0aa6485506eb2cc7abdeb5da87dac04926334"
+    },
+    {
+      "number": 40,
+      "ayah_count": 85,
+      "basmala_mode": "prefatory",
+      "file": "surahs/040.json",
+      "sha256": "77bf35c570708b837089b54f289f1d5db7def003b550e4644e3e205b9f7faa15"
+    },
+    {
+      "number": 41,
+      "ayah_count": 54,
+      "basmala_mode": "prefatory",
+      "file": "surahs/041.json",
+      "sha256": "de2caec7fa35096b0a1499f2d4bac72ebf5eca0674f46f6024ce2d1fd22a7c1a"
+    },
+    {
+      "number": 42,
+      "ayah_count": 53,
+      "basmala_mode": "prefatory",
+      "file": "surahs/042.json",
+      "sha256": "493e7d936aaa2b124213986fa34ce4f75e1184561dfa74facb92972813bccf43"
+    },
+    {
+      "number": 43,
+      "ayah_count": 89,
+      "basmala_mode": "prefatory",
+      "file": "surahs/043.json",
+      "sha256": "9bf567bd4370f75fd04ebf531699957e331f322b2131dcba0acc18edd2b544d0"
+    },
+    {
+      "number": 44,
+      "ayah_count": 59,
+      "basmala_mode": "prefatory",
+      "file": "surahs/044.json",
+      "sha256": "9724e996259179041dba9806fec5986c1a76931e719d500db73d50e41666e688"
+    },
+    {
+      "number": 45,
+      "ayah_count": 37,
+      "basmala_mode": "prefatory",
+      "file": "surahs/045.json",
+      "sha256": "70f2ddfbf1c20e130278f84e2094ae8703e0c10880707be681101c1fecf65ac9"
+    },
+    {
+      "number": 46,
+      "ayah_count": 35,
+      "basmala_mode": "prefatory",
+      "file": "surahs/046.json",
+      "sha256": "31cfed53b8c4ffc7411acd7c106711178e72c7da67f9fc56596256ba9424fdb8"
+    },
+    {
+      "number": 47,
+      "ayah_count": 38,
+      "basmala_mode": "prefatory",
+      "file": "surahs/047.json",
+      "sha256": "509c1c9f2ad1553fffb1931d87a6a008551229da36e1b8ab939011dda032ba2d"
+    },
+    {
+      "number": 48,
+      "ayah_count": 29,
+      "basmala_mode": "prefatory",
+      "file": "surahs/048.json",
+      "sha256": "0895744e2f78c89206695fa6694993f037f3077d7e7e21600c2e61ea71440df6"
+    },
+    {
+      "number": 49,
+      "ayah_count": 18,
+      "basmala_mode": "prefatory",
+      "file": "surahs/049.json",
+      "sha256": "a9f1aa517298eb7e601c910fdfddefa23a4c345c6bd61a42558fbe8e6b6e5304"
+    },
+    {
+      "number": 50,
+      "ayah_count": 45,
+      "basmala_mode": "prefatory",
+      "file": "surahs/050.json",
+      "sha256": "1cab93a5ce1d6514cd1ae78639c03cf4d0b1828c8e8e4fdd09780670156676ae"
+    },
+    {
+      "number": 51,
+      "ayah_count": 60,
+      "basmala_mode": "prefatory",
+      "file": "surahs/051.json",
+      "sha256": "c7e1021bfa5840c5cd2ea7094d001fb529469bb77389d78b0d84e716a2ba21e9"
+    },
+    {
+      "number": 52,
+      "ayah_count": 49,
+      "basmala_mode": "prefatory",
+      "file": "surahs/052.json",
+      "sha256": "1fd3659798bdf370ba6eac619fcfc7d880a6d3ab3234b597e6ecd97a9454f7f0"
+    },
+    {
+      "number": 53,
+      "ayah_count": 62,
+      "basmala_mode": "prefatory",
+      "file": "surahs/053.json",
+      "sha256": "162604b90b56a114cfde0ae5ebbe7cddc1ba090f02a6d076ac73b0fd26ea967a"
+    },
+    {
+      "number": 54,
+      "ayah_count": 55,
+      "basmala_mode": "prefatory",
+      "file": "surahs/054.json",
+      "sha256": "04470f952442bbdd21c254902f7bcf47923d99116b339401dcb63d3bab04a866"
+    },
+    {
+      "number": 55,
+      "ayah_count": 78,
+      "basmala_mode": "prefatory",
+      "file": "surahs/055.json",
+      "sha256": "07766f2bc145cdf8af0763745e00ce1894d556a83dcf552f5b85cfdf80544ec3"
+    },
+    {
+      "number": 56,
+      "ayah_count": 96,
+      "basmala_mode": "prefatory",
+      "file": "surahs/056.json",
+      "sha256": "1e9667c341f143ed3a86892a541c723419e6a6a7872c506f2ad55b58f140f6a1"
+    },
+    {
+      "number": 57,
+      "ayah_count": 29,
+      "basmala_mode": "prefatory",
+      "file": "surahs/057.json",
+      "sha256": "9c51adb6896a88719387e931163d0d941ad70fa547d528f33522b5a5fd9922c5"
+    },
+    {
+      "number": 58,
+      "ayah_count": 22,
+      "basmala_mode": "prefatory",
+      "file": "surahs/058.json",
+      "sha256": "9a6f6f0a969f5d19c224ea3d3595c173cd99cb5d29c595fb818dc4c11ab0536d"
+    },
+    {
+      "number": 59,
+      "ayah_count": 24,
+      "basmala_mode": "prefatory",
+      "file": "surahs/059.json",
+      "sha256": "fa80305d83617d545d038d1e786cd1d7e179ca0af87f2dacae568819a827774a"
+    },
+    {
+      "number": 60,
+      "ayah_count": 13,
+      "basmala_mode": "prefatory",
+      "file": "surahs/060.json",
+      "sha256": "42388b69aaa3a71ecd6715066c4952a0560bef60a0a1994f52b68e246b83d768"
+    },
+    {
+      "number": 61,
+      "ayah_count": 14,
+      "basmala_mode": "prefatory",
+      "file": "surahs/061.json",
+      "sha256": "e86658dd5e24c69668b243a7ab1534b905c824173d19567d9ae6aabf03bebc3a"
+    },
+    {
+      "number": 62,
+      "ayah_count": 11,
+      "basmala_mode": "prefatory",
+      "file": "surahs/062.json",
+      "sha256": "04e0e506408a01ceeb8564af56554a03d828dc2381fe2967502cb6a883d7d298"
+    },
+    {
+      "number": 63,
+      "ayah_count": 11,
+      "basmala_mode": "prefatory",
+      "file": "surahs/063.json",
+      "sha256": "0ce859bda629e527fc74c9bb1f41f5b524f3536bd1f9298c4b7b12a8423cfea5"
+    },
+    {
+      "number": 64,
+      "ayah_count": 18,
+      "basmala_mode": "prefatory",
+      "file": "surahs/064.json",
+      "sha256": "b3c5059f98a49d5b0dc57633fe9304c22201d0bab22ebf44689b3698d206b47d"
+    },
+    {
+      "number": 65,
+      "ayah_count": 12,
+      "basmala_mode": "prefatory",
+      "file": "surahs/065.json",
+      "sha256": "f5ba8bb43c096d5d3b92af438837fd81934bfbb419ab7d67aea76ded7291b163"
+    },
+    {
+      "number": 66,
+      "ayah_count": 12,
+      "basmala_mode": "prefatory",
+      "file": "surahs/066.json",
+      "sha256": "4649bf352ea9640ee11218cddc1a639bbe2c8e732835aa3eaf18d427ba6a37c7"
+    },
+    {
+      "number": 67,
+      "ayah_count": 30,
+      "basmala_mode": "prefatory",
+      "file": "surahs/067.json",
+      "sha256": "b3bed058f1520b8fdb913088f945e43112782d8b65e12b3b5414136bdec48f9b"
+    },
+    {
+      "number": 68,
+      "ayah_count": 52,
+      "basmala_mode": "prefatory",
+      "file": "surahs/068.json",
+      "sha256": "52e0a1e8914de9539561bef7aff07721e94c490f2f093a9d1475abcf0fa3efd0"
+    },
+    {
+      "number": 69,
+      "ayah_count": 52,
+      "basmala_mode": "prefatory",
+      "file": "surahs/069.json",
+      "sha256": "47b142f4468cb65ba0ff6b29679ba2acaf1b8339a38cc8a2654ed4782503ab69"
+    },
+    {
+      "number": 70,
+      "ayah_count": 44,
+      "basmala_mode": "prefatory",
+      "file": "surahs/070.json",
+      "sha256": "cb8eb501166ce6f81a9a26b37afd9a2b1be541417b449b19a49332725ce2ce5b"
+    },
+    {
+      "number": 71,
+      "ayah_count": 28,
+      "basmala_mode": "prefatory",
+      "file": "surahs/071.json",
+      "sha256": "f53ec3acf2a60e54bbc2558f42877a05e5dde08658c045fba5ce118c6c7562cd"
+    },
+    {
+      "number": 72,
+      "ayah_count": 28,
+      "basmala_mode": "prefatory",
+      "file": "surahs/072.json",
+      "sha256": "e57202b13bf29d89a052578c2bf019640bcb6d046afcb2eba2d317c3aaef1999"
+    },
+    {
+      "number": 73,
+      "ayah_count": 20,
+      "basmala_mode": "prefatory",
+      "file": "surahs/073.json",
+      "sha256": "d85d142e73ce133a5cb090c35fd1c64676688e537e60ae622b95e50fe118fe4f"
+    },
+    {
+      "number": 74,
+      "ayah_count": 56,
+      "basmala_mode": "prefatory",
+      "file": "surahs/074.json",
+      "sha256": "be0530e966e027508826975d1faa8bc70d6364635385872896978bdb4defc8ee"
+    },
+    {
+      "number": 75,
+      "ayah_count": 40,
+      "basmala_mode": "prefatory",
+      "file": "surahs/075.json",
+      "sha256": "d81909897a82c0a471edd214e87784db444b96559adb6f8c6bc2d847161bbe43"
+    },
+    {
+      "number": 76,
+      "ayah_count": 31,
+      "basmala_mode": "prefatory",
+      "file": "surahs/076.json",
+      "sha256": "9004c7fae69844994ced94cbaaa073548f1369cb03b918c8f505f50f61801196"
+    },
+    {
+      "number": 77,
+      "ayah_count": 50,
+      "basmala_mode": "prefatory",
+      "file": "surahs/077.json",
+      "sha256": "928a1c467fda1f95d19fda5b913eced75c6c64e300e3d661e8e9bdf7acfc26c6"
+    },
+    {
+      "number": 78,
+      "ayah_count": 40,
+      "basmala_mode": "prefatory",
+      "file": "surahs/078.json",
+      "sha256": "d4f7a10af56e4ffb36dec3862d53d9c32bce2b4e64e2b967f2f10f254fbea42b"
+    },
+    {
+      "number": 79,
+      "ayah_count": 46,
+      "basmala_mode": "prefatory",
+      "file": "surahs/079.json",
+      "sha256": "2b3e7b61e1631a416a07c829a2a5a073a0cf5ccdd2381027fce9208173d7e741"
+    },
+    {
+      "number": 80,
+      "ayah_count": 42,
+      "basmala_mode": "prefatory",
+      "file": "surahs/080.json",
+      "sha256": "a5be914df32911d0cff4de5963b45bb91272d0a204be8d0f2eead571a46d8974"
+    },
+    {
+      "number": 81,
+      "ayah_count": 29,
+      "basmala_mode": "prefatory",
+      "file": "surahs/081.json",
+      "sha256": "6b7696ca017e8a4d4371a9851e807e42613512df83c03b05be6819e5d338cace"
+    },
+    {
+      "number": 82,
+      "ayah_count": 19,
+      "basmala_mode": "prefatory",
+      "file": "surahs/082.json",
+      "sha256": "f7762b484f5da007441f7e98b1f7dadff312239cb42a15c372fb80e7f1ed295d"
+    },
+    {
+      "number": 83,
+      "ayah_count": 36,
+      "basmala_mode": "prefatory",
+      "file": "surahs/083.json",
+      "sha256": "d4f2edd0fc527bedf525f06c18e964008073f845285858a3551ef466c250d4d9"
+    },
+    {
+      "number": 84,
+      "ayah_count": 25,
+      "basmala_mode": "prefatory",
+      "file": "surahs/084.json",
+      "sha256": "1a0fdcc52125d094c20b06b86a48e126ad14858ca2bb04fb24df72abe21417ea"
+    },
+    {
+      "number": 85,
+      "ayah_count": 22,
+      "basmala_mode": "prefatory",
+      "file": "surahs/085.json",
+      "sha256": "d54bb21e34125379ac2b6e83e7e511c989c4599bf414c209877c2061393f80e6"
+    },
+    {
+      "number": 86,
+      "ayah_count": 17,
+      "basmala_mode": "prefatory",
+      "file": "surahs/086.json",
+      "sha256": "a1c28d1f309600ff15172864d71699f7caac35b0368df6227f9d12471d6833bd"
+    },
+    {
+      "number": 87,
+      "ayah_count": 19,
+      "basmala_mode": "prefatory",
+      "file": "surahs/087.json",
+      "sha256": "0fd579edbd5b767d4ab36708d4010503d55b186a51add90e509667ce783d12fc"
+    },
+    {
+      "number": 88,
+      "ayah_count": 26,
+      "basmala_mode": "prefatory",
+      "file": "surahs/088.json",
+      "sha256": "16b5065737d1d870db4132a6f8ed39e6b72c2b4e8631c7235e025e7493fd6c94"
+    },
+    {
+      "number": 89,
+      "ayah_count": 30,
+      "basmala_mode": "prefatory",
+      "file": "surahs/089.json",
+      "sha256": "db1f8ce7259bcee1086cabdb533637575be629f8cc85daf20bb1be47a188924d"
+    },
+    {
+      "number": 90,
+      "ayah_count": 20,
+      "basmala_mode": "prefatory",
+      "file": "surahs/090.json",
+      "sha256": "45f07f9862c081b875560745869bf19ce25fd239dd13862bffe28e5f78edbccb"
+    },
+    {
+      "number": 91,
+      "ayah_count": 15,
+      "basmala_mode": "prefatory",
+      "file": "surahs/091.json",
+      "sha256": "a9432e0a178ef10febc7b2cd636c0b6d5dd14f0fe193ea88d52803ca96589253"
+    },
+    {
+      "number": 92,
+      "ayah_count": 21,
+      "basmala_mode": "prefatory",
+      "file": "surahs/092.json",
+      "sha256": "afc89a320f0aa3e480622aabb57e76fe00113c7148d518f289b752528a6895a1"
+    },
+    {
+      "number": 93,
+      "ayah_count": 11,
+      "basmala_mode": "prefatory",
+      "file": "surahs/093.json",
+      "sha256": "72b2aed494ab885dec00467aa6ec8819c5ff620e6547932bcc3b1658ac4b50b8"
+    },
+    {
+      "number": 94,
+      "ayah_count": 8,
+      "basmala_mode": "prefatory",
+      "file": "surahs/094.json",
+      "sha256": "6d96d1d77c051ceae597de9e512e1f7ed153a1de3e9d6ad5e06773465316e0c3"
+    },
+    {
+      "number": 95,
+      "ayah_count": 8,
+      "basmala_mode": "prefatory",
+      "file": "surahs/095.json",
+      "sha256": "9aedc151a7cb9df17e61c7d5e8c664a944ca295ae6d4f2ddf8e8404149ab16f2"
+    },
+    {
+      "number": 96,
+      "ayah_count": 19,
+      "basmala_mode": "prefatory",
+      "file": "surahs/096.json",
+      "sha256": "3d2c971141c9ae35e4205ff245cee52f8c0e9975625c0c9de2e52555be8111dc"
+    },
+    {
+      "number": 97,
+      "ayah_count": 5,
+      "basmala_mode": "prefatory",
+      "file": "surahs/097.json",
+      "sha256": "73d9e36552fd8db3fa4ff3a4d4b9d88c687b313ef3bf0d2ec822dd1dc2ad8ad5"
+    },
+    {
+      "number": 98,
+      "ayah_count": 8,
+      "basmala_mode": "prefatory",
+      "file": "surahs/098.json",
+      "sha256": "08db52370e9190681db361c1fb77988b2da93021d52477b5ff5d009238c3d136"
+    },
+    {
+      "number": 99,
+      "ayah_count": 8,
+      "basmala_mode": "prefatory",
+      "file": "surahs/099.json",
+      "sha256": "7de2a725f0ea41c1f6cace5bcd348982e61664288becfb65d5de958189aa9112"
+    },
+    {
+      "number": 100,
+      "ayah_count": 11,
+      "basmala_mode": "prefatory",
+      "file": "surahs/100.json",
+      "sha256": "4ef027c2846f3c1467de49d27e20a2fe145568eb9cbbf4fd0260e327fc8d5e1a"
+    },
+    {
+      "number": 101,
+      "ayah_count": 11,
+      "basmala_mode": "prefatory",
+      "file": "surahs/101.json",
+      "sha256": "91c580f8a66bd46d5600f1de12342834a60ad7d28974037f9b1d752309cf3743"
+    },
+    {
+      "number": 102,
+      "ayah_count": 8,
+      "basmala_mode": "prefatory",
+      "file": "surahs/102.json",
+      "sha256": "897cc5e07534ea150aafe2a50adf2765d47009aaeee08b59f16d5dcfdac27823"
+    },
+    {
+      "number": 103,
+      "ayah_count": 3,
+      "basmala_mode": "prefatory",
+      "file": "surahs/103.json",
+      "sha256": "ddb322535071c4e4c6834b0dd955e5fd3ef254503495848c0cd54b727999894a"
+    },
+    {
+      "number": 104,
+      "ayah_count": 9,
+      "basmala_mode": "prefatory",
+      "file": "surahs/104.json",
+      "sha256": "3ae606cb791eec2e43b63faecfd6347bfbae3282a2becb6528fc33a25438795e"
+    },
+    {
+      "number": 105,
+      "ayah_count": 5,
+      "basmala_mode": "prefatory",
+      "file": "surahs/105.json",
+      "sha256": "0c0936cd357253ca6722f4d99e983ee0d3b54f497613865d056e773bd3f82f74"
+    },
+    {
+      "number": 106,
+      "ayah_count": 4,
+      "basmala_mode": "prefatory",
+      "file": "surahs/106.json",
+      "sha256": "5452f2e7a7d8056ab1100cd4e1b582053bd608b7184a087baf392b343c36eec6"
+    },
+    {
+      "number": 107,
+      "ayah_count": 7,
+      "basmala_mode": "prefatory",
+      "file": "surahs/107.json",
+      "sha256": "1cfcd7ee3bd1ebb9aea5e698589018c3b1b60bbb8277fdc2ca330f21a2dae9aa"
+    },
+    {
+      "number": 108,
+      "ayah_count": 3,
+      "basmala_mode": "prefatory",
+      "file": "surahs/108.json",
+      "sha256": "f0610d4e02175b34fb8dce003fff4035b2008cfd0e34a3c47516643529162a05"
+    },
+    {
+      "number": 109,
+      "ayah_count": 6,
+      "basmala_mode": "prefatory",
+      "file": "surahs/109.json",
+      "sha256": "4cd95887fc9ba34cd467083aded6ddc06ef3f414d1a48eb0069ce1d4e9510c03"
+    },
+    {
+      "number": 110,
+      "ayah_count": 3,
+      "basmala_mode": "prefatory",
+      "file": "surahs/110.json",
+      "sha256": "a4e6a520b05f98f257232fd237248fdbaf6146f8a959fa544936fa06ad17293c"
+    },
+    {
+      "number": 111,
+      "ayah_count": 5,
+      "basmala_mode": "prefatory",
+      "file": "surahs/111.json",
+      "sha256": "7e7a72dca5f0d66c53bf1ad28dc01c46f4d5ef9257dbb3c7ca92d77ab28ee399"
+    },
+    {
+      "number": 112,
+      "ayah_count": 4,
+      "basmala_mode": "prefatory",
+      "file": "surahs/112.json",
+      "sha256": "95ffaaec4ae7a5b7473a1ca91d5246edfc807529cb2c8b68258f5ca7a7eca0bc"
+    },
+    {
+      "number": 113,
+      "ayah_count": 5,
+      "basmala_mode": "prefatory",
+      "file": "surahs/113.json",
+      "sha256": "187ea7520d9b0e00eb3c77ea014af361a049ff05aeec83a8f5f4c237d40b8fe2"
+    },
+    {
+      "number": 114,
+      "ayah_count": 6,
+      "basmala_mode": "prefatory",
+      "file": "surahs/114.json",
+      "sha256": "78391aa4e388c66bf1fbd5d20bc3d99e8f98f6b0d2ea9f858decb0df042fad15"
+    }
+  ],
+  "content_checksum": {
+    "algorithm": "SHA-256",
+    "scope": "SHA-256 over sorted per-Surah file names and digests, each followed by a newline; generation timestamps are excluded.",
+    "value": "140a0c97a22bcb5c1227a5a7f05690ea498ec5d4c0de33f8c1270c8a91ae5ce6",
+    "file_count": 114
+  },
+  "validation": {
+    "status": "passed",
+    "checks_total": 72,
+    "checks_passed": 72,
+    "checks_failed": 0,
+    "full_report": "validation/validation-report.json",
+    "independent_report": "validation/independent-validation.json",
+    "note": "Counts cover generation and generated-Surah-file checks. The full report additionally includes manifest read-back and checksum checks.",
+    "source_hashes_verified": true,
+    "catalogue_counts_verified": true,
+    "generated_surah_files_parsed": 114,
+    "sajdah_locations": [
+      "7:206",
+      "13:15",
+      "16:50",
+      "17:109",
+      "19:58",
+      "22:18",
+      "22:77",
+      "25:60",
+      "27:26",
+      "32:15",
+      "38:24",
+      "41:38",
+      "53:62",
+      "84:21",
+      "96:19"
+    ],
+    "spot_checks": [
+      "1:1",
+      "1:2",
+      "2:1",
+      "9:1",
+      "114:6"
+    ]
+  }
+}

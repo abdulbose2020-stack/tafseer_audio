@@ -1,0 +1,89 @@
+{
+  "generated_at_utc": "2026-11-13T16:48:38Z",
+  "source_hashes": {
+    "arabic": "c5052534d63d3856ce25413ff464d0b609f90169a202a1615aa8707efec81244",
+    "english": "6029cb17db0365e93856f2fec15561db64f3609dba90e28c72358ce71cacbc5e"
+  },
+  "checks": [
+    {
+      "key": "1:1",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "starts_with_standard_basmala": true,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "1ad501ee473ec3953c6d669513e2ae2550ad333577aef0f156926b52f6972b61",
+      "translation_sha256": "9986e8649539ee6158cd327f727491ca89fe9ee024be39bdec677cad113d4540",
+      "footnotes_sha256": "a2755b76645c7b3a94f3598aa90479249b22cba5e3607bbb5d1bd11fc64325e4",
+      "arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+      "translation": "In the name of Allāh,[2] the Entirely Merciful, the Especially Merciful.[3]",
+      "footnotes": "[2] Allāh is a proper name belonging only to the one Almighty God, Creator and Sustainer of the heavens and the earth and all that is within them, the Eternal and Absolute, to whom alone all worship is due.\n[3] Ar-Raḥmān and ar-Raḥeem are two names of Allāh derived from the word \"raḥmah\" (mercy) . In Arabic grammar both are intensive forms of \"merciful\" (i.e., extremely merciful) . A complimentary and comprehensive meaning is intended by using both together. Raḥmān is used only to describe Allāh, while raḥeem might be used to describe a person as well. The Prophet (ﷺ) was described in the Qur’ān as raḥeem. Raḥmān is above the human level (i.e., intensely merciful) . Since one usually understands intensity to be something of short duration, Allāh describes Himself also as raḥeem (i.e., continually merciful) . Raḥmān also carries a wider meaning - merciful to all creation. Justice is a part of this mercy. Raḥeem includes the concept of speciality - especially and specifically merciful to the believers. Forgiveness is a part of this mercy. In addition, Raḥmān is adjectival, referring to an attribute of Allāh and is part of His essence. Raḥeem is verbal, indicating what He does: i.e., bestowing and implementing mercy.",
+      "sajdah": false
+    },
+    {
+      "key": "1:2",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "starts_with_standard_basmala": false,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "463f13295bc7d90e0ea221942d7b39359a137da8686420b58f63d0774eebda09",
+      "translation_sha256": "49af29530016f95bc1dc11a034598255d87c425a47fc4fe0365b28eb537cbd08",
+      "footnotes_sha256": "84b3422b182e140267caf663f7f7999093600bb981c23ba73e04c9c456235d34",
+      "arabic": "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ",
+      "translation": "[All] praise is [due] to Allāh, Lord[4] of the worlds -",
+      "footnotes": "[4] When referring to Allāh (subḥānahu wa taʿālā) , the Arabic term \"rabb\" (translated as \"Lord\") includes all of the following meanings: \"owner, master, ruler, controller, sustainer, provider, guardian and caretaker.\"",
+      "sajdah": false
+    },
+    {
+      "key": "2:1",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "starts_with_standard_basmala": false,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "49c5355bd921dc0d810e3be457432004847a72d5dbe754562be895be707be6c3",
+      "translation_sha256": "f6d960531078049a9494ccab3c70201113bbe37b435eea315ee4d5bf4dd7bef3",
+      "footnotes_sha256": "0772477f7b71eef755d928c56e9aad7d44fd2cdfe651fec895d45ef6eeba3887",
+      "arabic": "الٓمٓ",
+      "translation": "Alif, Lām, Meem.[7]",
+      "footnotes": "[7] These are among the fourteen opening letters which occur in various combinations at the beginning of twenty-nine sūrahs in the Qur’ān. Although there has been much speculation as to their meaning, it was not, in fact, revealed by Allāh to anyone and is known only to Him.",
+      "sajdah": false
+    },
+    {
+      "key": "9:1",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "starts_with_standard_basmala": false,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "d18402a276407219dcaeb5cb91cb19ddaa8a92fe282eedc6c0028f83d40e5766",
+      "translation_sha256": "792aa18f4fba526f14e3da02b10a1fa77303f6b08cdad5cc0994c41a6af970e6",
+      "footnotes_sha256": "cb3dde08e0e7c51928f4b5f055180b3d4223d8a30c0969d579682dddeb544d7f",
+      "arabic": "بَرَآءَةٌ مِّنَ ٱللَّهِ وَرَسُولِهِۦٓ إِلَى ٱلَّذِينَ عَـٰهَدتُّم مِّنَ ٱلْمُشْرِكِينَ",
+      "translation": "[This is a declaration of] disassociation, from Allāh and His Messenger, to those with whom you had made a treaty among the polytheists.[461]",
+      "footnotes": "[461] But who had violated it.",
+      "sajdah": false
+    },
+    {
+      "key": "114:6",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "starts_with_standard_basmala": false,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "afe439d2346201551930d0c231ab3a35f2c90f1a5ebb09fc797707059732d756",
+      "translation_sha256": "92fd0a8a67736ece9b2b18d5e9cbc573588ba3f62a93ffc3ef22d1c1b80006b7",
+      "footnotes_sha256": "ceca1d9ce313c3d97a8f8148f607432ea215b46d60cd4f34706cedf326dc15b9",
+      "arabic": "مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ",
+      "translation": "From among the jinn and mankind.\"[2017]",
+      "footnotes": "[2017] Evil prompters may be from men as well as from jinn.",
+      "sajdah": false
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "surah_number": 97,
+  "basmala_mode": "prefatory",
+  "basmala_text": "بِّسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+  "ayahs": [
+    {
+      "number": 1,
+      "arabic": "إِنَّآ أَنزَلْنَـٰهُ فِى لَيْلَةِ ٱلْقَدْرِ",
+      "translation": "Indeed, We sent it [i.e., the Qur’ān] down during the Night of Decree.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 2,
+      "arabic": "وَمَآ أَدْرَىٰكَ مَا لَيْلَةُ ٱلْقَدْرِ",
+      "translation": "And what can make you know what is the Night of Decree?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 3,
+      "arabic": "لَيْلَةُ ٱلْقَدْرِ خَيْرٌ مِّنْ أَلْفِ شَهْرٍ",
+      "translation": "The Night of Decree is better than a thousand months.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 4,
+      "arabic": "تَنَزَّلُ ٱلْمَلَـٰٓئِكَةُ وَٱلرُّوحُ فِيهَا بِإِذْنِ رَبِّهِم مِّن كُلِّ أَمْرٍ",
+      "translation": "The angels and the Spirit [i.e., Gabriel] descend therein by permission of their Lord for every matter.[1955]",
+      "footnotes": "[1955] Bringing the exact measures apportioned for everything by Allāh in the course of the coming year.",
+      "sajdah": false
+    },
+    {
+      "number": 5,
+      "arabic": "سَلَـٰمٌ هِىَ حَتَّىٰ مَطْلَعِ ٱلْفَجْرِ",
+      "translation": "Peace it is[1956] until the emergence of dawn.",
+      "footnotes": "[1956] Upon the believers.",
+      "sajdah": false
+    }
+  ]
+}

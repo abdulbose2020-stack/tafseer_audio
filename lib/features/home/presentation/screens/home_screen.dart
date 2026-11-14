@@ -8,7 +8,7 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../../core/widgets/brand_mark.dart';
 import '../../../../core/widgets/islamic_pattern.dart';
 import '../../../player/presentation/widgets/mini_player.dart';
-import '../../../quran/presentation/screens/quran_reading_placeholder_screen.dart';
+import '../../../quran/presentation/screens/quran_reader_surahs_screen.dart';
 import '../../../settings/presentation/screens/settings_screen.dart';
 import '../../../surahs/presentation/screens/surah_list_screen.dart';
 
@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
   void _openReading(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (context) => const QuranReadingPlaceholderScreen(),
+        builder: (context) => const QuranReaderSurahsScreen(),
       ),
     );
   }
@@ -88,9 +88,9 @@ class HomeScreen extends StatelessWidget {
                     eyebrow: 'QUR’AN READING',
                     title: 'Read the Qur’an',
                     description:
-                        'Arabic text and English translation will live here, '
-                        'with bookmarks and a saved reading position.',
-                    status: 'CONTENT BEING PREPARED',
+                        'Read the complete Arabic Qur’an offline, Surah by '
+                        'Surah, with adjustable Arabic text size.',
+                    status: 'ARABIC READER READY',
                     onTap: () => _openReading(context),
                   ),
                   const SizedBox(height: AppSpacing.md),

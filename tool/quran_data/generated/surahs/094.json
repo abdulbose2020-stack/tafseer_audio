@@ -1,0 +1,63 @@
+{
+  "surah_number": 94,
+  "basmala_mode": "prefatory",
+  "basmala_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+  "ayahs": [
+    {
+      "number": 1,
+      "arabic": "أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ",
+      "translation": "Did We not expand for you, [O Muḥammad], your breast?[1944]",
+      "footnotes": "[1944] i.e., enlighten, assure and gladden your heart with guidance.",
+      "sajdah": false
+    },
+    {
+      "number": 2,
+      "arabic": "وَوَضَعْنَا عَنكَ وِزْرَكَ",
+      "translation": "And We removed from you your burden[1945]",
+      "footnotes": "[1945] By forgiving any errors which you may have committed previously or might commit consequently. \"Burden\" can also refer to the anxiety experienced by the Prophet (ﷺ) at the beginning of his mission.",
+      "sajdah": false
+    },
+    {
+      "number": 3,
+      "arabic": "ٱلَّذِىٓ أَنقَضَ ظَهْرَكَ",
+      "translation": "Which had weighed upon your back",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 4,
+      "arabic": "وَرَفَعْنَا لَكَ ذِكْرَكَ",
+      "translation": "And raised high for you your repute.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 5,
+      "arabic": "فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا",
+      "translation": "For indeed, with hardship [will be] ease [i.e., relief].",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 6,
+      "arabic": "إِنَّ مَعَ ٱلْعُسْرِ يُسْرًا",
+      "translation": "Indeed, with hardship [will be] ease.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 7,
+      "arabic": "فَإِذَا فَرَغْتَ فَٱنصَبْ",
+      "translation": "So when you have finished [your duties], then stand up [for worship].",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 8,
+      "arabic": "وَإِلَىٰ رَبِّكَ فَٱرْغَب",
+      "translation": "And to your Lord direct [your] longing.",
+      "footnotes": "",
+      "sajdah": false
+    }
+  ]
+}

@@ -1,0 +1,1423 @@
+{
+  "status": "passed",
+  "generated_at_utc": "2026-11-13T16:48:38Z",
+  "schema_version": "1.0.0",
+  "dataset_version": "1.0.0",
+  "source_acquisition_record": "validation/source-acquisition.json",
+  "acquired_at_utc": "2026-11-13T16:35:40Z",
+  "sources": {
+    "arabic": {
+      "name": "Tanzil Quran Text (Uthmani, Version 1.1)",
+      "provider": "Tanzil Project",
+      "url": "https://tanzil.net/pub/download/index.php?agree=true&marks=true&outType=xml&quranType=uthmani&sajdah=true&rub=true&tatweel=true",
+      "updates_url": "https://tanzil.net/docs/text_updates",
+      "version": "1.1",
+      "release_date": "2021-02-12",
+      "file": "sources/tanzil-uthmani-v1.1.xml",
+      "size_bytes": 1541984,
+      "sha256": "c5052534d63d3856ce25413ff464d0b609f90169a202a1615aa8707efec81244",
+      "copyright": "Copyright (C) 2007-2026 Tanzil Project",
+      "license": "Creative Commons Attribution 3.0",
+      "notice": "\n\n# PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK\n#====================================================================\n#\n#  Tanzil Quran Text (Uthmani, Version 1.1)\n#  Copyright (C) 2007-2026 Tanzil Project\n#  License: Creative Commons Attribution 3.0\n#\n#  This copy of the Quran text is carefully produced, highly \n#  verified and continuously monitored by a group of specialists \n#  at Tanzil Project.\n#\n#  TERMS OF USE:\n#\n#  - Permission is granted to copy and distribute verbatim copies \n#    of this text, but CHANGING IT IS NOT ALLOWED.\n#\n#  - This Quran text can be used in any website or application, \n#    provided that its source (Tanzil Project) is clearly indicated, \n#    and a link is made to tanzil.net to enable users to keep\n#    track of changes.\n#\n#  - This copyright notice shall be included in all verbatim copies \n#    of the text, and shall be reproduced appropriately in all files \n#    derived from or containing substantial portion of this text.\n#\n#  Please check updates at: http://tanzil.net/updates/\n#\n#====================================================================\n\t\n"
+    },
+    "english": {
+      "name": "QuranEnc English translation (english_saheeh)",
+      "provider": "QuranEnc",
+      "publisher": "Noor International Center",
+      "attribution": "Noor International Center, through QuranEnc.",
+      "url": "https://quranenc.com/en/home/d/csv/english_saheeh",
+      "browse_url": "https://quranenc.com/en/browse/english_saheeh",
+      "version": "1.1.2",
+      "revision": "v1.1.2-csv.1",
+      "last_update_unix": 1750772247,
+      "last_update_utc": "2025-06-24T13:37:27Z",
+      "last_update_source_text": "2025-06-24 16:37:27",
+      "file": "sources/quranenc-english_saheeh-v1.1.2.csv",
+      "size_bytes": 1146154,
+      "sha256": "6029cb17db0365e93856f2fec15561db64f3609dba90e28c72358ce71cacbc5e",
+      "license": "QuranEnc Terms and Policies",
+      "license_url": "https://quranenc.com/en/home/about",
+      "license_terms": "Contents of the translations can be downloaded and re-published, with the following terms and conditions: 1. No modification, addition, or deletion of the content. 2. Clearly referring to the publisher and the source (QuranEnc.com). 3. Mentioning the version number when re-publishing the translation. 4. Keeping the transcript information inside the document. 5. Notifying the source (QuranEnc.com) of any note on the translation. 6. Updating the translation according to the latest version issued from the source (QuranEnc.com). 7. Inappropriate advertisements must not be included when displaying translations of the meanings of the Noble Quran.",
+      "source_info_block": "Translation Info:\r\n#---------------------------\r\n# Translation of the meanings of the Noble Qur'an\r\n# Language: English\r\n# Translation ID: english_saheeh\r\n# Source: https://quranenc.com\r\n# URL: https://quranenc.com/en/browse/english_saheeh\r\n# Last update: 2025-06-24 16:37:27 (v1.1.2-csv.1)\r\n# Check for updates: https://quranenc.com/check/english_saheeh/v1.1.2-csv.1\r\n# PLEASE DON'T REMOVE THIS IMPORTANT INFORMATION!\r\n#---------------------------"
+    },
+    "catalogue": {
+      "name": "Tanzil Quran Metadata",
+      "url": "https://tanzil.net/res/text/metadata/quran-data.xml",
+      "license": "CC BY",
+      "copyright": "(C) 2008-2009 Tanzil.info",
+      "cross_checked_with": "Quran.com Chapters API (https://api.quran.com/api/v4/chapters)",
+      "path": "assets/data/surahs.json",
+      "sha256": "82f64df268291d5c803f60fdc1fac5235362f857139a436cc793e38ca9ffd59f",
+      "note": "Existing app catalogue; read-only. It is not part of the Qur'an text source."
+    }
+  },
+  "totals": {
+    "surahs": 114,
+    "ayahs": 6236,
+    "arabic_records": 6236,
+    "translation_records": 6236,
+    "footnote_records": 6236,
+    "footnotes_nonempty": 1613,
+    "footnotes_with_embedded_newlines": 225,
+    "footnotes_with_quotes": 294,
+    "sajdah_ayahs": 15,
+    "pause_marks": 4366,
+    "rub_el_hizb_marks": 199,
+    "tatweel_characters": 6736
+  },
+  "basmala": {
+    "ayah": [
+      1
+    ],
+    "prefatory": 112,
+    "none": [
+      9
+    ],
+    "special_spellings": [
+      95,
+      97
+    ]
+  },
+  "marker_counts": {
+    "pause_marks": 4366,
+    "rub_el_hizb_marks": 199,
+    "sajdah_marks": 15,
+    "tatweel_characters": 6736
+  },
+  "sajdah_locations": [
+    "7:206",
+    "13:15",
+    "16:50",
+    "17:109",
+    "19:58",
+    "22:18",
+    "22:77",
+    "25:60",
+    "27:26",
+    "32:15",
+    "38:24",
+    "41:38",
+    "53:62",
+    "84:21",
+    "96:19"
+  ],
+  "spot_checks": [
+    {
+      "key": "1:1",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "starts_with_standard_basmala": true,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "1ad501ee473ec3953c6d669513e2ae2550ad333577aef0f156926b52f6972b61",
+      "translation_sha256": "9986e8649539ee6158cd327f727491ca89fe9ee024be39bdec677cad113d4540",
+      "footnotes_sha256": "a2755b76645c7b3a94f3598aa90479249b22cba5e3607bbb5d1bd11fc64325e4",
+      "arabic": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+      "translation": "In the name of Allāh,[2] the Entirely Merciful, the Especially Merciful.[3]",
+      "footnotes": "[2] Allāh is a proper name belonging only to the one Almighty God, Creator and Sustainer of the heavens and the earth and all that is within them, the Eternal and Absolute, to whom alone all worship is due.\n[3] Ar-Raḥmān and ar-Raḥeem are two names of Allāh derived from the word \"raḥmah\" (mercy) . In Arabic grammar both are intensive forms of \"merciful\" (i.e., extremely merciful) . A complimentary and comprehensive meaning is intended by using both together. Raḥmān is used only to describe Allāh, while raḥeem might be used to describe a person as well. The Prophet (ﷺ) was described in the Qur’ān as raḥeem. Raḥmān is above the human level (i.e., intensely merciful) . Since one usually understands intensity to be something of short duration, Allāh describes Himself also as raḥeem (i.e., continually merciful) . Raḥmān also carries a wider meaning - merciful to all creation. Justice is a part of this mercy. Raḥeem includes the concept of speciality - especially and specifically merciful to the believers. Forgiveness is a part of this mercy. In addition, Raḥmān is adjectival, referring to an attribute of Allāh and is part of His essence. Raḥeem is verbal, indicating what He does: i.e., bestowing and implementing mercy.",
+      "sajdah": false
+    },
+    {
+      "key": "1:2",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "starts_with_standard_basmala": false,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "463f13295bc7d90e0ea221942d7b39359a137da8686420b58f63d0774eebda09",
+      "translation_sha256": "49af29530016f95bc1dc11a034598255d87c425a47fc4fe0365b28eb537cbd08",
+      "footnotes_sha256": "84b3422b182e140267caf663f7f7999093600bb981c23ba73e04c9c456235d34",
+      "arabic": "ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ",
+      "translation": "[All] praise is [due] to Allāh, Lord[4] of the worlds -",
+      "footnotes": "[4] When referring to Allāh (subḥānahu wa taʿālā) , the Arabic term \"rabb\" (translated as \"Lord\") includes all of the following meanings: \"owner, master, ruler, controller, sustainer, provider, guardian and caretaker.\"",
+      "sajdah": false
+    },
+    {
+      "key": "2:1",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "starts_with_standard_basmala": false,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "49c5355bd921dc0d810e3be457432004847a72d5dbe754562be895be707be6c3",
+      "translation_sha256": "f6d960531078049a9494ccab3c70201113bbe37b435eea315ee4d5bf4dd7bef3",
+      "footnotes_sha256": "0772477f7b71eef755d928c56e9aad7d44fd2cdfe651fec895d45ef6eeba3887",
+      "arabic": "الٓمٓ",
+      "translation": "Alif, Lām, Meem.[7]",
+      "footnotes": "[7] These are among the fourteen opening letters which occur in various combinations at the beginning of twenty-nine sūrahs in the Qur’ān. Although there has been much speculation as to their meaning, it was not, in fact, revealed by Allāh to anyone and is known only to Him.",
+      "sajdah": false
+    },
+    {
+      "key": "9:1",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "starts_with_standard_basmala": false,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "d18402a276407219dcaeb5cb91cb19ddaa8a92fe282eedc6c0028f83d40e5766",
+      "translation_sha256": "792aa18f4fba526f14e3da02b10a1fa77303f6b08cdad5cc0994c41a6af970e6",
+      "footnotes_sha256": "cb3dde08e0e7c51928f4b5f055180b3d4223d8a30c0969d579682dddeb544d7f",
+      "arabic": "بَرَآءَةٌ مِّنَ ٱللَّهِ وَرَسُولِهِۦٓ إِلَى ٱلَّذِينَ عَـٰهَدتُّم مِّنَ ٱلْمُشْرِكِينَ",
+      "translation": "[This is a declaration of] disassociation, from Allāh and His Messenger, to those with whom you had made a treaty among the polytheists.[461]",
+      "footnotes": "[461] But who had violated it.",
+      "sajdah": false
+    },
+    {
+      "key": "114:6",
+      "arabic_matches_source": true,
+      "translation_matches_source": true,
+      "footnotes_matches_source": true,
+      "sajdah_matches_source": true,
+      "starts_with_standard_basmala": false,
+      "basmala_prepended_to_ayah": false,
+      "arabic_sha256": "afe439d2346201551930d0c231ab3a35f2c90f1a5ebb09fc797707059732d756",
+      "translation_sha256": "92fd0a8a67736ece9b2b18d5e9cbc573588ba3f62a93ffc3ef22d1c1b80006b7",
+      "footnotes_sha256": "ceca1d9ce313c3d97a8f8148f607432ea215b46d60cd4f34706cedf326dc15b9",
+      "arabic": "مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ",
+      "translation": "From among the jinn and mankind.\"[2017]",
+      "footnotes": "[2017] Evil prompters may be from men as well as from jinn.",
+      "sajdah": false
+    }
+  ],
+  "checks_total": 74,
+  "checks_passed": 74,
+  "checks_failed": 0,
+  "checks": [
+    {
+      "id": "sources.arabic.integrity",
+      "category": "sources",
+      "description": "Downloaded source file matches the acquisition record (size and SHA-256).",
+      "passed": true,
+      "details": "size=1541984 (expected 1541984); sha256=c5052534d63d3856ce25413ff464d0b609f90169a202a1615aa8707efec81244 (expected c5052534d63d3856ce25413ff464d0b609f90169a202a1615aa8707efec81244)"
+    },
+    {
+      "id": "sources.arabic.no_bom",
+      "category": "sources",
+      "description": "Source file has no UTF-8 BOM.",
+      "passed": true,
+      "details": "C:\\Users\\X390\\Documents\\FlutterProjects\\tafseer_audio\\tool\\quran_data\\sources\\tanzil-uthmani-v1.1.xml"
+    },
+    {
+      "id": "sources.english.integrity",
+      "category": "sources",
+      "description": "Downloaded source file matches the acquisition record (size and SHA-256).",
+      "passed": true,
+      "details": "size=1146154 (expected 1146154); sha256=6029cb17db0365e93856f2fec15561db64f3609dba90e28c72358ce71cacbc5e (expected 6029cb17db0365e93856f2fec15561db64f3609dba90e28c72358ce71cacbc5e)"
+    },
+    {
+      "id": "sources.english.no_bom",
+      "category": "sources",
+      "description": "Source file has no UTF-8 BOM.",
+      "passed": true,
+      "details": "C:\\Users\\X390\\Documents\\FlutterProjects\\tafseer_audio\\tool\\quran_data\\sources\\quranenc-english_saheeh-v1.1.2.csv"
+    },
+    {
+      "id": "sources.arabic.surah_count",
+      "category": "sources",
+      "description": "Tanzil XML contains exactly 114 Surahs.",
+      "passed": true,
+      "details": "found 114"
+    },
+    {
+      "id": "sources.arabic.ayah_count",
+      "category": "sources",
+      "description": "Tanzil XML contains exactly 6,236 Ayahs.",
+      "passed": true,
+      "details": "found 6236"
+    },
+    {
+      "id": "sources.english.row_count",
+      "category": "sources",
+      "description": "QuranEnc CSV contains exactly 6,236 data rows.",
+      "passed": true,
+      "details": "found 6236"
+    },
+    {
+      "id": "sources.versions",
+      "category": "sources",
+      "description": "Acquisition metadata and source notices identify the reviewed versions.",
+      "passed": true,
+      "details": "Tanzil=1.1 (2021-02-12); QuranEnc=1.1.2 (v1.1.2-csv.1); last_update=2025-06-24T13:37:27Z"
+    },
+    {
+      "id": "sources.arabic.copyright_notice",
+      "category": "sources",
+      "description": "Tanzil copyright block is present and includes its preservation and licence notices.",
+      "passed": true,
+      "details": "Copyright (C) 2007-2026 Tanzil Project"
+    },
+    {
+      "id": "sources.english.source_notice",
+      "category": "sources",
+      "description": "QuranEnc preamble is present and includes its required preservation notice, ID, URL and version.",
+      "passed": true,
+      "details": "v1.1.2-csv.1"
+    },
+    {
+      "id": "sources.english.attribution",
+      "category": "sources",
+      "description": "Official QuranEnc attribution is recorded without an unconfirmed translator claim.",
+      "passed": true,
+      "details": "Noor International Center, through QuranEnc."
+    },
+    {
+      "id": "sources.english.license",
+      "category": "sources",
+      "description": "QuranEnc Terms and Policies are recorded with their official URL.",
+      "passed": true,
+      "details": "https://quranenc.com/en/home/about"
+    },
+    {
+      "id": "sources.encoding",
+      "category": "sources",
+      "description": "Tanzil XML declares UTF-8 and both sources are valid UTF-8 without BOM.",
+      "passed": true,
+      "details": "UTF-8, no BOM"
+    },
+    {
+      "id": "sources.english.record_order",
+      "category": "sources",
+      "description": "QuranEnc IDs run 1..6236 and map from 1:1 through 114:6.",
+      "passed": true,
+      "details": "first=1:1:1; last=6236:114:6"
+    },
+    {
+      "id": "sources.arabic.surah_sequence",
+      "category": "sources",
+      "description": "Surah numbers are sequential from 1 to 114.",
+      "passed": true,
+      "details": "1..114"
+    },
+    {
+      "id": "sources.arabic.ayah_sequence",
+      "category": "sources",
+      "description": "Ayah numbers are sequential from 1 within every Surah.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "sources.arabic.no_duplicate_surahs",
+      "category": "sources",
+      "description": "Tanzil XML has no duplicate Surah numbers.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "catalogue.surah_count",
+      "category": "catalogue",
+      "description": "Existing assets/data/surahs.json contains 114 Surahs.",
+      "passed": true,
+      "details": "found 114"
+    },
+    {
+      "id": "catalogue.total_ayahs",
+      "category": "catalogue",
+      "description": "Existing assets/data/surahs.json totals 6,236 Ayahs.",
+      "passed": true,
+      "details": "found 6236"
+    },
+    {
+      "id": "catalogue.sequence",
+      "category": "catalogue",
+      "description": "Catalogue Surah numbers are complete and unique.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "mapping.one_to_one",
+      "category": "mapping",
+      "description": "Every Arabic Ayah has exactly one English record and vice versa.",
+      "passed": true,
+      "details": "6,236 matched records"
+    },
+    {
+      "id": "content.arabic_nonempty",
+      "category": "content",
+      "description": "No generated Arabic record is empty.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "content.translation_nonempty",
+      "category": "content",
+      "description": "No generated English translation record is empty.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "content.arabic_controls",
+      "category": "content",
+      "description": "Arabic records contain no NUL, tab, CR or LF characters.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "content.translation_controls",
+      "category": "content",
+      "description": "Translation and footnote records contain no NUL characters.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "content.arabic_exact",
+      "category": "content",
+      "description": "All 6,236 generated Arabic strings match the Tanzil source exactly (ordinal comparison).",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "content.translation_exact",
+      "category": "content",
+      "description": "All 6,236 generated translations match the QuranEnc CSV exactly (ordinal comparison).",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "content.footnotes_exact",
+      "category": "content",
+      "description": "All 6,236 raw footnote strings match the QuranEnc CSV exactly (ordinal comparison).",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "content.footnote_counts",
+      "category": "content",
+      "description": "Raw footnotes are retained, including embedded newlines and quotation marks.",
+      "passed": true,
+      "details": "records=6236; non-empty=1613; with newlines=225; with quotes=294"
+    },
+    {
+      "id": "content.catalogue_counts",
+      "category": "catalogue",
+      "description": "Every Surah Ayah count matches assets/data/surahs.json.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "json.in_memory_parse",
+      "category": "json",
+      "description": "Every in-memory Surah JSON document parses successfully.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "json.in_memory_content",
+      "category": "json",
+      "description": "Every in-memory Surah JSON round-trip preserves the generated values exactly.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "totals.surahs",
+      "category": "totals",
+      "description": "Generated dataset contains exactly 114 Surahs.",
+      "passed": true,
+      "details": "found 114"
+    },
+    {
+      "id": "totals.ayahs",
+      "category": "totals",
+      "description": "Generated dataset contains exactly 6,236 Ayahs.",
+      "passed": true,
+      "details": "found 6236"
+    },
+    {
+      "id": "totals.arabic_records",
+      "category": "totals",
+      "description": "Generated dataset contains exactly 6,236 Arabic records.",
+      "passed": true,
+      "details": "found 6236"
+    },
+    {
+      "id": "totals.translation_records",
+      "category": "totals",
+      "description": "Generated dataset contains exactly 6,236 English translation records.",
+      "passed": true,
+      "details": "found 6236"
+    },
+    {
+      "id": "basmala.attribute_count",
+      "category": "basmala",
+      "description": "Tanzil source contains exactly 112 prefatory Basmala attributes, all on first Ayahs.",
+      "passed": true,
+      "details": "attributes=112; non-first="
+    },
+    {
+      "id": "basmala.mode_counts",
+      "category": "basmala",
+      "description": "Basmala modes are ayah=1, prefatory=112, none=1.",
+      "passed": true,
+      "details": "ayah=1; prefatory=112; none=1"
+    },
+    {
+      "id": "basmala.surah_1",
+      "category": "basmala",
+      "description": "Surah 1 uses mode ayah; its first Ayah is the source Basmala and is not duplicated.",
+      "passed": true,
+      "details": "Surah 1:1 equals the standard prefatory Basmala from Surah 2."
+    },
+    {
+      "id": "basmala.surah_9",
+      "category": "basmala",
+      "description": "Surah 9 uses mode none and has no prefatory Basmala.",
+      "passed": true,
+      "details": "Surah 9 has no Basmala attribute and its first Ayah does not start with the Basmala."
+    },
+    {
+      "id": "basmala.not_prepended",
+      "category": "basmala",
+      "description": "No prefatory Basmala is prepended to the first Ayah text.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "basmala.special_95_97",
+      "category": "basmala",
+      "description": "Surahs 95 and 97 preserve their distinct Basmala spelling (extra shadda).",
+      "passed": true,
+      "details": "95_len=40; 97_len=40; standard_len=39; 95_cp1=U+0651; standard_cp1=U+0650"
+    },
+    {
+      "id": "sajdah.locations",
+      "category": "sajdah",
+      "description": "Exactly the 15 known Sajdah locations are marked and no others.",
+      "passed": true,
+      "details": "found: 7:206, 13:15, 16:50, 17:109, 19:58, 22:18, 22:77, 25:60, 27:26, 32:15, 38:24, 41:38, 53:62, 84:21, 96:19"
+    },
+    {
+      "id": "sajdah.markers",
+      "category": "sajdah",
+      "description": "Each Sajdah Ayah contains exactly one U+06E9 mark and no other Ayah contains one.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "marks.source_totals",
+      "category": "marks",
+      "description": "Pause, rub-el-hizb, Sajdah and tatweel marker totals match the source.",
+      "passed": true,
+      "details": "pause=4366; rub=199; sajdah=15; tatweel=6736"
+    },
+    {
+      "id": "marks.present",
+      "category": "marks",
+      "description": "Pause marks, rub-el-hizb signs and tatweel characters are present in the generated Arabic.",
+      "passed": true,
+      "details": "pause=4366; rub=199; tatweel=6736"
+    },
+    {
+      "id": "generated.file_count",
+      "category": "generated",
+      "description": "Exactly 114 Surah JSON files exist with the expected names.",
+      "passed": true,
+      "details": "files=114"
+    },
+    {
+      "id": "generated.file_hashes",
+      "category": "generated",
+      "description": "Every written Surah file has the recorded SHA-256 checksum.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "generated.json_parse",
+      "category": "generated",
+      "description": "Every written Surah JSON file parses successfully.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "generated.schema",
+      "category": "generated",
+      "description": "Every written Surah file has the required schema, types and Ayah shape.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "generated.ayah_sequence",
+      "category": "generated",
+      "description": "Every written Surah has sequential Ayah numbering.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "generated.arabic_exact",
+      "category": "generated",
+      "description": "Every written Arabic string matches the Tanzil source exactly.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "generated.translation_exact",
+      "category": "generated",
+      "description": "Every written translation matches the QuranEnc CSV exactly.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "generated.footnotes_exact",
+      "category": "generated",
+      "description": "Every written raw footnote string matches the QuranEnc CSV exactly.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "generated.sajdah_exact",
+      "category": "generated",
+      "description": "Every written sajdah flag matches the presence of the U+06E9 source mark.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "generated.basmala_exact",
+      "category": "generated",
+      "description": "Every written Basmala mode and text matches the source-derived values.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "generated.content_checksum",
+      "category": "generated",
+      "description": "Per-Surah checksums reproduce the pre-write content checksum.",
+      "passed": true,
+      "details": "actual=140a0c97a22bcb5c1227a5a7f05690ea498ec5d4c0de33f8c1270c8a91ae5ce6; expected=140a0c97a22bcb5c1227a5a7f05690ea498ec5d4c0de33f8c1270c8a91ae5ce6"
+    },
+    {
+      "id": "spot.1_1",
+      "category": "spot-checks",
+      "description": "Spot check 1:1 matches the original Arabic and English sources.",
+      "passed": true,
+      "details": "arabic=True; translation=True; footnotes=True; sajdah=True; starts_with_basmala=True; basmala_prepended=False"
+    },
+    {
+      "id": "spot.1_2",
+      "category": "spot-checks",
+      "description": "Spot check 1:2 matches the original Arabic and English sources.",
+      "passed": true,
+      "details": "arabic=True; translation=True; footnotes=True; sajdah=True; starts_with_basmala=False; basmala_prepended=False"
+    },
+    {
+      "id": "spot.2_1",
+      "category": "spot-checks",
+      "description": "Spot check 2:1 matches the original Arabic and English sources.",
+      "passed": true,
+      "details": "arabic=True; translation=True; footnotes=True; sajdah=True; starts_with_basmala=False; basmala_prepended=False"
+    },
+    {
+      "id": "spot.9_1",
+      "category": "spot-checks",
+      "description": "Spot check 9:1 matches the original Arabic and English sources.",
+      "passed": true,
+      "details": "arabic=True; translation=True; footnotes=True; sajdah=True; starts_with_basmala=False; basmala_prepended=False"
+    },
+    {
+      "id": "spot.114_6",
+      "category": "spot-checks",
+      "description": "Spot check 114:6 matches the original Arabic and English sources.",
+      "passed": true,
+      "details": "arabic=True; translation=True; footnotes=True; sajdah=True; starts_with_basmala=False; basmala_prepended=False"
+    },
+    {
+      "id": "spot_checks.all_match",
+      "category": "spot-checks",
+      "description": "All required spot checks pass against the original sources.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "guard.catalogue_unchanged",
+      "category": "guard",
+      "description": "assets/data/surahs.json was not modified.",
+      "passed": true,
+      "details": "sha256=82f64df268291d5c803f60fdc1fac5235362f857139a436cc793e38ca9ffd59f"
+    },
+    {
+      "id": "guard.pubspec_unchanged",
+      "category": "guard",
+      "description": "pubspec.yaml was not modified.",
+      "passed": true,
+      "details": "sha256=c1b7d03463cfeb0a2e3822d877ef05682b787805e8975ff4abd09019a9485550"
+    },
+    {
+      "id": "guard.no_app_quran_assets",
+      "category": "guard",
+      "description": "No files were added under assets/data/quran/.",
+      "passed": true,
+      "details": "exists=False"
+    },
+    {
+      "id": "generated.manifest_parse",
+      "category": "manifest",
+      "description": "Generated manifest parses as JSON.",
+      "passed": true,
+      "details": "length=30176"
+    },
+    {
+      "id": "generated.manifest_structure",
+      "category": "manifest",
+      "description": "Manifest contains schema, timestamp, sources, totals, Basmala summary, Surah entries, checksums and validation.",
+      "passed": true,
+      "details": "required top-level fields present"
+    },
+    {
+      "id": "generated.manifest_totals",
+      "category": "manifest",
+      "description": "Manifest totals are 114 Surahs, 6,236 Ayahs, 6,236 Arabic records, 6,236 translations and 15 Sajdah Ayahs.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "generated.manifest_surahs",
+      "category": "manifest",
+      "description": "Manifest per-Surah counts, file names and SHA-256 checksums match the generated files.",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "id": "generated.manifest_checksums",
+      "category": "manifest",
+      "description": "Manifest content checksum matches the post-write per-Surah checksums.",
+      "passed": true,
+      "details": "value=140a0c97a22bcb5c1227a5a7f05690ea498ec5d4c0de33f8c1270c8a91ae5ce6"
+    },
+    {
+      "id": "generated.manifest_notices",
+      "category": "manifest",
+      "description": "Manifest preserves the exact Tanzil copyright block, QuranEnc preamble, attribution and Terms and Policies.",
+      "passed": true,
+      "details": "notices compared with exact ordinal equality"
+    },
+    {
+      "id": "generated.manifest_readback",
+      "category": "manifest",
+      "description": "Written manifest re-parses and preserves its required metadata.",
+      "passed": true,
+      "details": "sha256=752b56053cbf717d9454b7115b4766512b53a40d84f4696e546b70aa488b31ce; size=30176"
+    },
+    {
+      "id": "generated.json_files_parse",
+      "category": "generated",
+      "description": "All 115 generated JSON files (114 Surahs plus the manifest) parse successfully.",
+      "passed": true,
+      "details": "114 Surah files + manifest"
+    }
+  ],
+  "generated_files": {
+    "surah_file_count": 114,
+    "surah_files_total_size_bytes": 3167018,
+    "manifest_file": "manifest.json",
+    "manifest_size_bytes": 30176,
+    "total_size_bytes": 3197194,
+    "surah_files": [
+      {
+        "file": "surahs/001.json",
+        "ayah_count": 7,
+        "size_bytes": 3527,
+        "sha256": "d375c8bdb01caa9560d11f7c28b76b30244e7a0ca46261c50b3106ec6068502d"
+      },
+      {
+        "file": "surahs/002.json",
+        "ayah_count": 286,
+        "size_bytes": 222443,
+        "sha256": "1d154a0883cfa467c07a8507871b4133c489c8ca811dd57a71971dd800b095ba"
+      },
+      {
+        "file": "surahs/003.json",
+        "ayah_count": 200,
+        "size_bytes": 128641,
+        "sha256": "a6d8c4e126fc9513f175f483ad1865f85068e6d286e79cd9ea116ca057dbb6fc"
+      },
+      {
+        "file": "surahs/004.json",
+        "ayah_count": 176,
+        "size_bytes": 137467,
+        "sha256": "e12fa01e90f68ffb5609341415dbd15aef83682f8442dc98d11da4b74ffd7e65"
+      },
+      {
+        "file": "surahs/005.json",
+        "ayah_count": 120,
+        "size_bytes": 99602,
+        "sha256": "d4713624ed0d9abfa6e24725a8ca7c58a0d11e7b141c614af718ea920f577d38"
+      },
+      {
+        "file": "surahs/006.json",
+        "ayah_count": 165,
+        "size_bytes": 113543,
+        "sha256": "07e3e6dd98d7459c9c2a700a3efe3424f3eb9dbdb5b2c1fb31ca97face5826c2"
+      },
+      {
+        "file": "surahs/007.json",
+        "ayah_count": 206,
+        "size_bytes": 127700,
+        "sha256": "809e0b0ab9c76375e88fa2d279d78e03717c1b1b8a9f2876d689c0bfe221e654"
+      },
+      {
+        "file": "surahs/008.json",
+        "ayah_count": 75,
+        "size_bytes": 47890,
+        "sha256": "b8d5d33369ceaef29485c81f01fe3198c256eeb32c98939d5769f46ed949d320"
+      },
+      {
+        "file": "surahs/009.json",
+        "ayah_count": 129,
+        "size_bytes": 94192,
+        "sha256": "d5ec1774d2476f28c1b7c8ce10eacc0d08bdfcc16ece603411c973c5b04d10f8"
+      },
+      {
+        "file": "surahs/010.json",
+        "ayah_count": 109,
+        "size_bytes": 67287,
+        "sha256": "82641303967778c209f63749a58fc2c496eb5f1c5d98576c09d5ede6badccf91"
+      },
+      {
+        "file": "surahs/011.json",
+        "ayah_count": 123,
+        "size_bytes": 71332,
+        "sha256": "e7794ba9b90d2dd56dcf1586a68ea0e16f94898f4e10ca877072cc07987818cf"
+      },
+      {
+        "file": "surahs/012.json",
+        "ayah_count": 111,
+        "size_bytes": 66228,
+        "sha256": "ec4ea8259112fa429d6e5cb38ce2486d5ebe77f40be33177d494661735788bb0"
+      },
+      {
+        "file": "surahs/013.json",
+        "ayah_count": 43,
+        "size_bytes": 31621,
+        "sha256": "9e7508847b2c5aaa1bc23f20b6a30a6e10dfae83c0a2d29d59883e99cf956e04"
+      },
+      {
+        "file": "surahs/014.json",
+        "ayah_count": 52,
+        "size_bytes": 31852,
+        "sha256": "c2a2505becebc59d9ac7bdc355b2b8499ac597cfa2b3e09addcec4db3cd8d9ea"
+      },
+      {
+        "file": "surahs/015.json",
+        "ayah_count": 99,
+        "size_bytes": 33443,
+        "sha256": "ba5c3151fb5291ff308921d63596b884996a4af989ba6ca83aa798bba2f5a070"
+      },
+      {
+        "file": "surahs/016.json",
+        "ayah_count": 128,
+        "size_bytes": 71544,
+        "sha256": "645cc7e67325a16c32bb74dfb7c56c4c438c23a11ac30aacf2f2ba5c231f55f4"
+      },
+      {
+        "file": "surahs/017.json",
+        "ayah_count": 111,
+        "size_bytes": 62757,
+        "sha256": "5964f9b4effe3fedde5ab090e02cf68420b0ae6d9e4820ce4dee8628995e2818"
+      },
+      {
+        "file": "surahs/018.json",
+        "ayah_count": 110,
+        "size_bytes": 60302,
+        "sha256": "6260c49054b93423b15a625517d47b5193da6dd092293483604a793249d3da9b"
+      },
+      {
+        "file": "surahs/019.json",
+        "ayah_count": 98,
+        "size_bytes": 41114,
+        "sha256": "8beb220f27e73675c41ba3c035c4b3e9520f54e761e479e2c4b0dadccc1b1477"
+      },
+      {
+        "file": "surahs/020.json",
+        "ayah_count": 135,
+        "size_bytes": 57639,
+        "sha256": "079ded6b4f35fa92c7fdc3efe81af2c5b17300b8b480fc781171019f37392e82"
+      },
+      {
+        "file": "surahs/021.json",
+        "ayah_count": 112,
+        "size_bytes": 51306,
+        "sha256": "4ad8635d0afc38b9c5f0eb13609ca9d4146f879ad5c0415f4305ec88893da818"
+      },
+      {
+        "file": "surahs/022.json",
+        "ayah_count": 78,
+        "size_bytes": 48194,
+        "sha256": "b482759a0ad28ce4e3eef0cc56797bc990ea15b3c98705dbbe586c40966da2eb"
+      },
+      {
+        "file": "surahs/023.json",
+        "ayah_count": 118,
+        "size_bytes": 45683,
+        "sha256": "bd2ce4b413d4f55bf26ce2f7af393056a7f32c2c92b592de6439757f5e7c53da"
+      },
+      {
+        "file": "surahs/024.json",
+        "ayah_count": 64,
+        "size_bytes": 49751,
+        "sha256": "5ef8ff9aeb2456e8db0a86691f609697ab4a26d2d145961fe5dc3979cb01ac8e"
+      },
+      {
+        "file": "surahs/025.json",
+        "ayah_count": 77,
+        "size_bytes": 37761,
+        "sha256": "dc31de0dc90cbb3b7d18f341f0b9c9122eb7c8f979f4279e9823aa9f87ff2a2c"
+      },
+      {
+        "file": "surahs/026.json",
+        "ayah_count": 227,
+        "size_bytes": 67101,
+        "sha256": "abb0fb69d1d8610fbc6b25bbd0e3418d714c50ba873335b7aae85c3f87894825"
+      },
+      {
+        "file": "surahs/027.json",
+        "ayah_count": 93,
+        "size_bytes": 45603,
+        "sha256": "ddf85d3ffcd67026390a85185eb614297b9551b86d93f1365bdf539f0fe305bc"
+      },
+      {
+        "file": "surahs/028.json",
+        "ayah_count": 88,
+        "size_bytes": 53505,
+        "sha256": "e140814d7f499c929faccfbeda19aa1c5ba73e2c51f38392c4aa088256e8fedb"
+      },
+      {
+        "file": "surahs/029.json",
+        "ayah_count": 69,
+        "size_bytes": 38379,
+        "sha256": "6b3418c4a139196b4e5aa32fd07f413aac67def0fffa6ba2e9549eb59b421824"
+      },
+      {
+        "file": "surahs/030.json",
+        "ayah_count": 60,
+        "size_bytes": 32501,
+        "sha256": "84c3534b276bfc311eb50d815b9c1c341b5100b3613ff8ccdd7fd18f74e94049"
+      },
+      {
+        "file": "surahs/031.json",
+        "ayah_count": 34,
+        "size_bytes": 19795,
+        "sha256": "05db13917fae3829153f545cdbd4c686b08c82dfbe4b7c078984a1a78342f30c"
+      },
+      {
+        "file": "surahs/032.json",
+        "ayah_count": 30,
+        "size_bytes": 14722,
+        "sha256": "b81005577a0045fd0494eb611f369ae6064841a2171aac37d51bc06ed2801a20"
+      },
+      {
+        "file": "surahs/033.json",
+        "ayah_count": 73,
+        "size_bytes": 50819,
+        "sha256": "3a7cc11f668115811409ffff3a72b47ea6945e3d2c1bc96984298534036f443a"
+      },
+      {
+        "file": "surahs/034.json",
+        "ayah_count": 54,
+        "size_bytes": 33470,
+        "sha256": "0642d3360518a12b822e6965a39310f3eb2d327e5912a26a06959f2d874d9dbc"
+      },
+      {
+        "file": "surahs/035.json",
+        "ayah_count": 45,
+        "size_bytes": 28414,
+        "sha256": "7e306c6cb0964dd4f3dc2448c2d19e85a9da0e767c00086f6040de14e868d91d"
+      },
+      {
+        "file": "surahs/036.json",
+        "ayah_count": 83,
+        "size_bytes": 32869,
+        "sha256": "85c0981a741ffd25d07495ad4ecc180875b9edd9ded6546dbbef701ff46a1299"
+      },
+      {
+        "file": "surahs/037.json",
+        "ayah_count": 182,
+        "size_bytes": 50882,
+        "sha256": "06ec555644e4ce0d5852f0ed2833e5a0b99d68386929ae9ddffd3385340b250a"
+      },
+      {
+        "file": "surahs/038.json",
+        "ayah_count": 88,
+        "size_bytes": 34068,
+        "sha256": "f7e66d645a3f023c49d3dfd45dcf0ab4fcdbb363cefd30f9dbbe9f352e2c8b36"
+      },
+      {
+        "file": "surahs/039.json",
+        "ayah_count": 75,
+        "size_bytes": 43841,
+        "sha256": "c8e4951156995ac9df9daeda2df0aa6485506eb2cc7abdeb5da87dac04926334"
+      },
+      {
+        "file": "surahs/040.json",
+        "ayah_count": 85,
+        "size_bytes": 46179,
+        "sha256": "77bf35c570708b837089b54f289f1d5db7def003b550e4644e3e205b9f7faa15"
+      },
+      {
+        "file": "surahs/041.json",
+        "ayah_count": 54,
+        "size_bytes": 31228,
+        "sha256": "de2caec7fa35096b0a1499f2d4bac72ebf5eca0674f46f6024ce2d1fd22a7c1a"
+      },
+      {
+        "file": "surahs/042.json",
+        "ayah_count": 53,
+        "size_bytes": 32109,
+        "sha256": "493e7d936aaa2b124213986fa34ce4f75e1184561dfa74facb92972813bccf43"
+      },
+      {
+        "file": "surahs/043.json",
+        "ayah_count": 89,
+        "size_bytes": 37857,
+        "sha256": "9bf567bd4370f75fd04ebf531699957e331f322b2131dcba0acc18edd2b544d0"
+      },
+      {
+        "file": "surahs/044.json",
+        "ayah_count": 59,
+        "size_bytes": 18053,
+        "sha256": "9724e996259179041dba9806fec5986c1a76931e719d500db73d50e41666e688"
+      },
+      {
+        "file": "surahs/045.json",
+        "ayah_count": 37,
+        "size_bytes": 19366,
+        "sha256": "70f2ddfbf1c20e130278f84e2094ae8703e0c10880707be681101c1fecf65ac9"
+      },
+      {
+        "file": "surahs/046.json",
+        "ayah_count": 35,
+        "size_bytes": 23642,
+        "sha256": "31cfed53b8c4ffc7411acd7c106711178e72c7da67f9fc56596256ba9424fdb8"
+      },
+      {
+        "file": "surahs/047.json",
+        "ayah_count": 38,
+        "size_bytes": 22054,
+        "sha256": "509c1c9f2ad1553fffb1931d87a6a008551229da36e1b8ab939011dda032ba2d"
+      },
+      {
+        "file": "surahs/048.json",
+        "ayah_count": 29,
+        "size_bytes": 21480,
+        "sha256": "0895744e2f78c89206695fa6694993f037f3077d7e7e21600c2e61ea71440df6"
+      },
+      {
+        "file": "surahs/049.json",
+        "ayah_count": 18,
+        "size_bytes": 12584,
+        "sha256": "a9f1aa517298eb7e601c910fdfddefa23a4c345c6bd61a42558fbe8e6b6e5304"
+      },
+      {
+        "file": "surahs/050.json",
+        "ayah_count": 45,
+        "size_bytes": 16745,
+        "sha256": "1cab93a5ce1d6514cd1ae78639c03cf4d0b1828c8e8e4fdd09780670156676ae"
+      },
+      {
+        "file": "surahs/051.json",
+        "ayah_count": 60,
+        "size_bytes": 18833,
+        "sha256": "c7e1021bfa5840c5cd2ea7094d001fb529469bb77389d78b0d84e716a2ba21e9"
+      },
+      {
+        "file": "surahs/052.json",
+        "ayah_count": 49,
+        "size_bytes": 16025,
+        "sha256": "1fd3659798bdf370ba6eac619fcfc7d880a6d3ab3234b597e6ecd97a9454f7f0"
+      },
+      {
+        "file": "surahs/053.json",
+        "ayah_count": 62,
+        "size_bytes": 18886,
+        "sha256": "162604b90b56a114cfde0ae5ebbe7cddc1ba090f02a6d076ac73b0fd26ea967a"
+      },
+      {
+        "file": "surahs/054.json",
+        "ayah_count": 55,
+        "size_bytes": 18041,
+        "sha256": "04470f952442bbdd21c254902f7bcf47923d99116b339401dcb63d3bab04a866"
+      },
+      {
+        "file": "surahs/055.json",
+        "ayah_count": 78,
+        "size_bytes": 21638,
+        "sha256": "07766f2bc145cdf8af0763745e00ce1894d556a83dcf552f5b85cfdf80544ec3"
+      },
+      {
+        "file": "surahs/056.json",
+        "ayah_count": 96,
+        "size_bytes": 24984,
+        "sha256": "1e9667c341f143ed3a86892a541c723419e6a6a7872c506f2ad55b58f140f6a1"
+      },
+      {
+        "file": "surahs/057.json",
+        "ayah_count": 29,
+        "size_bytes": 22067,
+        "sha256": "9c51adb6896a88719387e931163d0d941ad70fa547d528f33522b5a5fd9922c5"
+      },
+      {
+        "file": "surahs/058.json",
+        "ayah_count": 22,
+        "size_bytes": 17713,
+        "sha256": "9a6f6f0a969f5d19c224ea3d3595c173cd99cb5d29c595fb818dc4c11ab0536d"
+      },
+      {
+        "file": "surahs/059.json",
+        "ayah_count": 24,
+        "size_bytes": 18230,
+        "sha256": "fa80305d83617d545d038d1e786cd1d7e179ca0af87f2dacae568819a827774a"
+      },
+      {
+        "file": "surahs/060.json",
+        "ayah_count": 13,
+        "size_bytes": 13083,
+        "sha256": "42388b69aaa3a71ecd6715066c4952a0560bef60a0a1994f52b68e246b83d768"
+      },
+      {
+        "file": "surahs/061.json",
+        "ayah_count": 14,
+        "size_bytes": 8245,
+        "sha256": "e86658dd5e24c69668b243a7ab1534b905c824173d19567d9ae6aabf03bebc3a"
+      },
+      {
+        "file": "surahs/062.json",
+        "ayah_count": 11,
+        "size_bytes": 6723,
+        "sha256": "04e0e506408a01ceeb8564af56554a03d828dc2381fe2967502cb6a883d7d298"
+      },
+      {
+        "file": "surahs/063.json",
+        "ayah_count": 11,
+        "size_bytes": 6870,
+        "sha256": "0ce859bda629e527fc74c9bb1f41f5b524f3536bd1f9298c4b7b12a8423cfea5"
+      },
+      {
+        "file": "surahs/064.json",
+        "ayah_count": 18,
+        "size_bytes": 9910,
+        "sha256": "b3c5059f98a49d5b0dc57633fe9304c22201d0bab22ebf44689b3698d206b47d"
+      },
+      {
+        "file": "surahs/065.json",
+        "ayah_count": 12,
+        "size_bytes": 10796,
+        "sha256": "f5ba8bb43c096d5d3b92af438837fd81934bfbb419ab7d67aea76ded7291b163"
+      },
+      {
+        "file": "surahs/066.json",
+        "ayah_count": 12,
+        "size_bytes": 9264,
+        "sha256": "4649bf352ea9640ee11218cddc1a639bbe2c8e732835aa3eaf18d427ba6a37c7"
+      },
+      {
+        "file": "surahs/067.json",
+        "ayah_count": 30,
+        "size_bytes": 13495,
+        "sha256": "b3bed058f1520b8fdb913088f945e43112782d8b65e12b3b5414136bdec48f9b"
+      },
+      {
+        "file": "surahs/068.json",
+        "ayah_count": 52,
+        "size_bytes": 16823,
+        "sha256": "52e0a1e8914de9539561bef7aff07721e94c490f2f093a9d1475abcf0fa3efd0"
+      },
+      {
+        "file": "surahs/069.json",
+        "ayah_count": 52,
+        "size_bytes": 14889,
+        "sha256": "47b142f4468cb65ba0ff6b29679ba2acaf1b8339a38cc8a2654ed4782503ab69"
+      },
+      {
+        "file": "surahs/070.json",
+        "ayah_count": 44,
+        "size_bytes": 13014,
+        "sha256": "cb8eb501166ce6f81a9a26b37afd9a2b1be541417b449b19a49332725ce2ce5b"
+      },
+      {
+        "file": "surahs/071.json",
+        "ayah_count": 28,
+        "size_bytes": 10202,
+        "sha256": "f53ec3acf2a60e54bbc2558f42877a05e5dde08658c045fba5ce118c6c7562cd"
+      },
+      {
+        "file": "surahs/072.json",
+        "ayah_count": 28,
+        "size_bytes": 12428,
+        "sha256": "e57202b13bf29d89a052578c2bf019640bcb6d046afcb2eba2d317c3aaef1999"
+      },
+      {
+        "file": "surahs/073.json",
+        "ayah_count": 20,
+        "size_bytes": 9250,
+        "sha256": "d85d142e73ce133a5cb090c35fd1c64676688e537e60ae622b95e50fe118fe4f"
+      },
+      {
+        "file": "surahs/074.json",
+        "ayah_count": 56,
+        "size_bytes": 15126,
+        "sha256": "be0530e966e027508826975d1faa8bc70d6364635385872896978bdb4defc8ee"
+      },
+      {
+        "file": "surahs/075.json",
+        "ayah_count": 40,
+        "size_bytes": 10775,
+        "sha256": "d81909897a82c0a471edd214e87784db444b96559adb6f8c6bc2d847161bbe43"
+      },
+      {
+        "file": "surahs/076.json",
+        "ayah_count": 31,
+        "size_bytes": 11510,
+        "sha256": "9004c7fae69844994ced94cbaaa073548f1369cb03b918c8f505f50f61801196"
+      },
+      {
+        "file": "surahs/077.json",
+        "ayah_count": 50,
+        "size_bytes": 12202,
+        "sha256": "928a1c467fda1f95d19fda5b913eced75c6c64e300e3d661e8e9bdf7acfc26c6"
+      },
+      {
+        "file": "surahs/078.json",
+        "ayah_count": 40,
+        "size_bytes": 11134,
+        "sha256": "d4f7a10af56e4ffb36dec3862d53d9c32bce2b4e64e2b967f2f10f254fbea42b"
+      },
+      {
+        "file": "surahs/079.json",
+        "ayah_count": 46,
+        "size_bytes": 12607,
+        "sha256": "2b3e7b61e1631a416a07c829a2a5a073a0cf5ccdd2381027fce9208173d7e741"
+      },
+      {
+        "file": "surahs/080.json",
+        "ayah_count": 42,
+        "size_bytes": 10403,
+        "sha256": "a5be914df32911d0cff4de5963b45bb91272d0a204be8d0f2eead571a46d8974"
+      },
+      {
+        "file": "surahs/081.json",
+        "ayah_count": 29,
+        "size_bytes": 7803,
+        "sha256": "6b7696ca017e8a4d4371a9851e807e42613512df83c03b05be6819e5d338cace"
+      },
+      {
+        "file": "surahs/082.json",
+        "ayah_count": 19,
+        "size_bytes": 4824,
+        "sha256": "f7762b484f5da007441f7e98b1f7dadff312239cb42a15c372fb80e7f1ed295d"
+      },
+      {
+        "file": "surahs/083.json",
+        "ayah_count": 36,
+        "size_bytes": 10075,
+        "sha256": "d4f2edd0fc527bedf525f06c18e964008073f845285858a3551ef466c250d4d9"
+      },
+      {
+        "file": "surahs/084.json",
+        "ayah_count": 25,
+        "size_bytes": 6949,
+        "sha256": "1a0fdcc52125d094c20b06b86a48e126ad14858ca2bb04fb24df72abe21417ea"
+      },
+      {
+        "file": "surahs/085.json",
+        "ayah_count": 22,
+        "size_bytes": 6619,
+        "sha256": "d54bb21e34125379ac2b6e83e7e511c989c4599bf414c209877c2061393f80e6"
+      },
+      {
+        "file": "surahs/086.json",
+        "ayah_count": 17,
+        "size_bytes": 4235,
+        "sha256": "a1c28d1f309600ff15172864d71699f7caac35b0368df6227f9d12471d6833bd"
+      },
+      {
+        "file": "surahs/087.json",
+        "ayah_count": 19,
+        "size_bytes": 4704,
+        "sha256": "0fd579edbd5b767d4ab36708d4010503d55b186a51add90e509667ce783d12fc"
+      },
+      {
+        "file": "surahs/088.json",
+        "ayah_count": 26,
+        "size_bytes": 6264,
+        "sha256": "16b5065737d1d870db4132a6f8ed39e6b72c2b4e8631c7235e025e7493fd6c94"
+      },
+      {
+        "file": "surahs/089.json",
+        "ayah_count": 30,
+        "size_bytes": 8613,
+        "sha256": "db1f8ce7259bcee1086cabdb533637575be629f8cc85daf20bb1be47a188924d"
+      },
+      {
+        "file": "surahs/090.json",
+        "ayah_count": 20,
+        "size_bytes": 5533,
+        "sha256": "45f07f9862c081b875560745869bf19ce25fd239dd13862bffe28e5f78edbccb"
+      },
+      {
+        "file": "surahs/091.json",
+        "ayah_count": 15,
+        "size_bytes": 4246,
+        "sha256": "a9432e0a178ef10febc7b2cd636c0b6d5dd14f0fe193ea88d52803ca96589253"
+      },
+      {
+        "file": "surahs/092.json",
+        "ayah_count": 21,
+        "size_bytes": 5146,
+        "sha256": "afc89a320f0aa3e480622aabb57e76fe00113c7148d518f289b752528a6895a1"
+      },
+      {
+        "file": "surahs/093.json",
+        "ayah_count": 11,
+        "size_bytes": 2822,
+        "sha256": "72b2aed494ab885dec00467aa6ec8819c5ff620e6547932bcc3b1658ac4b50b8"
+      },
+      {
+        "file": "surahs/094.json",
+        "ayah_count": 8,
+        "size_bytes": 2199,
+        "sha256": "6d96d1d77c051ceae597de9e512e1f7ed153a1de3e9d6ad5e06773465316e0c3"
+      },
+      {
+        "file": "surahs/095.json",
+        "ayah_count": 8,
+        "size_bytes": 2550,
+        "sha256": "9aedc151a7cb9df17e61c7d5e8c664a944ca295ae6d4f2ddf8e8404149ab16f2"
+      },
+      {
+        "file": "surahs/096.json",
+        "ayah_count": 19,
+        "size_bytes": 4519,
+        "sha256": "3d2c971141c9ae35e4205ff245cee52f8c0e9975625c0c9de2e52555be8111dc"
+      },
+      {
+        "file": "surahs/097.json",
+        "ayah_count": 5,
+        "size_bytes": 1722,
+        "sha256": "73d9e36552fd8db3fa4ff3a4d4b9d88c687b313ef3bf0d2ec822dd1dc2ad8ad5"
+      },
+      {
+        "file": "surahs/098.json",
+        "ayah_count": 8,
+        "size_bytes": 4004,
+        "sha256": "08db52370e9190681db361c1fb77988b2da93021d52477b5ff5d009238c3d136"
+      },
+      {
+        "file": "surahs/099.json",
+        "ayah_count": 8,
+        "size_bytes": 2440,
+        "sha256": "7de2a725f0ea41c1f6cace5bcd348982e61664288becfb65d5de958189aa9112"
+      },
+      {
+        "file": "surahs/100.json",
+        "ayah_count": 11,
+        "size_bytes": 3097,
+        "sha256": "4ef027c2846f3c1467de49d27e20a2fe145568eb9cbbf4fd0260e327fc8d5e1a"
+      },
+      {
+        "file": "surahs/101.json",
+        "ayah_count": 11,
+        "size_bytes": 2835,
+        "sha256": "91c580f8a66bd46d5600f1de12342834a60ad7d28974037f9b1d752309cf3743"
+      },
+      {
+        "file": "surahs/102.json",
+        "ayah_count": 8,
+        "size_bytes": 2336,
+        "sha256": "897cc5e07534ea150aafe2a50adf2765d47009aaeee08b59f16d5dcfdac27823"
+      },
+      {
+        "file": "surahs/103.json",
+        "ayah_count": 3,
+        "size_bytes": 1056,
+        "sha256": "ddb322535071c4e4c6834b0dd955e5fd3ef254503495848c0cd54b727999894a"
+      },
+      {
+        "file": "surahs/104.json",
+        "ayah_count": 9,
+        "size_bytes": 2502,
+        "sha256": "3ae606cb791eec2e43b63faecfd6347bfbae3282a2becb6528fc33a25438795e"
+      },
+      {
+        "file": "surahs/105.json",
+        "ayah_count": 5,
+        "size_bytes": 1750,
+        "sha256": "0c0936cd357253ca6722f4d99e983ee0d3b54f497613865d056e773bd3f82f74"
+      },
+      {
+        "file": "surahs/106.json",
+        "ayah_count": 4,
+        "size_bytes": 1488,
+        "sha256": "5452f2e7a7d8056ab1100cd4e1b582053bd608b7184a087baf392b343c36eec6"
+      },
+      {
+        "file": "surahs/107.json",
+        "ayah_count": 7,
+        "size_bytes": 1838,
+        "sha256": "1cfcd7ee3bd1ebb9aea5e698589018c3b1b60bbb8277fdc2ca330f21a2dae9aa"
+      },
+      {
+        "file": "surahs/108.json",
+        "ayah_count": 3,
+        "size_bytes": 925,
+        "sha256": "f0610d4e02175b34fb8dce003fff4035b2008cfd0e34a3c47516643529162a05"
+      },
+      {
+        "file": "surahs/109.json",
+        "ayah_count": 6,
+        "size_bytes": 1544,
+        "sha256": "4cd95887fc9ba34cd467083aded6ddc06ef3f414d1a48eb0069ce1d4e9510c03"
+      },
+      {
+        "file": "surahs/110.json",
+        "ayah_count": 3,
+        "size_bytes": 1173,
+        "sha256": "a4e6a520b05f98f257232fd237248fdbaf6146f8a959fa544936fa06ad17293c"
+      },
+      {
+        "file": "surahs/111.json",
+        "ayah_count": 5,
+        "size_bytes": 1606,
+        "sha256": "7e7a72dca5f0d66c53bf1ad28dc01c46f4d5ef9257dbb3c7ca92d77ab28ee399"
+      },
+      {
+        "file": "surahs/112.json",
+        "ayah_count": 4,
+        "size_bytes": 1425,
+        "sha256": "95ffaaec4ae7a5b7473a1ca91d5246edfc807529cb2c8b68258f5ca7a7eca0bc"
+      },
+      {
+        "file": "surahs/113.json",
+        "ayah_count": 5,
+        "size_bytes": 1335,
+        "sha256": "187ea7520d9b0e00eb3c77ea014af361a049ff05aeec83a8f5f4c237d40b8fe2"
+      },
+      {
+        "file": "surahs/114.json",
+        "ayah_count": 6,
+        "size_bytes": 1590,
+        "sha256": "78391aa4e388c66bf1fbd5d20bc3d99e8f98f6b0d2ea9f858decb0df042fad15"
+      }
+    ]
+  },
+  "manifest_sha256": "752b56053cbf717d9454b7115b4766512b53a40d84f4696e546b70aa488b31ce",
+  "content_checksum": {
+    "algorithm": "SHA-256",
+    "scope": "SHA-256 over sorted per-Surah file names and digests, each followed by a newline; generation timestamps are excluded.",
+    "value": "140a0c97a22bcb5c1227a5a7f05690ea498ec5d4c0de33f8c1270c8a91ae5ce6"
+  },
+  "write_statuses": {
+    "surah_files_created": 0,
+    "surah_files_unchanged": 114,
+    "surah_files_replaced": 0,
+    "manifest_status": "unchanged"
+  },
+  "read_only_guard": {
+    "catalogue_path": "assets/data/surahs.json",
+    "catalogue_sha256": "82f64df268291d5c803f60fdc1fac5235362f857139a436cc793e38ca9ffd59f",
+    "catalogue_unchanged": true,
+    "pubspec_sha256": "c1b7d03463cfeb0a2e3822d877ef05682b787805e8975ff4abd09019a9485550",
+    "pubspec_unchanged": true,
+    "app_quran_dir_exists": false,
+    "app_quran_dir_created": false
+  }
+}

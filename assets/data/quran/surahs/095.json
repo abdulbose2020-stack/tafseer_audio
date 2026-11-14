@@ -1,0 +1,63 @@
+{
+  "surah_number": 95,
+  "basmala_mode": "prefatory",
+  "basmala_text": "بِّسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+  "ayahs": [
+    {
+      "number": 1,
+      "arabic": "وَٱلتِّينِ وَٱلزَّيْتُونِ",
+      "translation": "By the fig and the olive[1947]",
+      "footnotes": "[1947] Referring to the places known for their production, i.e., Damascus and Jerusalem, respectively. It could also refer to the fig and olive trees or to the fruits themselves.",
+      "sajdah": false
+    },
+    {
+      "number": 2,
+      "arabic": "وَطُورِ سِينِينَ",
+      "translation": "And [by] Mount Sinai",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 3,
+      "arabic": "وَهَـٰذَا ٱلْبَلَدِ ٱلْأَمِينِ",
+      "translation": "And [by] this secure city [i.e., Makkah],",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 4,
+      "arabic": "لَقَدْ خَلَقْنَا ٱلْإِنسَـٰنَ فِىٓ أَحْسَنِ تَقْوِيمٍ",
+      "translation": "We have certainly created man in the best of stature;[1948]",
+      "footnotes": "[1948] i.e., upright, symmetrical, and balanced in form and nature.",
+      "sajdah": false
+    },
+    {
+      "number": 5,
+      "arabic": "ثُمَّ رَدَدْنَـٰهُ أَسْفَلَ سَـٰفِلِينَ",
+      "translation": "Then We return him to the lowest of the low,[1949]",
+      "footnotes": "[1949] This can refer to the depths of Hell, to decrepit old age or to immorality.",
+      "sajdah": false
+    },
+    {
+      "number": 6,
+      "arabic": "إِلَّا ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ فَلَهُمْ أَجْرٌ غَيْرُ مَمْنُونٍ",
+      "translation": "Except for those who believe and do righteous deeds, for they will have a reward uninterrupted.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 7,
+      "arabic": "فَمَا يُكَذِّبُكَ بَعْدُ بِٱلدِّينِ",
+      "translation": "So what yet causes you to deny the Recompense?[1950]",
+      "footnotes": "[1950] More literally, \"What makes you lie concerning it?\"",
+      "sajdah": false
+    },
+    {
+      "number": 8,
+      "arabic": "أَلَيْسَ ٱللَّهُ بِأَحْكَمِ ٱلْحَـٰكِمِينَ",
+      "translation": "Is not Allāh the most just of judges?",
+      "footnotes": "",
+      "sajdah": false
+    }
+  ]
+}

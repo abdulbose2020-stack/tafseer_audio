@@ -6,12 +6,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/theme/app_theme_colors.dart';
+import '../../../quran/presentation/screens/quran_sources_screen.dart';
 import '../providers/theme_providers.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   static const Key themeSelectorKey = Key('settings-theme-selector');
+  static const Key quranSourcesKey = Key('settings-quran-sources');
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -102,6 +104,39 @@ class SettingsScreen extends ConsumerWidget {
                       ],
                     ),
                   ],
+                ),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.xl),
+            Text(
+              'SOURCES & ACKNOWLEDGEMENTS',
+              style: textTheme.labelSmall?.copyWith(
+                color: colors.textSecondary,
+                letterSpacing: 1.1,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            Card(
+              clipBehavior: Clip.antiAlias,
+              child: ListTile(
+                key: quranSourcesKey,
+                onTap: () {
+                  Navigator.of(context).push(QuranSourcesScreen.route());
+                },
+                leading: Icon(
+                  Icons.verified_user_rounded,
+                  color: colors.goldStrong,
+                ),
+                title: const Text('Qur’an sources'),
+                subtitle: Text(
+                  'Tanzil Arabic text and QuranEnc English translation.',
+                  style: textTheme.bodySmall?.copyWith(
+                    color: colors.textSecondary,
+                  ),
+                ),
+                trailing: Icon(
+                  Icons.chevron_right_rounded,
+                  color: colors.textSecondary,
                 ),
               ),
             ),

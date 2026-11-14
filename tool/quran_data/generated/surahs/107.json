@@ -1,0 +1,56 @@
+{
+  "surah_number": 107,
+  "basmala_mode": "prefatory",
+  "basmala_text": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+  "ayahs": [
+    {
+      "number": 1,
+      "arabic": "أَرَءَيْتَ ٱلَّذِى يُكَذِّبُ بِٱلدِّينِ",
+      "translation": "Have you seen the one who denies the Recompense?",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 2,
+      "arabic": "فَذَٰلِكَ ٱلَّذِى يَدُعُّ ٱلْيَتِيمَ",
+      "translation": "For that is the one who drives away the orphan",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 3,
+      "arabic": "وَلَا يَحُضُّ عَلَىٰ طَعَامِ ٱلْمِسْكِينِ",
+      "translation": "And does not encourage the feeding of the poor.",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 4,
+      "arabic": "فَوَيْلٌ لِّلْمُصَلِّينَ",
+      "translation": "So woe to those who pray",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 5,
+      "arabic": "ٱلَّذِينَ هُمْ عَن صَلَاتِهِمْ سَاهُونَ",
+      "translation": "[But] who are heedless of their prayer[2000] -",
+      "footnotes": "[2000] i.e., the hypocrites who are unconcerned if they miss prayers when no one sees them.",
+      "sajdah": false
+    },
+    {
+      "number": 6,
+      "arabic": "ٱلَّذِينَ هُمْ يُرَآءُونَ",
+      "translation": "Those who make show [of their deeds]",
+      "footnotes": "",
+      "sajdah": false
+    },
+    {
+      "number": 7,
+      "arabic": "وَيَمْنَعُونَ ٱلْمَاعُونَ",
+      "translation": "And withhold [simple] assistance.",
+      "footnotes": "",
+      "sajdah": false
+    }
+  ]
+}

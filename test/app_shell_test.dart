@@ -81,6 +81,7 @@ void main() {
     expect(find.text('تفسير القرآن الكريم'), findsOneWidget);
     expect(find.text('Choose a module'), findsOneWidget);
     expect(find.text('Read the Qur’an'), findsOneWidget);
+    expect(find.text('ARABIC READER READY'), findsOneWidget);
     expect(find.text('Listen to Tafseer'), findsOneWidget);
     expect(find.byKey(HomeScreen.readingCardKey), findsOneWidget);
     expect(find.byKey(HomeScreen.tafseerCardKey), findsOneWidget);
@@ -100,42 +101,42 @@ void main() {
     expect(theme.extension<AppThemeColors>(), AppThemeColors.light);
   });
 
-  testWidgets(
-    'opens the existing Surah catalogue and the reading placeholder',
-    (tester) async {
-      await _pumpApp(tester);
+  testWidgets('opens the Tafseer catalogue and the Qur’an reading catalogue', (
+    tester,
+  ) async {
+    await _pumpApp(tester);
 
-      await tester.ensureVisible(find.byKey(HomeScreen.tafseerCardKey));
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(HomeScreen.tafseerCardKey));
-      await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byKey(HomeScreen.tafseerCardKey));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(HomeScreen.tafseerCardKey));
+    await tester.pumpAndSettle();
 
-      expect(find.text('Surah catalog'), findsOneWidget);
-      expect(find.text('All 3 Surahs'), findsOneWidget);
-      expect(find.text('Al-Faatiha'), findsOneWidget);
-      expect(find.byType(TextField), findsOneWidget);
-      expect(find.byTooltip('Back to home'), findsOneWidget);
+    expect(find.text('Surah catalog'), findsOneWidget);
+    expect(find.text('All 3 Surahs'), findsOneWidget);
+    expect(find.text('Al-Faatiha'), findsOneWidget);
+    expect(find.byType(TextField), findsOneWidget);
+    expect(find.byTooltip('Back to home'), findsOneWidget);
 
-      await tester.tap(find.byTooltip('Back to home'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Back to home'));
+    await tester.pumpAndSettle();
 
-      await tester.ensureVisible(find.byKey(HomeScreen.readingCardKey));
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(HomeScreen.readingCardKey));
-      await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byKey(HomeScreen.readingCardKey));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(HomeScreen.readingCardKey));
+    await tester.pumpAndSettle();
 
-      expect(find.text('Reading content is being prepared'), findsOneWidget);
-      expect(
-        find.textContaining('No Qur’an text or translation has been added'),
-        findsOneWidget,
-      );
+    expect(find.text('Qur’an Reading'), findsOneWidget);
+    expect(find.text('Read the Arabic Qur’an'), findsOneWidget);
+    expect(find.text('3 Surahs'), findsOneWidget);
+    expect(find.text('Al-Faatiha'), findsOneWidget);
+    expect(find.text('The Opening'), findsOneWidget);
+    expect(find.text('CONTENT BEING PREPARED'), findsNothing);
 
-      await tester.tap(find.text('Back to Home'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.byType(BackButton));
+    await tester.pumpAndSettle();
 
-      expect(find.text('Choose a module'), findsOneWidget);
-    },
-  );
+    expect(find.text('Choose a module'), findsOneWidget);
+  });
 
   testWidgets('selects and persists Light, Dark, and System themes', (
     tester,
