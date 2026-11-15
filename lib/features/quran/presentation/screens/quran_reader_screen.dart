@@ -11,7 +11,6 @@ import '../providers/quran_reader_providers.dart';
 import '../providers/quran_surah_providers.dart';
 import '../widgets/quran_ayah_translation_view.dart';
 import '../widgets/quran_ayah_view.dart';
-import 'quran_sources_screen.dart';
 
 /// The Arabic Qur'an reader for one selected Surah.
 ///
@@ -30,7 +29,6 @@ class QuranReaderScreen extends ConsumerWidget {
   static const Key fontSizeSliderKey = Key('quran-reader-font-size-slider');
   static const Key fontSizeValueKey = Key('quran-reader-font-size-value');
   static const Key fontSizeResetKey = Key('quran-reader-font-size-reset');
-  static const Key sourcesButtonKey = Key('quran-reader-sources-button');
   static const Key retryButtonKey = Key('quran-reader-retry');
   static const Key basmalaKey = Key('quran-reader-basmala');
 
@@ -46,10 +44,6 @@ class QuranReaderScreen extends ConsumerWidget {
       showDragHandle: true,
       builder: (context) => const _ReaderFontSizeSheet(),
     );
-  }
-
-  void _openSources(BuildContext context) {
-    Navigator.of(context).push(QuranSourcesScreen.route());
   }
 
   @override
@@ -99,12 +93,6 @@ class QuranReaderScreen extends ConsumerWidget {
             tooltip: 'Arabic text size',
             onPressed: () => _openFontSizeSheet(context),
             icon: const Icon(Icons.format_size_rounded),
-          ),
-          IconButton(
-            key: sourcesButtonKey,
-            tooltip: 'Sources & Acknowledgements',
-            onPressed: () => _openSources(context),
-            icon: const Icon(Icons.info_outline_rounded),
           ),
         ],
       ),

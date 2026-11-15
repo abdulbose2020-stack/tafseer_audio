@@ -103,8 +103,8 @@ never changes the Tafseer selection, the playback queue, or the mini player.
   Surah 9 has no Basmala.
 - **Selection** — Arabic text, English translation, and the prefatory Basmala
   are selectable and copyable.
-- **Sources** — the reader and Settings open the same acknowledgements screen,
-  which reads versions and required notices from the bundled manifest.
+- **Sources** — Settings opens the acknowledgements screen, which reads versions
+  and required notices from the bundled manifest.
 - **Offline** — every Surah is a local JSON asset. The reader loads only the
   requested Surah; it does not enumerate the directory or download content.
 

@@ -16,7 +16,7 @@ not rendered.
 | 3 — Audio playback | Complete; automated tests pass and basic playback smoke-tested on the Android emulator | Audio engine, temporary sample audio, playback queue, background playback, notification/lock-screen controls, and Riverpod integration. |
 | 4 — Player UI | Complete; automated tests pass | Full player screen, mini player, recording resolution, unavailable/error states, seeking, and catalogue navigation. Device verification is part of Phase 5. |
 | 5 — Hardening | Planned | Final full test pass, device verification, and documentation for adding the Sheikh's recordings. |
-| Qur’an reader | Complete | Offline Arabic reader for all 114 Surahs, reader catalogue/navigation, default-visible English translation with session-only visibility, Basmala and Sajdah handling, Arabic text-size control, source acknowledgements, and Light/Dark/System themes. |
+| Qur’an reader | Complete | Offline Arabic reader for all 114 Surahs, reader catalogue/navigation, default-visible English translation with session-only visibility, Basmala and Sajdah handling, Arabic text-size control, and Light/Dark/System themes. |
 | Qur’an data pipeline | Complete | Source acquisition, generation, independent pre/post-publish validation, staged publishing with backup/rollback, and asset-integrity tests. |
 
 The app launches into `MainShell`, a persistent three-destination shell:
@@ -419,8 +419,7 @@ lib/
   Basmala modes, exact Arabic text, separate Ayah numbers, Sajdah indicators,
   default-visible English translation, show/hide behavior, translation and
   footnote-marker preservation, session persistence across Surahs, session
-  font-size controls, source acknowledgements, and isolation from playback
-  state.
+  font-size controls, and isolation from playback state.
 - Theme tests cover Light, Dark, and System, persistence, and following platform
   brightness.
 - Unit tests cover search normalization, filtering, repository behavior, JSON

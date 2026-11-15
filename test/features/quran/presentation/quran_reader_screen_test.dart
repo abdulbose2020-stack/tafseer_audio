@@ -8,10 +8,8 @@ import 'package:tafseer_audio/core/theme/app_theme.dart';
 import 'package:tafseer_audio/core/theme/app_theme_colors.dart';
 import 'package:tafseer_audio/features/quran/data/quran_surah_asset_data_source.dart';
 import 'package:tafseer_audio/features/quran/presentation/providers/quran_reader_providers.dart';
-import 'package:tafseer_audio/features/quran/presentation/providers/quran_sources_providers.dart';
 import 'package:tafseer_audio/features/quran/presentation/providers/quran_surah_providers.dart';
 import 'package:tafseer_audio/features/quran/presentation/screens/quran_reader_screen.dart';
-import 'package:tafseer_audio/features/quran/presentation/screens/quran_sources_screen.dart';
 import 'package:tafseer_audio/features/quran/presentation/widgets/quran_ayah_translation_view.dart';
 import 'package:tafseer_audio/features/quran/presentation/widgets/quran_ayah_view.dart';
 import 'package:tafseer_audio/features/surahs/domain/surah.dart';
@@ -39,15 +37,7 @@ Future<FakeQuranSurahDataSource> _pumpReader(
 
   await tester.pumpWidget(
     ProviderScope(
-      overrides: [
-        quranSurahDataSourceProvider.overrideWithValue(dataSource),
-        quranSourceManifestProvider.overrideWithValue(
-          AsyncValue.error(
-            StateError('sources unavailable in this test'),
-            StackTrace.empty,
-          ),
-        ),
-      ],
+      overrides: [quranSurahDataSourceProvider.overrideWithValue(dataSource)],
       child: MaterialApp(
         theme: theme ?? AppTheme.light,
         home: QuranReaderScreen(surah: surah),
@@ -314,7 +304,7 @@ void main() {
       expect(find.byKey(QuranAyahView.numberBadgeKey(2)), findsOneWidget);
       expect(find.byKey(QuranAyahView.sajdahKey(2)), findsOneWidget);
       expect(find.byKey(QuranReaderScreen.fontSizeButtonKey), findsOneWidget);
-      expect(find.byKey(QuranReaderScreen.sourcesButtonKey), findsOneWidget);
+      expect(find.byTooltip('Sources & Acknowledgements'), findsNothing);
 
       await tester.tap(find.byKey(QuranReaderScreen.translationToggleKey));
       await tester.pumpAndSettle();
@@ -450,18 +440,6 @@ void main() {
     expect(arabicText().style?.fontSize, 34);
   });
 
-  testWidgets('opens Sources & Acknowledgements from the reader', (
-    tester,
-  ) async {
-    await _pumpReader(tester, surah: testSurah2);
-
-    await tester.tap(find.byKey(QuranReaderScreen.sourcesButtonKey));
-    await tester.pumpAndSettle();
-
-    expect(find.byType(QuranSourcesScreen), findsOneWidget);
-    expect(find.text('Sources & Acknowledgements'), findsOneWidget);
-  });
-
   testWidgets('loads only the selected Surah asset, not the manifest', (
     tester,
   ) async {
@@ -478,12 +456,6 @@ void main() {
         overrides: [
           quranSurahDataSourceProvider.overrideWithValue(
             QuranSurahAssetDataSource(bundle: bundle),
-          ),
-          quranSourceManifestProvider.overrideWithValue(
-            AsyncValue.error(
-              StateError('sources unavailable in this test'),
-              StackTrace.empty,
-            ),
           ),
         ],
         child: MaterialApp(
